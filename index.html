@@ -153,6 +153,42 @@ html,body{font-size:16px}
  .nav button span{font-size:24px!important}.nav button small{font-size:10px!important}
 }
 
+
+/* TELLE V4.2.10 - correção dos cards da tela Mais */
+.more{
+ display:grid!important;
+ grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ gap:12px!important;width:100%!important;
+}
+.more button{
+ width:100%!important;min-width:0!important;height:128px!important;min-height:128px!important;
+ display:flex!important;flex-direction:column!important;align-items:flex-start!important;
+ justify-content:flex-start!important;gap:0!important;
+ border:1px solid var(--line)!important;background:#fff!important;border-radius:19px!important;
+ text-align:left!important;padding:16px!important;overflow:hidden!important;position:relative!important;
+}
+.more button > span{
+ display:block!important;width:100%!important;height:34px!important;min-height:34px!important;
+ margin:0 0 8px!important;font-size:28px!important;line-height:34px!important;flex:0 0 34px!important;
+}
+.more button > b{
+ display:block!important;width:100%!important;margin:0!important;padding:0!important;
+ font-size:16px!important;line-height:21px!important;white-space:nowrap!important;
+ overflow:hidden!important;text-overflow:ellipsis!important;
+}
+.more button > small{
+ display:block!important;width:100%!important;margin:3px 0 0!important;padding:0!important;
+ color:var(--muted)!important;font-size:11px!important;line-height:16px!important;
+ white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;
+}
+.logout{width:100%!important;min-height:52px!important;margin-top:12px!important;font-size:14px!important}
+@media(max-width:380px){
+ .more{gap:9px!important}
+ .more button{height:122px!important;min-height:122px!important;padding:13px!important}
+ .more button > span{font-size:26px!important;margin-bottom:6px!important}
+ .more button > b{font-size:14px!important}.more button > small{font-size:10px!important}
+}
+
 </style>
 </head>
 <body>
@@ -235,13 +271,120 @@ async function signIn(email,password){
 function signOut(){localStorage.removeItem("telle_token");localStorage.removeItem("telle_uid");location.reload()}
 function totals(){let revenue=0,cost=0,open=0;data.sales.forEach(s=>{revenue+=Number(s.total)||0;cost+=Number(s.cost)||0;open+=Math.max(0,(Number(s.total)||0)-(Number(s.paid)||0))});return{revenue,cost,profit:revenue-cost,open}}
 
-function crc16(text){let crc=0xffff;for(let i=0;i<text.length;i++){crc^=text.charCodeAt(i)<<8;for(let j=0;j<8;j++)crc=(crc&0x8000)?((crc<<1)^0x1021)&0xffff:(crc<<1)&0xffff}return crc.toString(16).toUpperCase().padStart(4,"0")}
-function pixCode(key,value,name,city,txid){
- const field=(tag,value)=>tag+String(value).length.toString().padStart(2,"0")+value;
- let payload=field("00","01")+field("26",field("00","br.gov.bcb.pix")+field("01",key))+field("52","0000")+field("53","986")+field("54",Number(value).toFixed(2))+field("58","BR")+field("59",String(name||"TELLE COSMETICOS").slice(0,25))+field("60",String(city||"JOINVILLE").slice(0,15))+field("62",field("05",String(txid||"TELLE").replace(/[^A-Za-z0-9]/g,"").slice(0,25)||"TELLE"));
- return payload+"6304"+crc16(payload+"6304")
+function crc16(text){
+ let crc=0xFFFF;
+ for(let i=0;i<text.length;i++){
+  crc^=text.charCodeAt(i)<<8;
+  for(let j=0;j<8;j++)crc=(crc&0x8000)?((crc<<1)^0x1021)&0xFFFF:(crc<<1)&0xFFFF;
+ }
+ return crc.toString(16).toUpperCase().padStart(4,"0");
+}
+function pixLen(value){return new TextEncoder().encode(String(value)).length}
+function pixField(tag,value){
+ value=String(value??"");
+ return tag+String(pixLen(value)).padStart(2,"0")+value;
+}
+function pixAscii(value,max){
+ return String(value||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toUpperCase().replace(/[^A-Z0-9 .&'-]/g,"").trim().slice(0,max);
+}
+function normalizePixKey(key){
+ let k=String(key||"").trim();
+ const phone=k.replace(/\D/g,"");
+ if(/^\+?55/.test(k)&&phone.length===13)return phone;
+ if(/^\d{10,11}$/.test(phone))return "55"+phone;
+ return k;
+}
+function pixCode(key,value,name,city){
+ const cleanKey=normalizePixKey(key);
+ if(!cleanKey)throw Error("Chave Pix não cadastrada.");
+ const amount=Number(value);
+ if(!Number.isFinite(amount)||amount<=0)throw Error("Valor Pix inválido.");
+ const merchant=pixAscii(name||"TELLE COSMETICOS",25)||"TELLE COSMETICOS";
+ const location=pixAscii(city||"JOINVILLE",15)||"JOINVILLE";
+
+ // Static Pix BR Code. For a QR generated from a Pix key, the static
+ // transaction ID is ***. Do not inject the internal sale ID into txid.
+ const merchantAccount=
+   pixField("00","br.gov.bcb.pix")+
+   pixField("01",cleanKey);
+
+ const payload=
+   pixField("00","01")+
+   pixField("26",merchantAccount)+
+   pixField("52","0000")+
+   pixField("53","986")+
+   pixField("54",amount.toFixed(2))+
+   pixField("58","BR")+
+   pixField("59",merchant)+
+   pixField("60",location)+
+   pixField("62",pixField("05","***"));
+
+ return payload+"6304"+crc16(payload+"6304");
 }
 
+function renderPix(code,targetId,width=230){
+ const target=$(targetId);
+ if(!target)return;
+ target.innerHTML="";
+ if(window.QRCode)new QRCode(target,{text:code,width,height:width});
+ else target.innerHTML='<div class="warning">Não foi possível carregar o gerador visual do QR. Use o Pix copia e cola abaixo.</div>';
+}
+
+
+function pdfEscape(text){
+ return String(text??"").normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+  .replace(/\\/g,"\\\\").replace(/\(/g,"\\(").replace(/\)/g,"\\)");
+}
+function makeReceiptPDF(saleId){
+ const sale=data.sales.find(s=>s.id===saleId);
+ if(!sale){notify("Venda não encontrada.");return}
+ const lines=[
+  "TELLE COSMETICOS",
+  "COMPROVANTE DE COMPRA",
+  "--------------------------------",
+  "Pedido: #"+sale.id.slice(-6),
+  "Cliente: "+sale.client,
+  "Data: "+dateBR(sale.created),
+  "Pagamento: "+sale.payment,
+  "--------------------------------"
+ ];
+ sale.items.forEach(i=>lines.push(i.name+" x"+i.qty+"  "+money(i.price*i.qty)));
+ lines.push(
+  "--------------------------------",
+  "TOTAL: "+money(sale.total),
+  "PAGO: "+money(sale.paid),
+  "PENDENTE: "+money(Math.max(0,sale.total-sale.paid)),
+  "",
+  "Obrigada pela preferencia!",
+  "Telle Cosméticos"
+ );
+ const content=[];
+ let y=800;
+ lines.forEach(line=>{
+  content.push("BT /F1 11 Tf 55 "+y+" Td ("+pdfEscape(line)+") Tj ET");
+  y-=19;
+ });
+ const objects=[];
+ objects.push("1 0 obj << /Type /Catalog /Pages 2 0 R >> endobj");
+ objects.push("2 0 obj << /Type /Pages /Kids [3 0 R] /Count 1 >> endobj");
+ objects.push("3 0 obj << /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >> endobj");
+ objects.push("4 0 obj << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> endobj");
+ const stream=content.join("\\n");
+ objects.push("5 0 obj << /Length "+stream.length+" >> stream\n"+stream+"\nendstream endobj");
+ let pdf="%PDF-1.4\\n";
+ const offsets=[0];
+ objects.forEach(obj=>{offsets.push(pdf.length);pdf+=obj+"\\n";});
+ const xref=pdf.length;
+ pdf+="xref\\n0 "+(objects.length+1)+"\\n0000000000 65535 f \\n";
+ for(let i=1;i<offsets.length;i++)pdf+=String(offsets[i]).padStart(10,"0")+" 00000 n \\n";
+ pdf+="trailer << /Size "+(objects.length+1)+" /Root 1 0 R >>\\nstartxref\\n"+xref+"\\n%%EOF";
+ const blob=new Blob([pdf],{type:"application/pdf"});
+ const url=URL.createObjectURL(blob),a=document.createElement("a");
+ a.href=url;a.download="comprovante-telle-"+sale.id.slice(-6)+".pdf";
+ document.body.appendChild(a);a.click();a.remove();
+ setTimeout(()=>URL.revokeObjectURL(url),2000);
+ notify("Comprovante PDF gerado.");
+}
 function showModal(title,content,handler,label="Salvar"){
  $("modal").innerHTML=`<div class="modalbg"><div class="modal"><div class="mh"><h2>${title}</h2><button id="modalClose" class="close" type="button">×</button></div>${content}<div class="mf"><button id="modalCancel" class="soft" type="button">Cancelar</button><button id="modalOk" class="primary" type="button">${label}</button></div></div></div>`;
  $("modalClose").onclick=closeModal;$("modalCancel").onclick=closeModal;$("modalOk").onclick=async()=>{try{await handler()}catch(error){notify(error.message||"Erro")}}
@@ -249,36 +392,67 @@ function showModal(title,content,handler,label="Salvar"){
 function closeModal(){$("modal").innerHTML=""}
 
 function salePix(total){
- const area=$("salePix");if(!area)return;
- if($("payment").value!=="PIX"){area.innerHTML="";return}
- if(!data.settings.pix){area.innerHTML='<div class="warning">💠 Pix selecionado. Cadastre sua chave em Mais → Configurações.</div>';return}
- const code=pixCode(data.settings.pix,total,data.settings.pixName,data.settings.pixCity,"VENDA");
- area.innerHTML=`<div class="pix"><b>💠 Pix</b><strong>${money(total)}</strong><div id="saleQr"></div><button id="copySalePix" type="button">📋 Copiar Pix copia e cola</button><textarea id="salePixText" readonly>${esc(code)}</textarea></div>`;
- if(window.QRCode)new QRCode($("saleQr"),{text:code,width:210,height:210});
- $("copySalePix").onclick=async()=>{try{await navigator.clipboard.writeText(code);notify("Pix copiado!")}catch{const field=$("salePixText");field.select();document.execCommand("copy");notify("Pix copiado!")}}
+ const area=$("salePix");
+ if(area)area.innerHTML="";
 }
+function showSalePixAfterConfirmation(saleId){
+ const sale=data.sales.find(s=>s.id===saleId);
+ if(!sale||sale.payment!=="PIX")return;
+ const value=Math.max(0,Number(sale.total)-Number(sale.paid));
+ if(!data.settings.pix){
+  notify("Venda criada. Cadastre sua chave Pix em Mais → Configurações.");
+  return;
+ }
+ const code=pixCode(data.settings.pix,value,data.settings.pixName,data.settings.pixCity,sale.id.slice(-10));
+ showModal("Pix da venda",`<div class="pix"><b>💠 Pague por Pix</b><strong>${money(value)}</strong><div id="saleConfirmedQr"></div><button id="copySaleConfirmedPix" type="button">📋 Copiar Pix copia e cola</button><textarea id="saleConfirmedPixText" readonly>${esc(code)}</textarea><div class="warning">Depois que o cliente pagar, registre o pagamento na venda.</div></div>`,async()=>closeModal(),"Fechar");
+ renderPix(code,"saleConfirmedQr",230);
+ $("copySaleConfirmedPix").onclick=async()=>{
+  try{await navigator.clipboard.writeText(code);notify("Pix copia e cola copiado!")}
+  catch{
+   const field=$("saleConfirmedPixText");
+   field.focus();field.select();document.execCommand("copy");
+   notify("Pix copia e cola copiado!");
+  }
+ };
+}
+
 function refreshSale(){
- const product=data.products.find(item=>item.id===$("saleProduct").value);if(!product)return;
+ const product=data.products.find(item=>item.id===$("saleProduct").value);
+ if(!product)return;
  const qty=Math.max(1,Number($("saleQty").value)||1),total=product.price*qty;
  $("saleInfo").innerHTML=`<b>${esc(product.name)}</b><span>${qty} × ${money(product.price)}</span><strong>${money(total)}</strong>`;
- const pix=$("payment").value==="PIX";$("salePaid").readOnly=pix;if(pix)$("salePaid").value="0";salePix(total)
+ const pix=$("payment").value==="PIX";
+ $("salePaid").readOnly=pix;
+ if(pix){$("salePaid").value="0";$("salePix").innerHTML="";}
+ const area=$("salePix");
+ if(area)area.innerHTML="";
 }
+
 function newSale(){
  const products=data.products.filter(p=>p.stock>0);if(!products.length){notify("Cadastre produtos com estoque.");return}
  showModal("Nova venda",`<div class="sale"><label>Cliente<select id="saleClient"><option value="">Venda balcão</option>${data.clients.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join("")}</select></label><div class="two"><label>Produto<select id="saleProduct">${products.map(p=>`<option value="${p.id}">${esc(p.name)} · ${money(p.price)}</option>`).join("")}</select></label><label>Qtd.<input id="saleQty" type="number" min="1" value="1"></label></div><label>Forma de pagamento<select id="payment"><option>PIX</option><option>Dinheiro</option><option>Cartão</option><option>Fiado</option></select></label><label>Pago agora<input id="salePaid" type="number" min="0" step=".01" value="0"></label><label>Vencimento<input id="saleDue" type="date" value="${today()}"></label><div id="saleInfo" class="info"></div><div id="salePix"></div></div>`,saveSale,"Finalizar venda");
  ["saleProduct","saleQty","payment","salePaid"].forEach(id=>$(id).addEventListener("input",refreshSale));$("payment").addEventListener("change",refreshSale);refreshSale()
 }
 async function saveSale(){
- const product=data.products.find(p=>p.id===$("saleProduct").value),qty=Math.max(1,Number($("saleQty").value)||1),total=product.price*qty;
+ const product=data.products.find(p=>p.id===$("saleProduct").value);
+ const qty=Math.max(1,Number($("saleQty").value)||1),total=product.price*qty;
  if(qty>product.stock)throw Error("Estoque insuficiente.");
  const client=data.clients.find(c=>c.id===$("saleClient").value),method=$("payment").value;
- let paid=Math.max(0,Math.min(total,Number($("salePaid").value)||0));if(method!=="Fiado"&&paid===0)paid=total;
+ let paid=Math.max(0,Math.min(total,Number($("salePaid").value)||0));
+ if(method==="PIX")paid=0;
+ else if(method!=="Fiado"&&paid===0)paid=total;
  const sale={id:makeId(),clientId:client?.id||"",client:client?.name||"Venda balcão",items:[{productId:product.id,name:product.name,qty,price:product.price}],total,cost:(product.cost||0)*qty,paid,payment:method,created:new Date().toISOString(),due:$("saleDue").value};
- product.stock-=qty;data.sales.push(sale);
+ product.stock-=qty;
+ data.sales.push(sale);
  if(total>paid)data.receivables.push({id:makeId(),saleId:sale.id,client:sale.client,amount:total-paid,due:sale.due,status:"open"});
  if(paid)data.cash.push({id:makeId(),saleId:sale.id,type:"in",value:paid,date:today(),method});
- saveLocal();closeModal();go("sales");notify("Venda registrada.")
+ saveLocal();
+ closeModal();
+ go("sales");
+ notify("Venda registrada.");
+ if(method==="PIX")setTimeout(()=>showSalePixAfterConfirmation(sale.id),80);
 }
+
 async function addProduct(){showModal("Novo produto",`<div class="sale"><label>Nome<input id="productName"></label><div class="two"><label>Preço<input id="productPrice" type="number" step=".01"></label><label>Estoque<input id="productStock" type="number" value="0"></label></div><label>Custo<input id="productCost" type="number" step=".01" value="0"></label><label>Estoque mínimo<input id="productMin" type="number" value="2"></label></div>`,async()=>{const p={id:makeId(),name:$("productName").value.trim(),price:Number($("productPrice").value),cost:Number($("productCost").value),stock:Number($("productStock").value),min:Number($("productMin").value)||2};if(!p.name||!p.price)throw Error("Informe nome e preço.");data.products.push(p);saveLocal();closeModal();go("stock");notify("Produto cadastrado.")},"Cadastrar")}
 async function addClient(){showModal("Novo cliente",`<div class="sale"><label>Nome<input id="clientName"></label><label>WhatsApp<input id="clientPhone" inputmode="tel"></label></div>`,async()=>{const c={id:makeId(),name:$("clientName").value.trim(),phone:$("clientPhone").value.trim()};if(!c.name)throw Error("Informe o nome.");data.clients.push(c);saveLocal();closeModal();go("clients");notify("Cliente cadastrado.")},"Cadastrar")}
 async function addSupplier(){showModal("Novo fornecedor",`<div class="sale"><label>Nome<input id="supplierName"></label><label>Telefone<input id="supplierPhone"></label></div>`,async()=>{const s={id:makeId(),name:$("supplierName").value.trim(),phone:$("supplierPhone").value.trim()};if(!s.name)throw Error("Informe o nome.");data.suppliers.push(s);saveLocal();closeModal();openMore("suppliers");notify("Fornecedor cadastrado.")},"Cadastrar")}
@@ -289,14 +463,15 @@ async function registerPayment(saleId){
 }
 function saleDetails(saleId){
  const sale=data.sales.find(s=>s.id===saleId);if(!sale)return;const open=Math.max(0,sale.total-sale.paid);
- showModal("Pedido #"+sale.id.slice(-6),`<div class="panel"><div class="title"><b>${esc(sale.client)}</b><span>${dateBR(sale.created)}</span></div>${sale.items.map(i=>`<div class="title"><span>${esc(i.name)} × ${i.qty}</span><b>${money(i.price*i.qty)}</b></div>`).join("")}<div class="title"><span>Total</span><b>${money(sale.total)}</b></div><div class="title"><span>Pago</span><b class="ok">${money(sale.paid)}</b></div><div class="title"><span>Pendente</span><b class="bad">${money(open)}</b></div></div>`,async()=>closeModal(),"Fechar");
+ showModal("Pedido #"+sale.id.slice(-6),`<div class="panel"><div class="title"><b>${esc(sale.client)}</b><span>${dateBR(sale.created)}</span></div>${sale.items.map(i=>`<div class="title"><span>${esc(i.name)} × ${i.qty}</span><b>${money(i.price*i.qty)}</b></div>`).join("")}<div class="title"><span>Total</span><b>${money(sale.total)}</b></div><div class="title"><span>Pago</span><b class="ok">${money(sale.paid)}</b></div><div class="title"><span>Pendente</span><b class="bad">${money(open)}</b></div><button id="receiptPdf" class="soft" type="button">📄 Gerar comprovante PDF</button></div>`,async()=>closeModal(),"Fechar");
+ $("receiptPdf").onclick=()=>makeReceiptPDF(sale.id);
  if(open){$("modalOk").style.display="none";const payButton=document.createElement("button");payButton.className="primary";payButton.textContent="💰 Registrar pagamento";payButton.onclick=()=>{closeModal();registerPayment(sale.id)};$("modal").querySelector(".mf").prepend(payButton);if(data.settings.pix){const pixButton=document.createElement("button");pixButton.className="soft";pixButton.textContent="💠 Pix";pixButton.onclick=()=>{closeModal();salePixModal(sale.id)};$("modal").querySelector(".mf").prepend(pixButton)}}
 }
 function salePixModal(saleId){
  const sale=data.sales.find(s=>s.id===saleId),value=Math.max(0,sale.total-sale.paid);if(!data.settings.pix){notify("Cadastre sua chave Pix.");return}
  const code=pixCode(data.settings.pix,value,data.settings.pixName,data.settings.pixCity,sale.id.slice(-10));
  showModal("Pix da venda",`<div class="pix"><b>💠 Valor a pagar</b><strong>${money(value)}</strong><div id="detailQr"></div><button id="copyDetailPix" type="button">📋 Copiar Pix copia e cola</button><textarea id="detailPixText" readonly>${esc(code)}</textarea></div>`,async()=>closeModal(),"Fechar");
- if(window.QRCode)new QRCode($("detailQr"),{text:code,width:230,height:230});
+ renderPix(code,"detailQr",230);
  $("copyDetailPix").onclick=async()=>{try{await navigator.clipboard.writeText(code);notify("Pix copiado!")}catch{const field=$("detailPixText");field.select();document.execCommand("copy");notify("Pix copiado!")}}
 }
 function charge(saleId){
