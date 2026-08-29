@@ -126,42 +126,29 @@ main{margin-left:258px}
 <nav class="bottom" id="bottom"><button data-page="dashboard" class="active"><b>⌂</b>Início</button><button data-page="vendas"><b>🛍️</b>Vendas</button><button data-page="estoque"><b>📦</b>Estoque</button><button data-page="clientes"><b>👥</b>Clientes</button><button data-page="financeiro"><b>☰</b>Mais</button></nav>
 </div><div id="modal"></div><div id="toast"></div>
 
+
+<script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore-compat.js"></script>
 <script>
-/* V4 Safari-safe login fallback: the button remains usable even if the module is slow to initialize. */
-(function(){
-  const btn=document.getElementById("loginBtn"), email=document.getElementById("loginEmail"), pass=document.getElementById("loginPass"), msg=document.getElementById("loginMsg");
-  if(!btn||!email||!pass||!msg)return;
-  btn.type="button";
-  let busy=false;
-  async function fallbackLogin(){
-    if(window.__TELLE_LOGIN_READY__||busy)return;
-    const e=email.value.trim(), p=pass.value;
-    if(!e||!p){msg.textContent="Informe e-mail e senha.";return;}
-    busy=true; btn.disabled=true; btn.textContent="Conectando…"; msg.textContent="";
-    try{
-      const [{initializeApp,getApps,getApp},{getAuth,signInWithEmailAndPassword}]=await Promise.all([
-        import("https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js"),
-        import("https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js")
-      ]);
-      const cfg={apiKey:"AIzaSyADx57Ilk5JCaZFoHOeC3APensUHX6P3C4",authDomain:"telle-cosmeticos.firebaseapp.com",projectId:"telle-cosmeticos",storageBucket:"telle-cosmeticos.firebasestorage.app",messagingSenderId:"586748451590",appId:"1:586748451590:web:222875a9d0b9cd425d5c87"};
-      const app=getApps().length?getApp():initializeApp(cfg);
-      await signInWithEmailAndPassword(getAuth(app),e,p);
-    }catch(err){
-      console.error("Login fallback:",err);
-      const code=err&&err.code||"";
-      const map={"auth/invalid-credential":"E-mail ou senha incorretos.","auth/invalid-email":"O e-mail não é válido.","auth/user-disabled":"Este usuário está desativado.","auth/too-many-requests":"Muitas tentativas. Aguarde alguns minutos.","auth/network-request-failed":"Sem conexão com o Firebase. Verifique a internet.","auth/operation-not-allowed":"Ative o login por e-mail/senha no Firebase."};
-      msg.textContent=map[code]||"Não foi possível conectar. Tente novamente.";
-      btn.disabled=false; btn.textContent="Entrar"; busy=false;
-    }
-  }
-  btn.addEventListener("click",fallbackLogin);
-  pass.addEventListener("keydown",function(ev){if(ev.key==="Enter"){ev.preventDefault();fallbackLogin();}});
-})();
-</script>
-<script type="module">
-import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
-import { getFirestore, collection, getDocs, doc, setDoc, addDoc, updateDoc, deleteDoc, getDoc, writeBatch } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+/* Telle V4: Firebase compat mode for maximum Safari/GitHub Pages reliability. */
+const initializeApp = (cfg) => firebase.initializeApp(cfg);
+const getApps = () => firebase.apps;
+const getApp = () => firebase.app();
+const getAuth = () => firebase.auth();
+const getFirestore = () => firebase.firestore();
+const signInWithEmailAndPassword = (a,e,p) => a.signInWithEmailAndPassword(e,p);
+const onAuthStateChanged = (a,cb) => a.onAuthStateChanged(cb);
+const signOut = (a) => a.signOut();
+const collection = (db,...parts) => db.collection(parts.join('/'));
+const doc = (db,...parts) => db.doc(parts.join('/'));
+const setDoc = (ref,data,options) => ref.set(data,options);
+const addDoc = (ref,data) => ref.add(data);
+const updateDoc = (ref,patch) => ref.update(patch);
+const deleteDoc = (ref) => ref.delete();
+const getDoc = (ref) => ref.get();
+const getDocs = (ref) => ref.get();
+const writeBatch = (db) => db.batch();
 
 const firebaseConfig={
   apiKey:"AIzaSyADx57Ilk5JCaZFoHOeC3APensUHX6P3C4",
