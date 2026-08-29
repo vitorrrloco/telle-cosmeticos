@@ -46,10 +46,43 @@ function storageKey(){return "telle_data_"+userId}
 function loadLocal(){try{const saved=JSON.parse(localStorage.getItem(storageKey())||"null");if(saved)data=Object.assign(blank(),saved)}catch{}}
 function saveLocal(){localStorage.setItem(storageKey(),JSON.stringify(data))}
 async function signIn(email,password){
- const response=await fetch("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key="+FIREBASE.apiKey,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email,password,returnSecureToken:true})});
- const result=await response.json();
- if(!response.ok)throw Error(result.error?.message==="INVALID_LOGIN_CREDENTIALS"?"E-mail ou senha inválidos.":result.error?.message||"Não foi possível entrar.");
- idToken=result.idToken;userId=result.localId;localStorage.setItem("telle_token",idToken);localStorage.setItem("telle_uid",userId)
+ const controller=new AbortController();
+ const timeout=setTimeout(()=>controller.abort(),10000);
+ try{
+  const response=await fetch(
+   "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key="+encodeURIComponent(FIREBASE.apiKey),
+   {
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({email,password,returnSecureToken:true}),
+    signal:controller.signal,
+    cache:"no-store"
+   }
+  );
+  const result=await response.json().catch(()=>({}));
+  if(!response.ok){
+   const code=result?.error?.message||"UNKNOWN_ERROR";
+   const messages={
+    INVALID_LOGIN_CREDENTIALS:"E-mail ou senha inválidos.",
+    EMAIL_NOT_FOUND:"E-mail ou senha inválidos.",
+    INVALID_PASSWORD:"E-mail ou senha inválidos.",
+    USER_DISABLED:"Esta conta está desativada.",
+    TOO_MANY_ATTEMPTS_TRY_LATER:"Muitas tentativas. Aguarde alguns minutos.",
+    INVALID_API_KEY:"A configuração do Firebase está inválida."
+   };
+   throw Error(messages[code]||"Não foi possível entrar agora. Tente novamente.");
+  }
+  if(!result.idToken||!result.localId)throw Error("O Firebase não retornou uma sessão válida.");
+  idToken=result.idToken;
+  userId=result.localId;
+  localStorage.setItem("telle_token",idToken);
+  localStorage.setItem("telle_uid",userId);
+ }catch(error){
+  if(error.name==="AbortError")throw Error("O Firebase demorou para responder. Verifique a internet e tente novamente.");
+  throw error;
+ }finally{
+  clearTimeout(timeout);
+ }
 }
 function signOut(){localStorage.removeItem("telle_token");localStorage.removeItem("telle_uid");location.reload()}
 function totals(){let revenue=0,cost=0,open=0;data.sales.forEach(s=>{revenue+=Number(s.total)||0;cost+=Number(s.cost)||0;open+=Math.max(0,(Number(s.total)||0)-(Number(s.paid)||0))});return{revenue,cost,profit:revenue-cost,open}}
@@ -193,9 +226,29 @@ function openMore(kind){
  if(kind==="config")$("savePix").onclick=()=>{data.settings.pix=$("pixKey").value.trim();data.settings.pixName=$("pixName").value.trim()||"TELLE COSMETICOS";data.settings.pixCity=$("pixCity").value.trim()||"JOINVILLE";saveLocal();notify("Pix salvo.")};
 }
 async function startApp(){loadLocal();$("login").hidden=true;$("app").hidden=false;$("app").innerHTML=layout();go("home");notify("Telle conectada a nuvem ☁️")}
-$("loginButton").onclick=async()=>{const email=$("email").value.trim(),password=$("password").value;if(!email||!password){$("loginMessage").textContent="Informe e-mail e senha.";return}$("loginButton").disabled=true;$("loginButton").textContent="Entrando…";$("loginMessage").textContent="Conectando…";try{await signIn(email,password);await startApp()}catch(error){$("loginMessage").textContent=error.message;$("loginButton").disabled=false;$("loginButton").textContent="Entrar"}};
+$("loginButton").onclick=async()=>{
+ const button=$("loginButton"),message=$("loginMessage");
+ const email=$("email").value.trim(),password=$("password").value;
+ if(!email||!password){message.textContent="Informe e-mail e senha.";return}
+ button.disabled=true;
+ button.textContent="Entrando…";
+ message.textContent="Conectando ao Firebase…";
+ try{
+  await signIn(email,password);
+  message.textContent="Login confirmado. Abrindo o aplicativo…";
+  await startApp();
+ }catch(error){
+  message.textContent=error.message||"Não foi possível entrar.";
+  button.disabled=false;
+  button.textContent="Entrar";
+ }
+};
 $("password").addEventListener("keydown",event=>{if(event.key==="Enter")$("loginButton").click()});
-if(idToken&&userId)startApp();
+if(idToken&&userId){
+  // Sessão local é usada somente como atalho visual. Se houver problema,
+  // o usuário pode sair e fazer login novamente sem ficar preso no carregamento.
+  startApp().catch(()=>{localStorage.removeItem("telle_token");localStorage.removeItem("telle_uid");location.reload()});
+}
 </script>
 </body>
 </html>
