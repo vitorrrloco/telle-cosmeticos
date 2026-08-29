@@ -126,8 +126,40 @@ main{margin-left:258px}
 <nav class="bottom" id="bottom"><button data-page="dashboard" class="active"><b>⌂</b>Início</button><button data-page="vendas"><b>🛍️</b>Vendas</button><button data-page="estoque"><b>📦</b>Estoque</button><button data-page="clientes"><b>👥</b>Clientes</button><button data-page="financeiro"><b>☰</b>Mais</button></nav>
 </div><div id="modal"></div><div id="toast"></div>
 
+<script>
+/* V4 Safari-safe login fallback: the button remains usable even if the module is slow to initialize. */
+(function(){
+  const btn=document.getElementById("loginBtn"), email=document.getElementById("loginEmail"), pass=document.getElementById("loginPass"), msg=document.getElementById("loginMsg");
+  if(!btn||!email||!pass||!msg)return;
+  btn.type="button";
+  let busy=false;
+  async function fallbackLogin(){
+    if(window.__TELLE_LOGIN_READY__||busy)return;
+    const e=email.value.trim(), p=pass.value;
+    if(!e||!p){msg.textContent="Informe e-mail e senha.";return;}
+    busy=true; btn.disabled=true; btn.textContent="Conectando…"; msg.textContent="";
+    try{
+      const [{initializeApp,getApps,getApp},{getAuth,signInWithEmailAndPassword}]=await Promise.all([
+        import("https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js"),
+        import("https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js")
+      ]);
+      const cfg={apiKey:"AIzaSyADx57Ilk5JCaZFoHOeC3APensUHX6P3C4",authDomain:"telle-cosmeticos.firebaseapp.com",projectId:"telle-cosmeticos",storageBucket:"telle-cosmeticos.firebasestorage.app",messagingSenderId:"586748451590",appId:"1:586748451590:web:222875a9d0b9cd425d5c87"};
+      const app=getApps().length?getApp():initializeApp(cfg);
+      await signInWithEmailAndPassword(getAuth(app),e,p);
+    }catch(err){
+      console.error("Login fallback:",err);
+      const code=err&&err.code||"";
+      const map={"auth/invalid-credential":"E-mail ou senha incorretos.","auth/invalid-email":"O e-mail não é válido.","auth/user-disabled":"Este usuário está desativado.","auth/too-many-requests":"Muitas tentativas. Aguarde alguns minutos.","auth/network-request-failed":"Sem conexão com o Firebase. Verifique a internet.","auth/operation-not-allowed":"Ative o login por e-mail/senha no Firebase."};
+      msg.textContent=map[code]||"Não foi possível conectar. Tente novamente.";
+      btn.disabled=false; btn.textContent="Entrar"; busy=false;
+    }
+  }
+  btn.addEventListener("click",fallbackLogin);
+  pass.addEventListener("keydown",function(ev){if(ev.key==="Enter"){ev.preventDefault();fallbackLogin();}});
+})();
+</script>
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 import { getFirestore, collection, getDocs, doc, setDoc, addDoc, updateDoc, deleteDoc, getDoc, writeBatch } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
@@ -140,7 +172,7 @@ const firebaseConfig={
   appId:"1:586748451590:web:222875a9d0b9cd425d5c87",
   measurementId:"G-R0CGN0BP3C"
 };
-const firebaseApp=initializeApp(firebaseConfig);
+const firebaseApp=getApps().length?getApp():initializeApp(firebaseConfig);
 const auth=getAuth(firebaseApp), dbCloud=getFirestore(firebaseApp);
 const loginBtnEl=document.getElementById("loginBtn");
 const loginEmailEl=document.getElementById("loginEmail");
@@ -248,8 +280,9 @@ async function doLogin(){
     loginBtnEl.disabled=false;loginBtnEl.textContent="Entrar";
   }
 }
-loginBtnEl.onclick=doLogin;
-loginPassEl.addEventListener("keydown",e=>{if(e.key==="Enter")doLogin()});
+loginBtnEl.addEventListener("click",doLogin);
+loginPassEl.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();doLogin()}});
+window.__TELLE_LOGIN_READY__=true;
 logoutEl.onclick=async()=>{try{await signOut(auth)}catch(e){console.error(e)}};
 function showLogin(message=""){
   loginScreen.hidden=false;
@@ -333,7 +366,7 @@ function vendas(){return'<div class="toolbar"><input class="search" id="saleSear
 function newSaleFn(){let p=db.products.filter(x=>x.stock>0);if(!p.length){toast("Cadastre estoque antes de vender.");return}openModal("Nova venda",'<div class="form"><div class="field"><label>Cliente</label><select id="sc"><option value="">Venda balcão</option>'+db.clients.map(c=>'<option value="'+c.id+'">'+esc(c.name)+'</option>').join("")+'</select></div><div class="field"><label>Forma de pagamento</label><select id="sm"><option>PIX</option><option>Dinheiro</option><option>Cartão</option><option>Fiado</option></select></div><div class="field"><label>Produto</label><select id="sp">'+p.map(x=>'<option value="'+x.id+'">'+esc(x.name)+' • '+brl(x.price)+' • '+x.stock+' un.</option>').join("")+'</select></div><div class="field"><label>Quantidade</label><input id="sq" type="number" min="1" value="1"></div><div class="field"><label>Pago agora</label><input id="sPaid" type="number" min="0" step=".01" value="0"></div><div class="field"><label>Vencimento</label><input id="sDue" type="date" value="'+day()+'"></div></div><div class="notice" id="sInfo"></div>',saveSale,"Finalizar venda");$("sp").onchange=preview;$("sq").oninput=preview;preview()}
 function preview(){const p=db.products.find(x=>x.id==$("sp").value),q=Math.max(1,Number($("sq").value)||1);$("sInfo").innerHTML='<b>'+esc(p.name)+'</b> × '+q+' = <b>'+brl(p.price*q)+'</b>'}
 async function saveSale(){try{const p=db.products.find(x=>x.id==$("sp").value),q=Math.max(1,Number($("sq").value)||1);if(q>p.stock){toast("Estoque insuficiente.");return}const cid=Number($("sc").value)||null,c=db.clients.find(x=>x.id===cid),total=p.price*q;let paid=Number($("sPaid").value)||0;if($("sm").value!=="Fiado"&&paid===0)paid=total;if(paid>total)paid=total;const s={id:id(),created:new Date().toISOString(),client:c?.name||"",clientId:cid,total,cost:p.cost*q,paid,method:$("sm").value,due:$("sDue").value,items:[{name:p.name,qty:q,price:p.price,cost:p.cost,productId:p.id}]};p.stock-=q;await cloudSave("products",p);db.products=db.products.map(x=>x.id===p.id?p:x);await addObject("sales",s);if(paid)await addObject("cash",{id:id(),date:day(),type:"in",description:"Venda - "+(c?.name||"Balcão"),value:paid});if(paid<total&&c)await addObject("receivables",{id:id(),saleId:s.id,client:c.name,clientId:c.id,amount:total-paid,due:s.due,status:"pending"});closeModal();toast("Venda sincronizada ☁️");details(s.id)}catch(e){console.error(e);toast("Erro ao salvar a venda.")}}
-function details(idv){const s=db.sales.find(x=>x.id===idv),r=s.total-s.paid;openModal("Venda #"+String(s.id).slice(-6),'<div class="notice"><b>'+esc(s.client||"Balcão")+'</b><br>'+brdate(s.created.slice(0,10))+' • '+esc(s.method)+'</div>'+salesTable([s])+'<div class="notice">Em aberto: <b class="'+(r?"red":"green")+'">'+brl(r)+'</b></div>',r&&s.client?()=>charge(s.id):()=>receipt(s.id),r&&s.client?"💬 Cobrar WhatsApp":"📄 Gerar PDF")}
+function details(idv){const s=db.sales.find(x=>x.id===idv),r=Math.max(0,s.total-s.paid);const itemRows=s.items.map(i=>'<div class="quick"><span><b>'+esc(i.name)+'</b><br><small class="muted">'+i.qty+' × '+brl(i.price)+'</small></span><b>'+brl(i.price*i.qty)+'</b></div>').join("");openModal("Venda #"+String(s.id).slice(-6),'<div class="notice"><b>'+esc(s.client||"Balcão")+'</b><br>'+brdate(s.created.slice(0,10))+' • '+esc(s.method)+'</div><div class="panel" style="margin-top:12px"><h3>Itens da venda</h3>'+itemRows+'<hr style="border:0;border-top:1px solid var(--line);margin:12px 0"><div class="quick"><span>Total</span><b>'+brl(s.total)+'</b></div><div class="quick"><span>Pago</span><b>'+brl(s.paid)+'</b></div><div class="quick"><span>Em aberto</span><b class="'+(r?"red":"green")+'">'+brl(r)+'</b></div></div>',r&&s.client?()=>charge(s.id):()=>receipt(s.id),r&&s.client?"💬 Cobrar WhatsApp":"📄 Gerar PDF")}
 function charge(idv){
   const sale=db.sales.find(x=>x.id===idv);
   if(!sale){toast("Venda não encontrada.");return}
@@ -347,17 +380,12 @@ function charge(idv){
   const name=(c?.name||"cliente").trim();
   const message=[
     "🌸 *TELLE COSMÉTICOS*",
-    "",
     "Olá, "+name+"! Tudo bem? 💕",
-    "",
     "Passando para lembrar do valor em aberto da sua compra.",
-    "",
     "🧾 Pedido: #"+order,
     "💰 Valor pendente: *"+brl(pending)+"*",
     "📅 Vencimento: "+due,
-    "",
     "Assim que realizar o pagamento, pode me enviar o comprovante por aqui.",
-    "",
     "Obrigada pela preferência! 🌷",
     "*Telle Cosméticos*"
   ].join(NL);
@@ -373,7 +401,7 @@ function receipt(idv){
   const status=open<=0.009?"Pagamento confirmado":"Pagamento pendente";
   const statusClass=open<=0.009?"ok":"pending";
   const rows=s.items.map(i=>'<tr><td><strong>'+esc(i.name)+'</strong><small>Quantidade: '+i.qty+'</small></td><td>'+brl(i.price*i.qty)+'</td></tr>').join("");
-  const h='<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Telle Cosméticos • Pedido #'+order+'</title><style>@page{size:A4;margin:14mm}*{box-sizing:border-box}body{margin:0;background:#fff7fa;font-family:Arial,Helvetica,sans-serif;color:#351a28}.sheet{max-width:760px;margin:25px auto;background:#fff;border:1px solid #efdbe5;border-radius:24px;overflow:hidden;box-shadow:0 12px 45px rgba(115,31,70,.10)}.head{padding:28px 32px 22px;text-align:center;background:linear-gradient(180deg,#fffafd,#fff3f8);border-bottom:1px solid #f1dfe7}.logo{width:310px;max-width:80%;height:120px;object-fit:contain;display:block;margin:0 auto 8px}.brandline{font-size:11px;letter-spacing:2px;color:#a52b61;text-transform:uppercase;font-weight:700}.title{font-size:22px;margin:7px 0 2px}.sub{font-size:12px;color:#806a75}.body{padding:28px 32px}.meta{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:22px}.box{border:1px solid #efdde6;border-radius:14px;padding:13px 15px;background:#fffafd}.label{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#927783;margin-bottom:5px}.value{font-size:14px;font-weight:700}.status{display:inline-block;margin-top:8px;padding:7px 10px;border-radius:999px;font-size:11px;font-weight:700}.status.ok{background:#e8f7f0;color:#167455}.status.pending{background:#fff1d9;color:#996116}.section{font-size:14px;font-weight:700;margin:20px 0 10px;color:#5a263e}.items{width:100%;border-collapse:collapse}.items th{text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#927783;padding:9px 0;border-bottom:1px solid #ead9e1}.items th:last-child,.items td:last-child{text-align:right}.items td{padding:13px 0;border-bottom:1px solid #f0e4e9;font-size:13px}.items small{display:block;color:#8a747e;font-size:11px;margin-top:3px}.totals{margin-left:auto;width:min(330px,100%);margin-top:16px}.totalrow{display:flex;justify-content:space-between;padding:7px 0;color:#765d69;font-size:12px}.totalrow.grand{border-top:1px solid #e7d4de;margin-top:5px;padding-top:13px;font-size:18px;font-weight:800;color:#a61e59}.footer{padding:22px 32px 28px;background:#fff8fb;text-align:center;border-top:1px solid #f1e1e8;color:#806a75;font-size:11px}.thanks{font-size:14px;font-weight:700;color:#9f2258;margin-bottom:5px}@media print{body{background:#fff}.sheet{margin:0 auto;box-shadow:none;border-radius:0;max-width:none}.head{background:#fff3f8;-webkit-print-color-adjust:exact;print-color-adjust:exact}.status{ -webkit-print-color-adjust:exact;print-color-adjust:exact}}@media(max-width:600px){.body{padding:20px}.head{padding:22px 18px}.meta{grid-template-columns:1fr}.footer{padding:20px}.logo{height:100px}}</style></head><body><main class="sheet"><header class="head"><img class="logo" src="'+logo+'" alt="Telle Cosméticos"><div class="brandline">Telle Cosméticos</div><div class="title">Comprovante de compra</div><div class="sub">Pedido #'+order+' • '+brdate(s.created.slice(0,10))+'</div></header><section class="body"><div class="meta"><div class="box"><div class="label">Cliente</div><div class="value">'+esc(s.client||"Balcão")+'</div></div><div class="box"><div class="label">Forma de pagamento</div><div class="value">'+esc(s.method||"Não informado")+'</div><span class="status '+statusClass+'">'+status+'</span></div></div><div class="section">Itens da compra</div><table class="items"><thead><tr><th>Produto</th><th>Valor</th></tr></thead><tbody>'+rows+'</tbody></table><div class="totals"><div class="totalrow"><span>Total da compra</span><strong>'+brl(s.total)+'</strong></div><div class="totalrow"><span>Valor pago</span><strong>'+brl(paid)+'</strong></div><div class="totalrow grand"><span>Em aberto</span><span>'+brl(open)+'</span></div></div></section><footer class="footer"><div class="thanks">Obrigada pela preferência! 🌷</div><div>Telle Cosméticos</div><div style="margin-top:5px">'+esc(db.settings.instagram||"")+'</div></footer></main><script>window.onload=()=>setTimeout(()=>window.print(),450)<\/script></body></html>';
+  const h='<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#c52a6c"><link rel="preconnect" href="https://www.gstatic.com"><title>Telle Cosméticos • Pedido #'+order+'</title><style>@page{size:A4;margin:14mm}*{box-sizing:border-box}body{margin:0;background:#fff7fa;font-family:Arial,Helvetica,sans-serif;color:#351a28}.sheet{max-width:760px;margin:25px auto;background:#fff;border:1px solid #efdbe5;border-radius:24px;overflow:hidden;box-shadow:0 12px 45px rgba(115,31,70,.10)}.head{padding:28px 32px 22px;text-align:center;background:linear-gradient(180deg,#fffafd,#fff3f8);border-bottom:1px solid #f1dfe7}.logo{width:310px;max-width:80%;height:120px;object-fit:contain;display:block;margin:0 auto 8px}.brandline{font-size:11px;letter-spacing:2px;color:#a52b61;text-transform:uppercase;font-weight:700}.title{font-size:22px;margin:7px 0 2px}.sub{font-size:12px;color:#806a75}.body{padding:28px 32px}.meta{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:22px}.box{border:1px solid #efdde6;border-radius:14px;padding:13px 15px;background:#fffafd}.label{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#927783;margin-bottom:5px}.value{font-size:14px;font-weight:700}.status{display:inline-block;margin-top:8px;padding:7px 10px;border-radius:999px;font-size:11px;font-weight:700}.status.ok{background:#e8f7f0;color:#167455}.status.pending{background:#fff1d9;color:#996116}.section{font-size:14px;font-weight:700;margin:20px 0 10px;color:#5a263e}.items{width:100%;border-collapse:collapse}.items th{text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#927783;padding:9px 0;border-bottom:1px solid #ead9e1}.items th:last-child,.items td:last-child{text-align:right}.items td{padding:13px 0;border-bottom:1px solid #f0e4e9;font-size:13px}.items small{display:block;color:#8a747e;font-size:11px;margin-top:3px}.totals{margin-left:auto;width:min(330px,100%);margin-top:16px}.totalrow{display:flex;justify-content:space-between;padding:7px 0;color:#765d69;font-size:12px}.totalrow.grand{border-top:1px solid #e7d4de;margin-top:5px;padding-top:13px;font-size:18px;font-weight:800;color:#a61e59}.footer{padding:22px 32px 28px;background:#fff8fb;text-align:center;border-top:1px solid #f1e1e8;color:#806a75;font-size:11px}.thanks{font-size:14px;font-weight:700;color:#9f2258;margin-bottom:5px}@media print{body{background:#fff}.sheet{margin:0 auto;box-shadow:none;border-radius:0;max-width:none}.head{background:#fff3f8;-webkit-print-color-adjust:exact;print-color-adjust:exact}.status{ -webkit-print-color-adjust:exact;print-color-adjust:exact}}@media(max-width:600px){.body{padding:20px}.head{padding:22px 18px}.meta{grid-template-columns:1fr}.footer{padding:20px}.logo{height:100px}}</style></head><body><main class="sheet"><header class="head"><img class="logo" src="'+logo+'" alt="Telle Cosméticos"><div class="brandline">Telle Cosméticos</div><div class="title">Comprovante de compra</div><div class="sub">Pedido #'+order+' • '+brdate(s.created.slice(0,10))+'</div></header><section class="body"><div class="meta"><div class="box"><div class="label">Cliente</div><div class="value">'+esc(s.client||"Balcão")+'</div></div><div class="box"><div class="label">Forma de pagamento</div><div class="value">'+esc(s.method||"Não informado")+'</div><span class="status '+statusClass+'">'+status+'</span></div></div><div class="section">Itens da compra</div><table class="items"><thead><tr><th>Produto</th><th>Valor</th></tr></thead><tbody>'+rows+'</tbody></table><div class="totals"><div class="totalrow"><span>Total da compra</span><strong>'+brl(s.total)+'</strong></div><div class="totalrow"><span>Valor pago</span><strong>'+brl(paid)+'</strong></div><div class="totalrow grand"><span>Em aberto</span><span>'+brl(open)+'</span></div></div></section><footer class="footer"><div class="thanks">Obrigada pela preferência! 🌷</div><div>Telle Cosméticos</div><div style="margin-top:5px">'+esc(db.settings.instagram||"")+'</div></footer></main><script>window.onload=()=>setTimeout(()=>window.print(),450)<\/script></body></html>';
   const u=URL.createObjectURL(new Blob([h],{type:"text/html"}));
   const w=window.open(u,"_blank");
   if(!w)toast("Permita pop-ups no Safari para gerar o PDF.");
@@ -403,5 +431,7 @@ function restoreFile(e){const f=e.target.files[0];if(!f)return;const r=new FileR
 function resetData(){if(confirm("Isso apaga somente o backup local deste aparelho. Os dados da nuvem não serão apagados. Continuar?")){localStorage.removeItem(KEY);toast("Dados locais apagados.")}}
 backupEl.onclick=backup;restoreEl.onchange=restoreFile;
 window.go=go;window.charge=charge;window.details=details;window.receipt=receipt;window.historyClient=historyClient;window.move=move;window.resetData=resetData;
+window.addEventListener("error",e=>{console.error("Telle error:",e.error||e.message)});
+window.addEventListener("unhandledrejection",e=>{console.error("Telle rejection:",e.reason)});
 </script>
 </body></html>
