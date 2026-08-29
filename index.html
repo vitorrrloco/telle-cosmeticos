@@ -2,295 +2,200 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#9d1854">
-<title>Telle Cosméticos • V4.1</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#a51d55">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Telle Cosméticos</title>
 <style>
-:root{--pink:#a51d55;--pink2:#7b123e;--soft:#fff0f6;--soft2:#f9dce9;--bg:#fffafd;--ink:#301622;--muted:#806a75;--line:#ead8e2;--green:#087b58;--red:#bd2349;--gold:#8d650b;--shadow:0 12px 34px rgba(74,17,43,.08)}
-*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Arial,sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}input,select,textarea{font-size:16px}
-[hidden]{display:none!important}
-#login{min-height:100vh;display:grid;place-items:center;padding:18px;background:radial-gradient(circle at top,#fff 0,#fff7fa 50%,#f9dce9 100%)}
-.loginCard{width:min(420px,100%);background:#fff;border:1px solid var(--line);border-radius:28px;padding:28px;box-shadow:0 24px 70px rgba(70,10,40,.13)}
-.loginLogo{height:105px;display:flex;align-items:center;justify-content:center;margin-bottom:18px}.loginLogo img{max-width:100%;max-height:100%;object-fit:contain}
-.loginCard h1{margin:0;font-size:23px;text-align:center}.loginCard p{margin:7px 0 20px;text-align:center;color:var(--muted);font-size:13px}
-.field{margin:11px 0}.field label{display:block;font-size:11px;color:var(--muted);margin-bottom:5px}.field input,.field select,.field textarea{width:100%;padding:13px;border:1px solid var(--line);border-radius:13px;background:#fff;color:var(--ink);outline:none}.field input:focus,.field select:focus,.field textarea:focus{border-color:#d77ca2;box-shadow:0 0 0 3px var(--soft)}
-.loginBtn{width:100%;margin-top:8px;border:0;background:linear-gradient(135deg,var(--pink),#cf397a);color:#fff;padding:14px;border-radius:14px;font-weight:800;box-shadow:0 9px 22px rgba(165,29,85,.18)}
-.loginMsg{min-height:22px;text-align:center;font-size:12px;margin-top:12px;color:var(--red)}.loginFoot{text-align:center;color:var(--muted);font-size:11px;margin-top:18px}
-.app{min-height:100vh}.sidebar{position:fixed;left:0;top:0;bottom:0;width:250px;background:rgba(255,255,255,.98);border-right:1px solid var(--line);padding:17px 13px;z-index:50}
-.brand{height:98px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--line);margin-bottom:10px}.brand img{width:190px;height:90px;object-fit:contain}
-.nav{display:grid;gap:4px}.nav button{border:0;background:transparent;color:#765f69;text-align:left;border-radius:13px;padding:12px;display:flex;align-items:center;gap:11px}.nav button.active{background:var(--soft);color:var(--pink);font-weight:800}.nav em{font-style:normal;width:22px;text-align:center}
-.sidebarFoot{position:absolute;bottom:14px;left:13px;right:13px;display:flex;gap:6px}.mini{border:1px solid var(--line);background:var(--soft);color:var(--pink);border-radius:10px;padding:9px;font-size:11px;font-weight:750;flex:1;text-align:center}.mini input{display:none}
-main{margin-left:250px;min-height:100vh}.topbar{height:78px;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:30}.heading{display:flex;gap:10px;align-items:center}.hamb{display:none;border:0;background:none;font-size:23px}.heading h1{font-size:21px;margin:0}.heading p{margin:3px 0 0;font-size:12px;color:var(--muted)}.topActions{display:flex;align-items:center;gap:8px}.userPill{font-size:11px;color:var(--muted);max-width:230px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.content{padding:24px 28px 100px;animation:pageIn .15s ease-out}.content.leaving{animation:pageOut .07s ease-in}@keyframes pageIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}@keyframes pageOut{to{opacity:0;transform:translateY(-3px)}}
-.primary,.softBtn,.danger{border:0;border-radius:11px;padding:10px 13px;font-weight:750}.primary{background:linear-gradient(135deg,var(--pink),#cf397a);color:#fff;box-shadow:0 6px 17px rgba(165,29,85,.14)}.softBtn{background:var(--soft);color:var(--pink)}.danger{background:#fff0f3;color:var(--red)}
-.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:17px;box-shadow:var(--shadow)}.eyebrow{font-size:11px;color:var(--muted)}.big{font-size:23px;font-weight:850;margin:7px 0}.green{color:var(--green)}.red{color:var(--red)}.muted{font-size:12px;color:var(--muted)}
-.layout{display:grid;grid-template-columns:1.35fr .65fr;gap:15px;margin-top:15px}.panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:17px;box-shadow:var(--shadow)}.panelHead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:13px}.panel h3{margin:0;font-size:16px}
-.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.search{flex:1;min-width:190px;border:1px solid var(--line);border-radius:12px;padding:11px;background:#fff;outline:none}
-.tableWrap{overflow:auto;-webkit-overflow-scrolling:touch}.table{width:100%;border-collapse:collapse;font-size:13px}.table th,.table td{padding:11px 8px;border-bottom:1px solid #f0e7eb;text-align:left;white-space:nowrap}.table th{font-size:10px;color:var(--muted);text-transform:uppercase}.badge{display:inline-block;padding:4px 8px;border-radius:99px;font-size:10px;font-weight:800}.bpaid{background:#e5f7ee;color:var(--green)}.bpart{background:#eee7f9;color:#624099}.bpending{background:#fff2d4;color:var(--gold)}.boverdue{background:#ffe7ed;color:var(--red)}
-.notice{padding:11px 12px;background:var(--soft);border-radius:12px;margin:7px 0;font-size:13px}.empty{text-align:center;color:var(--muted);padding:38px 12px}.quick{display:flex;justify-content:space-between;gap:10px;padding:11px 0;border-bottom:1px solid #f1e6eb}.quick:last-child{border-bottom:0}
-.chart{height:205px;display:flex;align-items:flex-end;gap:8px;padding:12px 2px 25px}.bar{flex:1;min-height:5px;background:linear-gradient(#f29cc4,var(--pink));border-radius:8px 8px 2px 2px;position:relative}.bar small{position:absolute;bottom:-21px;width:100%;text-align:center;font-size:10px;color:var(--muted)}
-.progressRow{display:grid;grid-template-columns:1.4fr 2fr auto;gap:8px;align-items:center;padding:9px 0}.progress{height:8px;background:var(--soft2);border-radius:99px;overflow:hidden}.progress i{display:block;height:100%;background:var(--pink);border-radius:99px}
-.modalBg{position:fixed;inset:0;background:rgba(39,9,24,.54);backdrop-filter:blur(3px);display:grid;place-items:center;padding:13px;z-index:1000}.modal{width:min(720px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:22px;padding:20px;box-shadow:0 25px 70px rgba(30,0,18,.28)}.modalHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}.modalHead h2{font-size:20px;margin:0}.close{border:0;background:var(--soft);color:var(--pink);width:37px;height:37px;border-radius:50%;font-size:21px}.form{display:grid;grid-template-columns:1fr 1fr;gap:11px}.full{grid-column:1/-1}.modalFoot{display:flex;justify-content:flex-end;gap:8px;margin-top:17px}
-.pixBox{display:grid;place-items:center;padding:15px;background:var(--soft);border:1px dashed #dfa0bc;border-radius:15px;margin-top:12px}.pixBox canvas,.pixBox img{max-width:230px;height:auto;background:#fff;padding:8px;border-radius:10px}.copyBox{width:100%;font-size:11px;padding:10px;border:1px solid var(--line);border-radius:10px;background:#fff;word-break:break-all}
-#toast{position:fixed;right:18px;bottom:18px;z-index:2000;background:#321722;color:#fff;padding:12px 15px;border-radius:12px;opacity:0;transform:translateY(8px);transition:.18s;max-width:330px}.toastOn{opacity:1!important;transform:none!important}
-.bottom{display:none}
-@media(max-width:900px){.sidebar{transform:translateX(-100%);transition:.16s}.sidebar.open{transform:none}.hamb{display:block}main{margin-left:0}.topbar{padding:0 14px}.content{padding:16px 13px 94px}.cards{grid-template-columns:1fr 1fr}.layout{grid-template-columns:1fr}.bottom{display:grid;position:fixed;left:0;right:0;bottom:0;height:70px;background:rgba(255,255,255,.98);backdrop-filter:blur(14px);border-top:1px solid var(--line);z-index:900;grid-template-columns:repeat(5,1fr);padding-bottom:env(safe-area-inset-bottom)}.bottom button{border:0;background:none;color:var(--muted);font-size:10px}.bottom button.active{color:var(--pink);font-weight:800}.bottom b{display:block;font-size:20px;margin-bottom:2px}.userPill{display:none}}
-@media(max-width:560px){.loginCard{padding:23px 19px}.loginLogo{height:90px}.brand{height:84px}.brand img{height:78px}.topbar{height:68px}.heading h1{font-size:18px}.content{padding-top:13px}.card{padding:14px;border-radius:16px}.big{font-size:19px}.panel{padding:14px;border-radius:16px}.form{grid-template-columns:1fr}.full{grid-column:auto}.modal{padding:15px;border-radius:19px}.modalFoot{position:sticky;bottom:0;background:#fff;padding-top:10px}.toolbar .primary,.toolbar .softBtn{min-height:44px}.table{font-size:12px}}
-@media print{body{background:#fff}.sidebar,.topbar,.bottom,#toast,#modal{display:none!important}main{margin:0}.content{padding:0!important}.noPrint{display:none!important}.printOnly{display:block!important}}
-.printOnly{display:none}
+:root{--p:#a51d55;--p2:#cf3b79;--bg:#faf7f9;--ink:#321724;--muted:#8b737d;--line:#eadde4;--soft:#fff0f6;--ok:#087a58;--bad:#c0264e}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input,select,textarea{font:inherit}button{touch-action:manipulation;-webkit-tap-highlight-color:transparent}input,select,textarea{font-size:16px}
+#login{height:100%;display:grid;place-items:center;padding:18px;background:linear-gradient(160deg,#fff,#fff3f8 70%,#efd5e1)}
+.login{width:min(400px,100%);padding:24px 20px;background:#fff;border:1px solid var(--line);border-radius:27px;box-shadow:0 25px 70px #4b102318}.logo{height:100px;display:grid;place-items:center}.logo img{max-width:255px;max-height:100px;object-fit:contain}.login h1{text-align:center;font-size:21px;margin:6px}.login p{text-align:center;color:var(--muted);font-size:11px}.field{margin:9px 0}.field label{display:block;color:var(--muted);font-size:10px}.field input,.field select,.field textarea{width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;outline:0;margin-top:5px}.enter{width:100%;border:0;border-radius:13px;padding:14px;background:linear-gradient(135deg,var(--p),var(--p2));color:#fff;font-weight:800}.msg{text-align:center;color:var(--bad);font-size:10px;min-height:18px;margin-top:8px}
+.app{height:100%;display:flex;flex-direction:column}.top{height:72px;min-height:72px;padding:calc(8px + env(safe-area-inset-top)) 14px 8px;background:#fffffff7;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:9px}.brand img{width:40px;height:40px;object-fit:contain;border-radius:10px}.brand b{display:block;font-size:16px}.brand small{display:block;font-size:9px;color:var(--muted)}.plus{width:42px;height:42px;border:0;border-radius:13px;background:var(--p);color:#fff;font-size:23px}
+.view{flex:1;min-height:0;overflow:auto;-webkit-overflow-scrolling:touch;padding:13px 13px calc(88px + env(safe-area-inset-bottom))}.page{max-width:760px;margin:auto}
+.nav{height:76px;min-height:76px;display:grid;grid-template-columns:repeat(5,1fr);background:#fffffff7;border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}.nav button{border:0;background:transparent;color:var(--muted);font-size:9px}.nav span{display:block;font-size:20px;line-height:26px}.nav .active{color:var(--p);font-weight:800}
+.hero{display:flex;justify-content:space-between;align-items:center;padding:17px;background:linear-gradient(135deg,#fff,#fff0f6);border:1px solid var(--line);border-radius:21px}.hero small{font-size:10px;color:var(--muted)}.hero h1{font-size:20px;margin:3px 0}.hero p{font-size:10px;color:var(--muted);margin:0}.hero span{font-size:30px}.metrics{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}.metric{background:#fff;border:1px solid var(--line);border-radius:15px;padding:11px}.metric small{display:block;color:var(--muted);font-size:9px}.metric b{display:block;font-size:15px;margin:5px 0}.metric i{font-style:normal;color:var(--muted);font-size:8px}.ok{color:var(--ok)!important}.bad{color:var(--bad)!important}
+.big{width:100%;border:0;border-radius:17px;background:linear-gradient(135deg,var(--p),var(--p2));color:#fff;padding:13px;display:flex;align-items:center;gap:11px;text-align:left;margin:2px 0 17px}.big span{font-size:25px}.big div{flex:1}.big b{display:block;font-size:13px}.big small{font-size:9px;opacity:.82}.big i{font-size:24px;font-style:normal}.title{display:flex;justify-content:space-between;align-items:center;margin:13px 2px 7px}.title b{font-size:13px}.link{border:0;background:none;color:var(--p);font-size:10px;font-weight:800}.list{display:grid;gap:7px}.item{width:100%;min-height:63px;background:#fff;border:1px solid var(--line);border-radius:15px;padding:9px;display:flex;align-items:center;gap:9px;text-align:left;color:var(--ink)}.ico{width:39px;height:39px;border-radius:12px;background:var(--soft);display:grid;place-items:center;font-size:19px}.main{flex:1;min-width:0}.main b{display:block;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.main small{display:block;color:var(--muted);font-size:9px;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.right{text-align:right}.right b{display:block;font-size:11px}.right small{font-size:8px}.item>i{font-style:normal;color:#b99eaa;font-size:21px}.empty{padding:28px;text-align:center;border:1px dashed var(--line);border-radius:15px;background:#fff;color:var(--muted);font-size:11px}
+.toolbar{display:flex;gap:8px;margin-bottom:10px}.search{flex:1;background:#fff;border:1px solid var(--line);border-radius:13px;display:flex;align-items:center;padding:0 10px;color:var(--muted)}.search input{width:100%;border:0;outline:0;background:transparent;padding:11px}.round{width:44px;height:44px;border:0;border-radius:14px;background:var(--p);color:#fff;font-size:22px}.chips{display:flex;gap:6px;overflow:auto;margin-bottom:10px}.chip{border:1px solid var(--line);background:#fff;color:var(--muted);border-radius:99px;padding:8px 12px;font-size:9px}.chip.active{background:var(--soft);color:var(--p);font-weight:800}.more{display:grid;grid-template-columns:1fr 1fr;gap:8px}.more button{min-height:110px;border:1px solid var(--line);background:#fff;border-radius:16px;text-align:left;padding:13px}.more span{display:block;font-size:23px;margin-bottom:10px}.more b{display:block;font-size:12px}.more small{display:block;color:var(--muted);font-size:8px;margin-top:3px}.logout{width:100%;border:0;border-radius:13px;background:#fff0f3;color:var(--bad);padding:13px;font-size:11px;font-weight:800;margin-top:9px}
+.modalbg{position:fixed;inset:0;background:#2b0a1b88;display:grid;place-items:end center;padding:9px;z-index:100}.modal{width:min(620px,100%);max-height:93vh;overflow:auto;background:#fff;border-radius:23px;padding:15px}.mh{display:flex;justify-content:space-between;align-items:center}.mh h2{font-size:17px;margin:0}.close{width:35px;height:35px;border:0;border-radius:50%;background:var(--soft);color:var(--p);font-size:20px}.mf{display:flex;justify-content:flex-end;gap:7px;margin-top:11px}.soft,.primary{border:0;border-radius:11px;padding:10px 13px;font-weight:800}.soft{background:var(--soft);color:var(--p)}.primary{background:var(--p);color:#fff}.sale label{display:block;color:var(--muted);font-size:10px;margin:8px 0}.sale input,.sale select{display:block;width:100%;margin-top:5px;border:1px solid var(--line);border-radius:11px;padding:11px;outline:0}.two{display:grid;grid-template-columns:1fr 90px;gap:8px}.info{display:flex;align-items:center;gap:7px;background:var(--soft);padding:10px;border-radius:12px;font-size:10px}.info strong{margin-left:auto}.pix{margin-top:8px;background:var(--soft);border-radius:15px;padding:13px;text-align:center}.pix b,.pix strong{display:block}.pix strong{font-size:20px;margin:4px}.pix canvas,.pix img{background:#fff;padding:7px;border-radius:10px}.pix button{display:block;width:100%;border:0;border-radius:11px;background:#fff;color:var(--p);padding:10px;font-weight:800;margin-top:9px}.pix textarea{width:100%;height:65px;border:1px solid var(--line);border-radius:10px;font-size:9px;margin-top:7px}.warning{margin-top:8px;background:#fff4d8;color:#73580a;padding:10px;border-radius:11px;font-size:10px}
+#toast{position:fixed;z-index:200;left:50%;bottom:92px;transform:translate(-50%,15px);opacity:0;background:#321724;color:#fff;padding:10px 13px;border-radius:12px;font-size:10px;transition:.2s}.show{opacity:1!important;transform:translate(-50%,0)!important}
+@media(min-width:700px){.metrics{grid-template-columns:repeat(4,1fr)}.more{grid-template-columns:repeat(3,1fr)}.modalbg{place-items:center}}
 </style>
 </head>
 <body>
-
-<section id="login">
-  <div class="loginCard">
-    <div class="loginLogo"><img src="telle-logo.png" alt="Telle Cosméticos"></div>
-    <h1>Bem-vinda à Telle Cosméticos</h1>
-    <p>Entre para acessar seu sistema de vendas.</p>
-    <div class="field"><label for="loginEmail">E-mail</label><input id="loginEmail" type="email" autocomplete="username" inputmode="email"></div>
-    <div class="field"><label for="loginPass">Senha</label><input id="loginPass" type="password" autocomplete="current-password"></div>
-    <button id="loginBtn" class="loginBtn" type="button">Entrar</button>
-    <div id="loginMsg" class="loginMsg" role="status" aria-live="polite"></div>
-    <div class="loginFoot">Telle Cosméticos • Sistema V4.1</div>
-  </div>
-</section>
-
-<section id="app" class="app" hidden>
-  <aside id="sidebar" class="sidebar">
-    <div class="brand"><img src="telle-logo.png" alt="Telle Cosméticos"></div>
-    <nav id="nav" class="nav">
-      <button type="button" data-page="dashboard">🏠 <span>Dashboard</span></button>
-      <button type="button" data-page="vendas">🛍️ <span>Vendas</span></button>
-      <button type="button" data-page="estoque">📦 <span>Estoque</span></button>
-      <button type="button" data-page="clientes">👥 <span>Clientes</span></button>
-      <button type="button" data-page="financeiro">💰 <span>Financeiro</span></button>
-      <button type="button" data-page="cobrancas">💬 <span>Cobranças</span></button>
-      <button type="button" data-page="fornecedores">🚚 <span>Fornecedores</span></button>
-      <button type="button" data-page="relatorios">📊 <span>Relatórios</span></button>
-      <button type="button" data-page="config">⚙️ <span>Configurações</span></button>
-    </nav>
-    <div class="sidebarFoot">
-      <button id="backupBtn" class="mini" type="button">Backup</button>
-      <label class="mini">Restaurar<input id="restoreFile" type="file" accept=".json"></label>
-    </div>
-  </aside>
-
-  <main>
-    <header class="topbar">
-      <div class="heading"><button id="hamb" class="hamb" type="button">☰</button><div><h1 id="pageTitle">Dashboard</h1><p id="pageSub">Visão geral da Telle Cosméticos</p></div></div>
-      <div class="topActions"><span id="userPill" class="userPill"></span><button id="newSale" class="primary" type="button">＋ Nova venda</button><button id="logout" class="softBtn" type="button">Sair</button></div>
-    </header>
-    <div id="content" class="content"></div>
-  </main>
-  <nav id="bottom" class="bottom">
-    <button type="button" data-page="dashboard"><b>⌂</b>Início</button>
-    <button type="button" data-page="vendas"><b>🛍️</b>Vendas</button>
-    <button type="button" data-page="estoque"><b>📦</b>Estoque</button>
-    <button type="button" data-page="clientes"><b>👥</b>Clientes</button>
-    <button type="button" data-page="financeiro"><b>☰</b>Mais</button>
-  </nav>
-</section>
-
-<div id="modal"></div><div id="toast"></div>
+<section id="login"><div class="login"><div class="logo"><img src="telle-logo.png" alt="Telle Cosméticos"></div><h1>Telle Cosméticos 🌸</h1><p>Seu aplicativo de vendas</p><div class="field"><label>E-mail</label><input id="email" type="email" autocomplete="username"></div><div class="field"><label>Senha</label><input id="password" type="password" autocomplete="current-password"></div><button id="loginButton" class="enter" type="button">Entrar</button><div id="loginMessage" class="msg"></div></div></section>
+<section id="app" hidden></section><div id="modal"></div><div id="toast"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
-(function(){
-"use strict";
-
-const API_KEY="AIzaSyADx57Ilk5JCaZFoHOeC3APensUHX6P3C4";
-const PROJECT="telle-cosmeticos";
-const ROOT="https://firestore.googleapis.com/v1/projects/"+PROJECT+"/databases/(default)/documents";
-const AUTH_URL="https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key="+encodeURIComponent(API_KEY);
-const REFRESH_URL="https://securetoken.googleapis.com/v1/token?key="+encodeURIComponent(API_KEY);
-const AUTH_KEY="TELLE_V41_AUTH", LOCAL_KEY="TELLE_V41_LOCAL";
-const NAMES=["products","clients","sales","receivables","cash","suppliers"];
-
-let db={products:[],clients:[],sales:[],receivables:[],cash:[],suppliers:[],settings:{pix:"",pixName:"TELLE COSMETICOS",pixCity:"JOINVILLE",instagram:"@tellecosmeticos"}};
-let token=null,refreshToken=null,uid=null,userEmail="",refreshing=null;
-
+const FIREBASE={apiKey:"AIzaSyADx57Ilk5JCaZFoHOeC3APensUHX6P3C4",projectId:"telle-cosmeticos"};
 const $=id=>document.getElementById(id);
-const clone=x=>JSON.parse(JSON.stringify(x));
-const money=n=>Number(n||0).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+const esc=value=>String(value??"").replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));
+const money=value=>Number(value||0).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
 const today=()=>new Date().toISOString().slice(0,10);
-const dateBR=s=>s?new Date(s+"T12:00:00").toLocaleDateString("pt-BR"):"-";
-const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[c]));
-const newid=()=>Date.now()+Math.floor(Math.random()*99999);
-function toast(text){const e=$("toast");e.textContent=text;e.classList.add("toastOn");clearTimeout(window.__tt);window.__tt=setTimeout(()=>e.classList.remove("toastOn"),2500);}
-function authGet(){try{return JSON.parse(localStorage.getItem(AUTH_KEY)||"null")}catch{return null}}
-function authSave(x){localStorage.setItem(AUTH_KEY,JSON.stringify(x))}
-function authClear(){localStorage.removeItem(AUTH_KEY);token=refreshToken=uid=userEmail=null}
-function localSave(){try{localStorage.setItem(LOCAL_KEY,JSON.stringify(db))}catch{}}
-function localLoad(){try{return JSON.parse(localStorage.getItem(LOCAL_KEY))||clone(db)}catch{return clone(db)}}
+const dateBR=value=>{const p=String(value||"").slice(0,10).split("-");return p.length===3?p.reverse().join("/"):"-"};
+const makeId=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+const blank=()=>({products:[],clients:[],sales:[],receivables:[],cash:[],suppliers:[],settings:{pix:"",pixName:"TELLE COSMETICOS",pixCity:"JOINVILLE"}});
+let data=blank();
+let idToken=localStorage.getItem("telle_token")||"";
+let userId=localStorage.getItem("telle_uid")||"";
+let saleFilter="all";
 
-async function loginRequest(email,password){
-  const r=await fetch(AUTH_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email,password,returnSecureToken:true})});
-  const j=await r.json();
-  if(!r.ok){const c=j?.error?.message||"LOGIN_FAILED";const map={INVALID_LOGIN_CREDENTIALS:"E-mail ou senha incorretos.",INVALID_PASSWORD:"E-mail ou senha incorretos.",EMAIL_NOT_FOUND:"E-mail ou senha incorretos.",INVALID_EMAIL:"E-mail inválido.",USER_DISABLED:"Usuário desativado.",TOO_MANY_ATTEMPTS_TRY_LATER:"Muitas tentativas. Aguarde alguns minutos.",OPERATION_NOT_ALLOWED:"Ative o login por e-mail/senha no Firebase.",API_KEY_INVALID:"Chave do Firebase inválida."};throw new Error(map[c]||"Não foi possível entrar.");}
-  token=j.idToken;refreshToken=j.refreshToken;uid=j.localId;userEmail=j.email||email;
-  authSave({idToken:token,refreshToken,localId:uid,email:userEmail,expiresAt:Date.now()+Number(j.expiresIn||3600)*1000});
+function notify(text){const box=$("toast");box.textContent=text;box.classList.add("show");clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>box.classList.remove("show"),2200)}
+function storageKey(){return "telle_data_"+userId}
+function loadLocal(){try{const saved=JSON.parse(localStorage.getItem(storageKey())||"null");if(saved)data=Object.assign(blank(),saved)}catch{}}
+function saveLocal(){localStorage.setItem(storageKey(),JSON.stringify(data))}
+async function signIn(email,password){
+ const response=await fetch("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key="+FIREBASE.apiKey,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email,password,returnSecureToken:true})});
+ const result=await response.json();
+ if(!response.ok)throw Error(result.error?.message==="INVALID_LOGIN_CREDENTIALS"?"E-mail ou senha inválidos.":result.error?.message||"Não foi possível entrar.");
+ idToken=result.idToken;userId=result.localId;localStorage.setItem("telle_token",idToken);localStorage.setItem("telle_uid",userId)
 }
-async function refreshAuth(){
-  const a=authGet();if(!a?.refreshToken)throw new Error("NO_AUTH");if(refreshing)return refreshing;
-  refreshing=(async()=>{const r=await fetch(REFRESH_URL,{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:"grant_type=refresh_token&refresh_token="+encodeURIComponent(a.refreshToken)});const j=await r.json();if(!r.ok)throw new Error("REFRESH_FAILED");token=j.id_token;refreshToken=j.refresh_token||a.refreshToken;uid=j.user_id||a.localId;userEmail=a.email||"";authSave({idToken:token,refreshToken,localId:uid,email:userEmail,expiresAt:Date.now()+Number(j.expires_in||3600)*1000});})().finally(()=>refreshing=null);
-  return refreshing;
+function signOut(){localStorage.removeItem("telle_token");localStorage.removeItem("telle_uid");location.reload()}
+function totals(){let revenue=0,cost=0,open=0;data.sales.forEach(s=>{revenue+=Number(s.total)||0;cost+=Number(s.cost)||0;open+=Math.max(0,(Number(s.total)||0)-(Number(s.paid)||0))});return{revenue,cost,profit:revenue-cost,open}}
+
+function crc16(text){let crc=0xffff;for(let i=0;i<text.length;i++){crc^=text.charCodeAt(i)<<8;for(let j=0;j<8;j++)crc=(crc&0x8000)?((crc<<1)^0x1021)&0xffff:(crc<<1)&0xffff}return crc.toString(16).toUpperCase().padStart(4,"0")}
+function pixCode(key,value,name,city,txid){
+ const field=(tag,value)=>tag+String(value).length.toString().padStart(2,"0")+value;
+ let payload=field("00","01")+field("26",field("00","br.gov.bcb.pix")+field("01",key))+field("52","0000")+field("53","986")+field("54",Number(value).toFixed(2))+field("58","BR")+field("59",String(name||"TELLE COSMETICOS").slice(0,25))+field("60",String(city||"JOINVILLE").slice(0,15))+field("62",field("05",String(txid||"TELLE").replace(/[^A-Za-z0-9]/g,"").slice(0,25)||"TELLE"));
+ return payload+"6304"+crc16(payload+"6304")
 }
-async function ensureAuth(){
-  const a=authGet();if(!a?.idToken||!a?.localId)return false;
-  token=a.idToken;refreshToken=a.refreshToken;uid=a.localId;userEmail=a.email||"";
-  if(a.expiresAt&&Date.now()>a.expiresAt-60000){try{await refreshAuth()}catch{authClear();return false}}
-  return true;
+
+function showModal(title,content,handler,label="Salvar"){
+ $("modal").innerHTML=`<div class="modalbg"><div class="modal"><div class="mh"><h2>${title}</h2><button id="modalClose" class="close" type="button">×</button></div>${content}<div class="mf"><button id="modalCancel" class="soft" type="button">Cancelar</button><button id="modalOk" class="primary" type="button">${label}</button></div></div></div>`;
+ $("modalClose").onclick=closeModal;$("modalCancel").onclick=closeModal;$("modalOk").onclick=async()=>{try{await handler()}catch(error){notify(error.message||"Erro")}}
 }
-async function api(path,opts={}){
-  const h={"Content-Type":"application/json",...(opts.headers||{})};if(token)h.Authorization="Bearer "+token;
-  let r=await fetch(path,{...opts,headers:h});
-  if(r.status===401&&refreshToken){try{await refreshAuth();h.Authorization="Bearer "+token;r=await fetch(path,{...opts,headers:h})}catch{}}
-  return r;
-}
-function fsFields(obj){const fields={};for(const [k,v] of Object.entries(obj)){if(k==="id")continue;if(v===null||v===undefined)fields[k]={nullValue:null};else if(typeof v==="boolean")fields[k]={booleanValue:v};else if(typeof v==="number")fields[k]={doubleValue:v};else if(Array.isArray(v))fields[k]={arrayValue:{values:v.map(x=>typeof x==="number"?{doubleValue:x}:typeof x==="boolean"?{booleanValue:x}:{stringValue:String(x??"")})}};else fields[k]={stringValue:String(v)}}return fields}
-function fsDecode(fields={}){const o={};for(const[k,v]of Object.entries(fields)){if("stringValue"in v)o[k]=v.stringValue;else if("doubleValue"in v)o[k]=Number(v.doubleValue);else if("integerValue"in v)o[k]=Number(v.integerValue);else if("booleanValue"in v)o[k]=v.booleanValue;else if("nullValue"in v)o[k]=null;else if(v.arrayValue)o[k]=(v.arrayValue.values||[]).map(x=>x.stringValue??x.doubleValue??x.integerValue??x.booleanValue??null)}return o}
-function docUrl(col,id){return ROOT+"/"+col+"/"+encodeURIComponent(String(id))}
-async function cloudGet(col){
-  const r=await api(ROOT+"/"+col+"?pageSize=1000");if(!r.ok){if(r.status===404)return[];throw new Error("FIRESTORE_"+r.status)}
-  const j=await r.json();return(j.documents||[]).map(d=>({id:decodeURIComponent(d.name.split("/").pop()),...fsDecode(d.fields)}));
-}
-async function cloudGetOne(col,id){const r=await api(docUrl(col,id));if(r.status===404)return null;if(!r.ok)throw new Error("FIRESTORE_"+r.status);return{id:String(id),...fsDecode((await r.json()).fields)}}
-async function cloudPut(col,obj){const body={fields:fsFields(obj)};const r=await api(docUrl(col,obj.id),{method:"PATCH",body:JSON.stringify(body)});if(!r.ok)throw new Error("FIRESTORE_"+r.status);return obj}
-async function cloudDelete(col,id){const r=await api(docUrl(col,id),{method:"DELETE"});if(!r.ok&&r.status!==404)throw new Error("FIRESTORE_"+r.status)}
-async function cloudLoad(){
-  const out={products:[],clients:[],sales:[],receivables:[],cash:[],suppliers:[],settings:clone(db.settings)};
-  for(const n of NAMES)out[n]=await cloudGet(n);
-  const st=await cloudGetOne("settings","main");if(st)out.settings={...out.settings,...st};
-  return out;
-}
-async function loadData(){
-  const local=localLoad();
-  try{
-    const cloud=await cloudLoad();
-    const empty=NAMES.every(n=>cloud[n].length===0),has=NAMES.some(n=>(local[n]||[]).length);
-    if(empty&&has){
-      for(const n of NAMES)for(const x of local[n]||[])await cloudPut(n,x);
-      await cloudPut("settings",{id:"main",...local.settings});
-      return await cloudLoad();
-    }
-    return cloud;
-  }catch(e){
-    console.error(e);
-    if(local)toast("Modo local ativo. A nuvem não respondeu agora.");
-    return local;
-  }
-}
-async function addObj(col,obj){db[col].push(obj);localSave();try{await cloudPut(col,obj)}catch(e){toast("Salvo neste aparelho; nuvem indisponível.")}}
-async function updateObj(col,id,patch){const i=db[col].findIndex(x=>String(x.id)===String(id));if(i<0)return;Object.assign(db[col][i],patch);localSave();try{await cloudPut(col,db[col][i])}catch{toast("Alterado localmente; nuvem indisponível.")}}
 function closeModal(){$("modal").innerHTML=""}
-function openModal(title,body,fn,label="Salvar"){const h=$("modal");h.innerHTML='<div class="modalBg"><div class="modal"><div class="modalHead"><h2>'+title+'</h2><button class="close" id="modalClose" type="button">×</button></div>'+body+'<div class="modalFoot"><button class="softBtn" id="modalCancel" type="button">Cancelar</button><button class="primary" id="modalAction" type="button">'+label+'</button></div></div></div>';$("modalClose").onclick=closeModal;$("modalCancel").onclick=closeModal;$("modalAction").onclick=async()=>{try{await fn()}catch(e){console.error(e);toast("Não foi possível concluir. Tente novamente.")}}}
-function status(s){return Number(s.paid)>=Number(s.total)?'<span class="badge bpaid">Pago</span>':Number(s.paid)>0?'<span class="badge bpart">Parcial</span>':'<span class="badge bpending">Pendente</span>'}
-function sums(){const r=db.sales.reduce((a,s)=>a+Number(s.total||0),0),c=db.sales.reduce((a,s)=>a+Number(s.cost||0),0),o=db.sales.reduce((a,s)=>a+Math.max(0,Number(s.total||0)-Number(s.paid||0)),0);return{r,p:r-c,o}}
-function salesTable(a){if(!a.length)return'<div class="empty">Nenhuma venda registrada.</div>';return'<div class="tableWrap"><table class="table"><tr><th>Data</th><th>Cliente</th><th>Total</th><th>Pago</th><th>Status</th><th></th></tr>'+a.map(s=>'<tr><td>'+dateBR((s.created||"").slice(0,10))+'</td><td>'+esc(s.client||"Balcão")+'</td><td>'+money(s.total)+'</td><td>'+money(s.paid)+'</td><td>'+status(s)+'</td><td><button class="softBtn" type="button" data-action="details" data-id="'+s.id+'">Abrir</button></td></tr>').join("")+'</table></div>'}
-function dashboard(){
-  const t=sums(),low=db.products.filter(p=>Number(p.stock)<=Number(p.min)),open=db.receivables.filter(r=>r.status!=="paid"),days=[],max={v:1};
-  for(let i=6;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);const k=d.toISOString().slice(0,10),v=db.sales.filter(s=>(s.created||"").slice(0,10)===k).reduce((a,s)=>a+Number(s.total||0),0);days.push({l:d.toLocaleDateString("pt-BR",{weekday:"short"}).replace(".",""),v});max.v=Math.max(max.v,v)}
-  return '<div class="cards"><div class="card"><div class="eyebrow">Faturamento</div><div class="big">'+money(t.r)+'</div><div class="muted">total de vendas</div></div><div class="card"><div class="eyebrow">Lucro bruto</div><div class="big green">'+money(t.p)+'</div><div class="muted">venda menos custo</div></div><div class="card"><div class="eyebrow">A receber</div><div class="big red">'+money(t.o)+'</div><div class="muted">'+open.length+' pendência(s)</div></div><div class="card"><div class="eyebrow">Estoque baixo</div><div class="big">'+low.length+'</div><div class="muted">produto(s)</div></div></div><div class="layout"><div class="panel"><div class="panelHead"><h3>Vendas da semana</h3><span class="muted">últimos 7 dias</span></div><div class="chart">'+days.map(x=>'<div class="bar" style="height:'+Math.max(5,x.v/max.v*170)+'px"><small>'+x.l+'</small></div>').join("")+'</div></div><div class="panel"><div class="panelHead"><h3>Atenção</h3></div>'+open.slice(0,4).map(r=>'<div class="notice">💳 <b>'+esc(r.client)+'</b> • '+money(r.amount)+' <button class="softBtn" type="button" data-action="charge" data-id="'+r.saleId+'">WhatsApp</button> <button class="softBtn" type="button" data-action="pay" data-id="'+r.saleId+'">Receber</button></div>').join("")+low.slice(0,4).map(p=>'<div class="notice">📦 '+esc(p.name)+' • '+p.stock+' un.</div>').join("")+(!open.length&&!low.length?'<div class="notice">🌷 Tudo em ordem.</div>':'')+'</div></div><div class="panel" style="margin-top:15px"><div class="panelHead"><h3>Últimas vendas</h3><button class="softBtn" type="button" data-page-jump="vendas">Ver todas</button></div>'+salesTable(db.sales.slice().reverse().slice(0,5))+'</div>';
-}
-function vendas(){return'<div class="toolbar"><input class="search" id="saleSearch" placeholder="Buscar cliente ou produto"><button class="primary" id="saleNew" type="button">＋ Nova venda</button></div><div class="panel" id="salePanel">'+salesTable(db.sales.slice().reverse())+'</div>'}
-function clientes(){return'<div class="toolbar"><input class="search" id="clientSearch" placeholder="Buscar cliente"><button class="primary" id="newClient" type="button">＋ Novo cliente</button></div><div class="panel" id="clientPanel">'+clientTable(db.clients)+'</div>'}
-function clientTable(a){if(!a.length)return'<div class="empty">Nenhum cliente cadastrado.</div>';return'<div class="tableWrap"><table class="table"><tr><th>Cliente</th><th>WhatsApp</th><th>E-mail</th><th></th></tr>'+a.map(c=>'<tr><td>'+esc(c.name)+'</td><td>'+esc(c.phone||"-")+'</td><td>'+esc(c.email||"-")+'</td><td><button class="softBtn" type="button" data-action="history" data-id="'+c.id+'">Histórico</button></td></tr>').join("")+'</table></div>'}
-function estoque(){return'<div class="toolbar"><input class="search" id="productSearch" placeholder="Buscar produto"><button class="primary" id="newProduct" type="button">＋ Novo produto</button></div><div class="panel" id="productPanel">'+productTable(db.products)+'</div>'}
-function productTable(a){if(!a.length)return'<div class="empty">Nenhum produto cadastrado.</div>';return'<div class="tableWrap"><table class="table"><tr><th>Produto</th><th>Preço</th><th>Estoque</th><th>Mín.</th><th></th></tr>'+a.map(p=>'<tr><td><b>'+esc(p.name)+'</b><br><small class="muted">'+esc(p.brand||"")+'</small></td><td>'+money(p.price)+'</td><td class="'+(Number(p.stock)<=Number(p.min)?"red":"")+'">'+p.stock+'</td><td>'+p.min+'</td><td><button class="softBtn" type="button" data-action="move" data-id="'+p.id+'">Movimentar</button></td></tr>').join("")+'</table></div>'}
-function financeiro(){const ins=db.cash.filter(x=>x.type==="in").reduce((a,x)=>a+Number(x.value||0),0),outs=db.cash.filter(x=>x.type==="out").reduce((a,x)=>a+Number(x.value||0),0);return'<div class="cards"><div class="card"><div class="eyebrow">Entradas</div><div class="big green">'+money(ins)+'</div></div><div class="card"><div class="eyebrow">Saídas</div><div class="big red">'+money(outs)+'</div></div><div class="card"><div class="eyebrow">Saldo</div><div class="big">'+money(ins-outs)+'</div></div><div class="card"><div class="eyebrow">A receber</div><div class="big red">'+money(sums().o)+'</div></div></div><div class="layout"><div class="panel"><div class="panelHead"><h3>Recebimentos</h3><button class="primary" id="expense" type="button">＋ Saída</button></div>'+receivableTable()+'</div><div class="panel"><h3>Movimentações recentes</h3>'+db.cash.slice().reverse().slice(0,15).map(x=>'<div class="quick"><span>'+esc(x.description)+'<br><small class="muted">'+dateBR(x.date)+'</small></span><b class="'+(x.type==="in"?"green":"red")+'">'+(x.type==="in"?"+":"-")+money(x.value)+'</b></div>').join("")+'</div></div>'}
-function receivableTable(){const a=db.receivables.filter(x=>x.status!=="paid");if(!a.length)return'<div class="empty">Nenhuma pendência.</div>';return'<div class="tableWrap"><table class="table"><tr><th>Cliente</th><th>Valor</th><th>Vencimento</th><th></th></tr>'+a.map(r=>'<tr><td>'+esc(r.client)+'</td><td>'+money(r.amount)+'</td><td>'+dateBR(r.due)+'</td><td><button class="softBtn" type="button" data-action="charge" data-id="'+r.saleId+'">WhatsApp</button> <button class="softBtn" type="button" data-action="pay" data-id="'+r.saleId+'">Receber</button></td></tr>').join("")+'</table></div>'}
-function cobrancas(){return'<div class="cards"><div class="card"><div class="eyebrow">Em aberto</div><div class="big red">'+money(db.receivables.filter(r=>r.status!=="paid").reduce((a,r)=>a+Number(r.amount||0),0))+'</div></div><div class="card"><div class="eyebrow">Pendências</div><div class="big">'+db.receivables.filter(r=>r.status!=="paid").length+'</div></div><div class="card"><div class="eyebrow">Vencidas</div><div class="big red">'+db.receivables.filter(r=>r.status!=="paid"&&r.due<today()).length+'</div></div><div class="card"><div class="eyebrow">Pagas</div><div class="big green">'+db.receivables.filter(r=>r.status==="paid").length+'</div></div></div><div class="panel" style="margin-top:15px">'+receivableTable()+'</div>'}
-function fornecedores(){return'<div class="toolbar"><button class="primary" id="newSupplier" type="button">＋ Novo fornecedor</button></div><div class="panel">'+(db.suppliers.length?'<table class="table"><tr><th>Fornecedor</th><th>Telefone</th><th>Documento</th></tr>'+db.suppliers.map(s=>'<tr><td>'+esc(s.name)+'</td><td>'+esc(s.phone||"-")+'</td><td>'+esc(s.doc||"-")+'</td></tr>').join("")+'</table>':'<div class="empty">Nenhum fornecedor.</div>')+'</div>'}
-function relatorios(){const t=sums(),map={};db.sales.forEach(s=>(s.items||[]).forEach(i=>map[i.name]=(map[i.name]||0)+Number(i.qty||0)));const best=Object.entries(map).sort((a,b)=>b[1]-a[1]).slice(0,7),sc=db.products.reduce((a,p)=>a+Number(p.cost||0)*Number(p.stock||0),0),sv=db.products.reduce((a,p)=>a+Number(p.price||0)*Number(p.stock||0),0);return'<div class="cards"><div class="card"><div class="eyebrow">Faturamento</div><div class="big">'+money(t.r)+'</div></div><div class="card"><div class="eyebrow">Lucro bruto</div><div class="big green">'+money(t.p)+'</div></div><div class="card"><div class="eyebrow">Margem</div><div class="big">'+(t.r?(t.p/t.r*100).toFixed(1):"0")+'%</div></div><div class="card"><div class="eyebrow">Vendas</div><div class="big">'+db.sales.length+'</div></div></div><div class="layout"><div class="panel"><h3>Mais vendidos</h3>'+(best.length?best.map((x,i)=>'<div class="progressRow"><span>'+(i+1)+'. '+esc(x[0])+'</span><div class="progress"><i style="width:'+(x[1]/best[0][1]*100)+'%"></i></div><b>'+x[1]+'</b></div>').join(""):'<div class="empty">Ainda sem vendas.</div>')+'</div><div class="panel"><h3>Estoque</h3><div class="big">'+money(sc)+'</div><div class="muted">valor a custo</div><hr style="border:0;border-top:1px solid var(--line);margin:16px 0"><div class="big">'+money(sv)+'</div><div class="muted">potencial de venda</div></div></div>'}
-function config(){return'<div class="panel"><h3>Configurações da Telle</h3><p class="muted">A chave Pix será usada para gerar QR Codes com o valor exato de cada venda.</p><div class="form"><div class="field full"><label>Chave Pix</label><input id="pix" value="'+esc(db.settings.pix)+'" placeholder="CPF, e-mail, telefone ou chave aleatória"></div><div class="field"><label>Nome do recebedor</label><input id="pixName" value="'+esc(db.settings.pixName||"TELLE COSMETICOS")+'"></div><div class="field"><label>Cidade</label><input id="pixCity" value="'+esc(db.settings.pixCity||"JOINVILLE")+'"></div><div class="field full"><label>Instagram</label><input id="insta" value="'+esc(db.settings.instagram||"@tellecosmeticos")+'"></div></div><div class="toolbar" style="margin-top:14px"><button id="saveConfig" class="primary" type="button">Salvar configurações</button></div><div class="notice">☁️ Os dados são vinculados à conta autenticada e sincronizados com o Firestore quando disponível.</div></div>'}
 
-function newClient(){openModal("Novo cliente",'<div class="form"><div class="field full"><label>Nome *</label><input id="cn"></div><div class="field"><label>WhatsApp</label><input id="cp" inputmode="tel"></div><div class="field"><label>E-mail</label><input id="ce" type="email"></div><div class="field full"><label>Observações</label><textarea id="co"></textarea></div></div>',async()=>{if(!$("cn").value.trim()){toast("Informe o nome.");return}await addObj("clients",{id:newid(),name:$("cn").value.trim(),phone:$("cp").value,email:$("ce").value,obs:$("co").value});closeModal();toast("Cliente salvo.");go("clientes")})}
-function newProduct(){openModal("Novo produto",'<div class="form"><div class="field"><label>Nome *</label><input id="pn"></div><div class="field"><label>Marca</label><input id="pb"></div><div class="field"><label>Categoria</label><input id="pc"></div><div class="field"><label>Código</label><input id="psku"></div><div class="field"><label>Custo</label><input id="pco" type="number" step=".01" inputmode="decimal"></div><div class="field"><label>Preço</label><input id="ppr" type="number" step=".01" inputmode="decimal"></div><div class="field"><label>Estoque</label><input id="pst" type="number" min="0" value="0"></div><div class="field"><label>Estoque mínimo</label><input id="pmi" type="number" min="0" value="3"></div></div>',async()=>{if(!$("pn").value.trim()){toast("Informe o nome.");return}await addObj("products",{id:newid(),name:$("pn").value.trim(),brand:$("pb").value,category:$("pc").value,sku:$("psku").value,cost:Number($("pco").value)||0,price:Number($("ppr").value)||0,stock:Number($("pst").value)||0,min:Number($("pmi").value)||0});closeModal();toast("Produto salvo.");go("estoque")})}
-function move(idv){const p=db.products.find(x=>String(x.id)===String(idv));openModal("Movimentar estoque",'<div class="notice"><b>'+esc(p?.name||"Produto")+'</b><br>Estoque atual: '+(p?.stock||0)+' unidade(s)</div><div class="field"><label>Quantidade</label><input id="mv" type="number" inputmode="numeric" placeholder="Use negativo para saída"></div>',async()=>{const n=Number($("mv").value);if(!n||Number(p.stock)+n<0){toast("Quantidade inválida.");return}await updateObj("products",p.id,{stock:Number(p.stock)+n});closeModal();toast("Estoque atualizado.");go("estoque")})}
-
-function newSaleFn(){
-  const products=db.products.filter(p=>Number(p.stock)>0);
-  if(!products.length){toast("Cadastre produtos com estoque antes de vender.");return}
-  const clients=db.clients;
-  openModal("Nova venda",'<div class="form"><div class="field full"><label>Cliente</label><select id="sc"><option value="">Venda balcão</option>'+clients.map(c=>'<option value="'+c.id+'">'+esc(c.name)+'</option>').join("")+'</select></div><div class="field"><label>Produto</label><select id="sp">'+products.map(p=>'<option value="'+p.id+'">'+esc(p.name)+' • '+money(p.price)+' • '+p.stock+' un.</option>').join("")+'</select></div><div class="field"><label>Quantidade</label><input id="sq" type="number" min="1" value="1"></div><div class="field"><label>Forma de pagamento</label><select id="sm"><option>PIX</option><option>Dinheiro</option><option>Cartão</option><option>Fiado</option></select></div><div class="field"><label>Pago agora</label><input id="sPaid" type="number" min="0" step=".01" value="0" inputmode="decimal"></div><div class="field"><label>Vencimento</label><input id="sDue" type="date" value="'+today()+'"></div></div><div id="sInfo" class="notice"></div>',saveSale,"Finalizar venda");
-  $("sp").oninput=preview;$("sq").oninput=preview;$("sm").onchange=()=>{if($("sm").value!=="Fiado")$("sPaid").value="0";};preview();
+function salePix(total){
+ const area=$("salePix");if(!area)return;
+ if($("payment").value!=="PIX"){area.innerHTML="";return}
+ if(!data.settings.pix){area.innerHTML='<div class="warning">💠 Pix selecionado. Cadastre sua chave em Mais → Configurações.</div>';return}
+ const code=pixCode(data.settings.pix,total,data.settings.pixName,data.settings.pixCity,"VENDA");
+ area.innerHTML=`<div class="pix"><b>💠 Pix</b><strong>${money(total)}</strong><div id="saleQr"></div><button id="copySalePix" type="button">📋 Copiar Pix copia e cola</button><textarea id="salePixText" readonly>${esc(code)}</textarea></div>`;
+ if(window.QRCode)new QRCode($("saleQr"),{text:code,width:210,height:210});
+ $("copySalePix").onclick=async()=>{try{await navigator.clipboard.writeText(code);notify("Pix copiado!")}catch{const field=$("salePixText");field.select();document.execCommand("copy");notify("Pix copiado!")}}
 }
-function preview(){const p=db.products.find(x=>String(x.id)===String($("sp").value)),q=Math.max(1,Number($("sq").value)||1);if(!p)return;$("sInfo").innerHTML='<b>'+esc(p.name)+'</b> × '+q+' = <b>'+money(Number(p.price)*q)+'</b>'}
+function refreshSale(){
+ const product=data.products.find(item=>item.id===$("saleProduct").value);if(!product)return;
+ const qty=Math.max(1,Number($("saleQty").value)||1),total=product.price*qty;
+ $("saleInfo").innerHTML=`<b>${esc(product.name)}</b><span>${qty} × ${money(product.price)}</span><strong>${money(total)}</strong>`;
+ const pix=$("payment").value==="PIX";$("salePaid").readOnly=pix;if(pix)$("salePaid").value="0";salePix(total)
+}
+function newSale(){
+ const products=data.products.filter(p=>p.stock>0);if(!products.length){notify("Cadastre produtos com estoque.");return}
+ showModal("Nova venda",`<div class="sale"><label>Cliente<select id="saleClient"><option value="">Venda balcão</option>${data.clients.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join("")}</select></label><div class="two"><label>Produto<select id="saleProduct">${products.map(p=>`<option value="${p.id}">${esc(p.name)} · ${money(p.price)}</option>`).join("")}</select></label><label>Qtd.<input id="saleQty" type="number" min="1" value="1"></label></div><label>Forma de pagamento<select id="payment"><option>PIX</option><option>Dinheiro</option><option>Cartão</option><option>Fiado</option></select></label><label>Pago agora<input id="salePaid" type="number" min="0" step=".01" value="0"></label><label>Vencimento<input id="saleDue" type="date" value="${today()}"></label><div id="saleInfo" class="info"></div><div id="salePix"></div></div>`,saveSale,"Finalizar venda");
+ ["saleProduct","saleQty","payment","salePaid"].forEach(id=>$(id).addEventListener("input",refreshSale));$("payment").addEventListener("change",refreshSale);refreshSale()
+}
 async function saveSale(){
-  const p=db.products.find(x=>String(x.id)===String($("sp").value)),q=Math.max(1,Number($("sq").value)||1);if(!p||q>Number(p.stock)){toast("Estoque insuficiente.");return}
-  const cid=Number($("sc").value)||null,c=db.clients.find(x=>Number(x.id)===cid),total=Number(p.price)*q;let paid=Number($("sPaid").value)||0;if($("sm").value!=="Fiado"&&paid===0)paid=total;if(paid>total)paid=total;
-  const sale={id:newid(),created:new Date().toISOString(),client:c?.name||"",clientId:cid,total,cost:Number(p.cost)*q,paid,method:$("sm").value,due:$("sDue").value,items:[{name:p.name,qty:q,price:Number(p.price),cost:Number(p.cost),productId:p.id}]};
-  p.stock=Number(p.stock)-q;await updateObj("products",p.id,{stock:p.stock});await addObj("sales",sale);
-  if(paid)await addObj("cash",{id:newid(),date:today(),type:"in",description:"Venda - "+(c?.name||"Balcão"),value:paid,saleId:sale.id});
-  if(paid<total&&c)await addObj("receivables",{id:newid(),saleId:sale.id,client:c.name,clientId:c.id,amount:total-paid,due:sale.due,status:"pending"});
-  closeModal();toast("Venda registrada.");details(sale.id);
+ const product=data.products.find(p=>p.id===$("saleProduct").value),qty=Math.max(1,Number($("saleQty").value)||1),total=product.price*qty;
+ if(qty>product.stock)throw Error("Estoque insuficiente.");
+ const client=data.clients.find(c=>c.id===$("saleClient").value),method=$("payment").value;
+ let paid=Math.max(0,Math.min(total,Number($("salePaid").value)||0));if(method!=="Fiado"&&paid===0)paid=total;
+ const sale={id:makeId(),clientId:client?.id||"",client:client?.name||"Venda balcão",items:[{productId:product.id,name:product.name,qty,price:product.price}],total,cost:(product.cost||0)*qty,paid,payment:method,created:new Date().toISOString(),due:$("saleDue").value};
+ product.stock-=qty;data.sales.push(sale);
+ if(total>paid)data.receivables.push({id:makeId(),saleId:sale.id,client:sale.client,amount:total-paid,due:sale.due,status:"open"});
+ if(paid)data.cash.push({id:makeId(),saleId:sale.id,type:"in",value:paid,date:today(),method});
+ saveLocal();closeModal();go("sales");notify("Venda registrada.")
 }
+async function addProduct(){showModal("Novo produto",`<div class="sale"><label>Nome<input id="productName"></label><div class="two"><label>Preço<input id="productPrice" type="number" step=".01"></label><label>Estoque<input id="productStock" type="number" value="0"></label></div><label>Custo<input id="productCost" type="number" step=".01" value="0"></label><label>Estoque mínimo<input id="productMin" type="number" value="2"></label></div>`,async()=>{const p={id:makeId(),name:$("productName").value.trim(),price:Number($("productPrice").value),cost:Number($("productCost").value),stock:Number($("productStock").value),min:Number($("productMin").value)||2};if(!p.name||!p.price)throw Error("Informe nome e preço.");data.products.push(p);saveLocal();closeModal();go("stock");notify("Produto cadastrado.")},"Cadastrar")}
+async function addClient(){showModal("Novo cliente",`<div class="sale"><label>Nome<input id="clientName"></label><label>WhatsApp<input id="clientPhone" inputmode="tel"></label></div>`,async()=>{const c={id:makeId(),name:$("clientName").value.trim(),phone:$("clientPhone").value.trim()};if(!c.name)throw Error("Informe o nome.");data.clients.push(c);saveLocal();closeModal();go("clients");notify("Cliente cadastrado.")},"Cadastrar")}
+async function addSupplier(){showModal("Novo fornecedor",`<div class="sale"><label>Nome<input id="supplierName"></label><label>Telefone<input id="supplierPhone"></label></div>`,async()=>{const s={id:makeId(),name:$("supplierName").value.trim(),phone:$("supplierPhone").value.trim()};if(!s.name)throw Error("Informe o nome.");data.suppliers.push(s);saveLocal();closeModal();openMore("suppliers");notify("Fornecedor cadastrado.")},"Cadastrar")}
+async function registerPayment(saleId){
+ const sale=data.sales.find(s=>s.id===saleId);if(!sale)return;
+ const open=Math.max(0,sale.total-sale.paid);if(!open){notify("Venda já paga.");return}
+ showModal("Registrar pagamento",`<div class="sale"><div class="info"><b>${esc(sale.client)}</b><strong>${money(open)}</strong></div><label>Valor recebido<input id="paymentValue" type="number" min=".01" max="${open}" step=".01" value="${open}"></label><label>Forma<select id="paymentMethod"><option>PIX</option><option>Dinheiro</option><option>Cartão</option></select></label></div>`,async()=>{const value=Math.min(open,Math.max(0,Number($("paymentValue").value)||0));if(!value)throw Error("Informe o valor.");sale.paid+=value;const receivable=data.receivables.find(r=>r.saleId===sale.id&&r.status!=="paid");if(receivable){receivable.amount=Math.max(0,receivable.amount-value);if(receivable.amount<=0)receivable.status="paid"}data.cash.push({id:makeId(),saleId:sale.id,type:"in",value,date:today(),method:$("paymentMethod").value});saveLocal();closeModal();go("sales");notify("Pagamento registrado.")},"Receber")
+}
+function saleDetails(saleId){
+ const sale=data.sales.find(s=>s.id===saleId);if(!sale)return;const open=Math.max(0,sale.total-sale.paid);
+ showModal("Pedido #"+sale.id.slice(-6),`<div class="panel"><div class="title"><b>${esc(sale.client)}</b><span>${dateBR(sale.created)}</span></div>${sale.items.map(i=>`<div class="title"><span>${esc(i.name)} × ${i.qty}</span><b>${money(i.price*i.qty)}</b></div>`).join("")}<div class="title"><span>Total</span><b>${money(sale.total)}</b></div><div class="title"><span>Pago</span><b class="ok">${money(sale.paid)}</b></div><div class="title"><span>Pendente</span><b class="bad">${money(open)}</b></div></div>`,async()=>closeModal(),"Fechar");
+ if(open){$("modalOk").style.display="none";const payButton=document.createElement("button");payButton.className="primary";payButton.textContent="💰 Registrar pagamento";payButton.onclick=()=>{closeModal();registerPayment(sale.id)};$("modal").querySelector(".mf").prepend(payButton);if(data.settings.pix){const pixButton=document.createElement("button");pixButton.className="soft";pixButton.textContent="💠 Pix";pixButton.onclick=()=>{closeModal();salePixModal(sale.id)};$("modal").querySelector(".mf").prepend(pixButton)}}
+}
+function salePixModal(saleId){
+ const sale=data.sales.find(s=>s.id===saleId),value=Math.max(0,sale.total-sale.paid);if(!data.settings.pix){notify("Cadastre sua chave Pix.");return}
+ const code=pixCode(data.settings.pix,value,data.settings.pixName,data.settings.pixCity,sale.id.slice(-10));
+ showModal("Pix da venda",`<div class="pix"><b>💠 Valor a pagar</b><strong>${money(value)}</strong><div id="detailQr"></div><button id="copyDetailPix" type="button">📋 Copiar Pix copia e cola</button><textarea id="detailPixText" readonly>${esc(code)}</textarea></div>`,async()=>closeModal(),"Fechar");
+ if(window.QRCode)new QRCode($("detailQr"),{text:code,width:230,height:230});
+ $("copyDetailPix").onclick=async()=>{try{await navigator.clipboard.writeText(code);notify("Pix copiado!")}catch{const field=$("detailPixText");field.select();document.execCommand("copy");notify("Pix copiado!")}}
+}
+function charge(saleId){
+ const sale=data.sales.find(s=>s.id===saleId);if(!sale)return;
+ const pending=Math.max(0,sale.total-sale.paid),client=data.clients.find(c=>c.id===sale.clientId),phone=(client?.phone||"").replace(/\D/g,"");
+ const text=`🌸 *TELLE COSMÉTICOS*
 
-function details(idv){
-  const s=db.sales.find(x=>String(x.id)===String(idv));if(!s){toast("Venda não encontrada.");return}
-  const open=Math.max(0,Number(s.total)-Number(s.paid)),r=db.receivables.find(x=>String(x.saleId)===String(s.id)&&x.status!=="paid");
-  const buttons='<div class="toolbar" style="margin-top:13px">'+(open&&s.client?'<button class="softBtn" id="dPay" type="button">💰 Registrar pagamento</button>':'')+(db.settings.pix&&open?'<button class="softBtn" id="dPix" type="button">💠 Pix</button>':'')+'<button class="softBtn" id="dWhats" type="button">💬 Cobrança</button><button class="softBtn" id="dPdf" type="button">🧾 Comprovante</button></div>';
-  openModal("Venda #"+String(s.id).slice(-6),'<div class="notice"><b>'+esc(s.client||"Balcão")+'</b><br>'+dateBR((s.created||"").slice(0,10))+' • '+esc(s.method||"")+'</div><div class="panel" style="margin-top:10px">'+(s.items||[]).map(i=>'<div class="quick"><span><b>'+esc(i.name)+'</b><br><small class="muted">'+i.qty+' × '+money(i.price)+'</small></span><b>'+money(i.qty*i.price)+'</b></div>').join("")+'<div class="quick"><span>Total</span><b>'+money(s.total)+'</b></div><div class="quick"><span>Pago</span><b>'+money(s.paid)+'</b></div><div class="quick"><span>Em aberto</span><b class="'+(open?"red":"green")+'">'+money(open)+'</b></div></div>'+buttons,()=>closeModal(),"Fechar");
-  if($("dPay"))$("dPay").onclick=()=>registerPayment(s.id);if($("dPix"))$("dPix").onclick=()=>pixModal(s.id);$("dWhats").onclick=()=>charge(s.id);$("dPdf").onclick=()=>receipt(s.id);
-}
-function registerPayment(idv){
-  const s=db.sales.find(x=>String(x.id)===String(idv));if(!s)return;const open=Math.max(0,Number(s.total)-Number(s.paid));if(!open){toast("Esta venda já está paga.");return}
-  openModal("Registrar pagamento",'<div class="notice">Cliente: <b>'+esc(s.client||"Balcão")+'</b><br>Em aberto: <b>'+money(open)+'</b></div><div class="field"><label>Valor recebido</label><input id="payValue" type="number" min=".01" max="'+open+'" step=".01" value="'+open+'" inputmode="decimal"></div><div class="field"><label>Forma de pagamento</label><select id="payMethod"><option>PIX</option><option>Dinheiro</option><option>Cartão</option><option>Outro</option></select></div>',async()=>{const v=Number($("payValue").value);if(!v||v>open){toast("Valor inválido.");return}const np=Number(s.paid)+v;await updateObj("sales",s.id,{paid:np});const rec=db.receivables.find(x=>String(x.saleId)===String(s.id)&&x.status!=="paid");if(rec)await updateObj("receivables",rec.id,{amount:Math.max(0,Number(rec.amount)-v),status:np>=Number(s.total)?"paid":"pending"});await addObj("cash",{id:newid(),date:today(),type:"in",description:"Pagamento de "+(s.client||"Balcão"),value:v,saleId:s.id,method:$("payMethod").value});closeModal();toast(np>=Number(s.total)?"Venda quitada!":"Pagamento registrado.");go("vendas")})}
-function brCode(key,amount,name,city,txid="TELLE"){
-  const cleanName=String(name||"TELLE COSMETICOS").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toUpperCase().replace(/[^A-Z0-9 .-]/g,"").slice(0,25);
-  const cleanCity=String(city||"JOINVILLE").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toUpperCase().replace(/[^A-Z0-9 .-]/g,"").slice(0,15);
-  const amt=Number(amount).toFixed(2);
-  const field=(id,val)=>id+String(val.length).padStart(2,"0")+val;
-  let p="00120126";p+=field("26",field("00","BR.GOV.BCB.PIX")+field("01",key));p+="520400005303986";p+=field("54",amt)+"5802BR"+field("59",cleanName)+field("60",cleanCity)+field("62",field("05",String(txid).replace(/[^A-Za-z0-9]/g,"").slice(0,25)||"TELLE"))+"6304";
-  let crc=0xFFFF;for(let i=0;i<p.length;i++){crc^=p.charCodeAt(i)<<8;for(let j=0;j<8;j++)crc=(crc&0x8000)?((crc<<1)^0x1021)&0xFFFF:(crc<<1)&0xFFFF}return p+crc.toString(16).toUpperCase().padStart(4,"0");
-}
-function pixModal(idv){
-  const s=db.sales.find(x=>String(x.id)===String(idv));if(!s)return;const value=Math.max(0,Number(s.total)-Number(s.paid));if(!db.settings.pix){toast("Cadastre sua chave Pix em Configurações.");return}const payload=brCode(db.settings.pix,value,db.settings.pixName,db.settings.pixCity,String(s.id).slice(-10));
-  openModal("Pix da venda #"+String(s.id).slice(-6),'<div class="notice"><b>Valor do Pix: '+money(value)+'</b><br>O QR Code já contém o valor da venda.</div><div class="pixBox"><div id="qrcode"></div><button id="copyPix" class="softBtn" type="button" style="margin-top:10px">📋 Copiar Pix copia e cola</button></div><textarea id="pixPayload" class="copyBox" readonly>'+esc(payload)+'</textarea>',()=>closeModal(),"Fechar");
-  if(window.QRCode)new QRCode($("qrcode"),{text:payload,width:220,height:220,colorDark:"#301622",colorLight:"#ffffff"});
-  $("copyPix").onclick=async()=>{try{await navigator.clipboard.writeText(payload);toast("Código Pix copiado!")}catch{const e=$("pixPayload");e.select();document.execCommand("copy");toast("Código Pix copiado!")}};
-}
-function charge(idv){
-  const s=db.sales.find(x=>String(x.id)===String(idv));if(!s)return;const c=db.clients.find(x=>Number(x.id)===Number(s.clientId));const phone=(c?.phone||"").replace(/\D/g,"");if(!phone){toast("Cadastre o WhatsApp do cliente.");return}
-  const pending=Math.max(0,Number(s.total)-Number(s.paid)),lines=["🌸 *TELLE COSMÉTICOS*","","Olá, "+(c.name||"cliente")+"! Tudo bem? 💕","","Passando para lembrar do valor em aberto da sua compra.","","🧾 Pedido: #"+String(s.id).slice(-6),"💰 Valor pendente: *"+money(pending)+"*","📅 Vencimento: "+dateBR(s.due),"",db.settings.pix?"💠 *Pagamento via Pix*":"",db.settings.pix?"Chave Pix: "+db.settings.pix:"",db.settings.pix?"Valor: *"+money(pending)+"*":"",db.settings.pix?"":"", "Assim que realizar o pagamento, pode me enviar o comprovante por aqui.","","Obrigada pela preferência! 🌷","*Telle Cosméticos*"];
-  const message=lines.filter((x,i)=>!(x===""&&lines[i-1]==="")).join("\n");window.open("https://wa.me/55"+phone+"?text="+encodeURIComponent(message),"_blank");
-}
-function receipt(idv){
-  const s=db.sales.find(x=>String(x.id)===String(idv));if(!s)return;const html='<div class="printOnly"><div style="max-width:760px;margin:auto;font-family:Arial,sans-serif"><div style="text-align:center"><img src="telle-logo.png" style="max-width:260px;height:100px;object-fit:contain"><h1 style="color:#a51d55;margin:5px 0">Comprovante de compra</h1><p>Pedido #'+String(s.id).slice(-6)+'</p></div><hr><p><b>Cliente:</b> '+esc(s.client||"Balcão")+'<br><b>Data:</b> '+dateBR((s.created||"").slice(0,10))+'<br><b>Pagamento:</b> '+esc(s.method||"")+'</p><table style="width:100%;border-collapse:collapse"><tr><th style="text-align:left;border-bottom:1px solid #ddd;padding:8px">Produto</th><th style="text-align:right;border-bottom:1px solid #ddd;padding:8px">Valor</th></tr>'+s.items.map(i=>'<tr><td style="padding:8px;border-bottom:1px solid #eee">'+esc(i.name)+' × '+i.qty+'</td><td style="text-align:right;padding:8px;border-bottom:1px solid #eee">'+money(i.qty*i.price)+'</td></tr>').join("")+'</table><p style="text-align:right;font-size:18px"><b>Total: '+money(s.total)+'</b><br>Pago: '+money(s.paid)+'<br>Em aberto: '+money(Math.max(0,s.total-s.paid))+'</p><p style="text-align:center;color:#a51d55">Obrigada pela preferência! 🌷<br><b>Telle Cosméticos</b></p></div></div>';
-  const w=window.open("","_blank");if(!w){toast("Permita pop-ups para gerar o comprovante.");return}w.document.write("<html><head><title>Comprovante Telle</title></head><body>"+html+"</body></html>");w.document.close();setTimeout(()=>w.print(),250);
-}
-function historyClient(idv){const c=db.clients.find(x=>String(x.id)===String(idv));if(!c)return;const sales=db.sales.filter(s=>Number(s.clientId)===Number(c.id));openModal("Histórico • "+esc(c.name),salesTable(sales),"", "Fechar")}
-function newSupplier(){openModal("Novo fornecedor",'<div class="form"><div class="field"><label>Nome *</label><input id="fn"></div><div class="field"><label>Telefone</label><input id="fp"></div><div class="field"><label>CNPJ/CPF</label><input id="fd"></div><div class="field full"><label>Observações</label><textarea id="fo"></textarea></div></div>',async()=>{if(!$("fn").value.trim()){toast("Informe o nome.");return}await addObj("suppliers",{id:newid(),name:$("fn").value.trim(),phone:$("fp").value,doc:$("fd").value,obs:$("fo").value});closeModal();toast("Fornecedor salvo.");go("fornecedores")})}
-async function expense(){const d=prompt("Descrição da saída:");if(!d)return;const v=Number(prompt("Valor:","0"));if(!v)return;await addObj("cash",{id:newid(),date:today(),type:"out",description:d,value:v});toast("Saída registrada.");go("financeiro")}
-function wire(p){
-  if(p==="vendas"){$("saleNew").onclick=newSaleFn;$("saleSearch").oninput=e=>{const q=e.target.value.toLowerCase();$("salePanel").innerHTML=salesTable(db.sales.slice().reverse().filter(s=>(s.client||"").toLowerCase().includes(q)||(s.items||[]).some(i=>String(i.name).toLowerCase().includes(q))))}}
-  if(p==="clientes"){$("newClient").onclick=newClient;$("clientSearch").oninput=e=>{const q=e.target.value.toLowerCase();$("clientPanel").innerHTML=clientTable(db.clients.filter(c=>(c.name+" "+(c.phone||"")).toLowerCase().includes(q)))}}
-  if(p==="estoque"){$("newProduct").onclick=newProduct;$("productSearch").oninput=e=>{const q=e.target.value.toLowerCase();$("productPanel").innerHTML=productTable(db.products.filter(x=>(x.name+" "+(x.brand||"")+" "+(x.category||"")+" "+(x.sku||"")).toLowerCase().includes(q)))}}
-  if(p==="financeiro")$("expense").onclick=expense;
-  if(p==="fornecedores")$("newSupplier").onclick=newSupplier;
-  if(p==="config")$("saveConfig").onclick=async()=>{db.settings.pix=$("pix").value.trim();db.settings.pixName=$("pixName").value.trim()||"TELLE COSMETICOS";db.settings.pixCity=$("pixCity").value.trim()||"JOINVILLE";db.settings.instagram=$("insta").value.trim();localSave();try{await cloudPut("settings",{id:"main",...db.settings});toast("Configurações salvas na nuvem.")}catch{toast("Configurações salvas neste aparelho.")}};
-}
-const META={dashboard:["Dashboard","Visão geral da Telle Cosméticos"],vendas:["Vendas","Vendas, pagamentos e comprovantes"],estoque:["Estoque","Produtos, preços e movimentações"],clientes:["Clientes","Cadastro e histórico"],financeiro:["Financeiro","Entradas, saídas e saldo"],cobrancas:["Cobranças","Valores pendentes e vencimentos"],fornecedores:["Fornecedores","Cadastro de fornecedores"],relatorios:["Relatórios","Desempenho da loja"],config:["Configurações","Dados da Telle"]};
-const PAGES={dashboard,vendas,estoque,clientes,financeiro,cobrancas,fornecedores,relatorios,config};
-function go(p){if(!PAGES[p]){toast("Tela indisponível.");return}const c=$("content");c.classList.add("leaving");setTimeout(()=>{try{$("pageTitle").textContent=META[p][0];$("pageSub").textContent=META[p][1];$("sidebar").classList.remove("open");document.querySelectorAll("[data-page]").forEach(b=>b.classList.toggle("active",b.dataset.page===p));c.innerHTML=PAGES[p]();c.classList.remove("leaving");wire(p)}catch(e){console.error(e);c.classList.remove("leaving");c.innerHTML='<div class="panel"><h3>Não foi possível abrir esta tela</h3><p class="muted">Tente novamente.</p><button id="retry" class="primary" type="button">Tentar novamente</button></div>';$("retry").onclick=()=>go(p)}},70)}
-function delegate(root){
-  root.addEventListener("click",e=>{
-    const b=e.target.closest("[data-action]");if(b){const id=b.dataset.id,a=b.dataset.action;if(a==="details")details(id);if(a==="charge")charge(id);if(a==="pay")registerPayment(id);if(a==="pix")pixModal(id);if(a==="move")move(id);if(a==="history")historyClient(id);return}
-    const j=e.target.closest("[data-page-jump]");if(j)go(j.dataset.pageJump);
-  });
-}
-delegate($("content"));
-$("nav").onclick=e=>{const b=e.target.closest("[data-page]");if(b)go(b.dataset.page)};
-$("bottom").onclick=e=>{const b=e.target.closest("[data-page]");if(b)go(b.dataset.page)};
-$("hamb").onclick=()=>$("sidebar").classList.toggle("open");
-$("newSale").onclick=newSaleFn;
-$("logout").onclick=()=>{authClear();$("app").hidden=true;$("login").hidden=false;$("loginEmail").value="";$("loginPass").value="";$("loginMsg").textContent="Sessão encerrada."};
-$("backupBtn").onclick=()=>{const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(db,null,2)],{type:"application/json"}));a.download="telle-cosmeticos-backup.json";a.click();toast("Backup criado.")};
-$("restoreFile").onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=async()=>{try{const x=JSON.parse(r.result);db={...db,...x};localSave();for(const n of NAMES)for(const o of db[n]||[])await cloudPut(n,o);if(db.settings)await cloudPut("settings",{id:"main",...db.settings});toast("Backup restaurado.");go("dashboard")}catch{toast("Backup inválido.")}};r.readAsText(f)};
-$("loginBtn").onclick=async()=>{const email=$("loginEmail").value.trim(),pass=$("loginPass").value;if(!email||!pass){$("loginMsg").textContent="Informe e-mail e senha.";return}$("loginBtn").disabled=true;$("loginBtn").textContent="Entrando…";$("loginMsg").textContent="Conectando…";try{await loginRequest(email,pass);$("login").hidden=true;$("app").hidden=false;$("userPill").textContent=userEmail;go("dashboard");toast("Telle conectada à nuvem ☁️");db=await loadData();localSave();go("dashboard")}catch(e){console.error(e);$("loginMsg").textContent=e.message||"Não foi possível entrar.";$("loginBtn").disabled=false;$("loginBtn").textContent="Entrar"}};
-$("loginPass").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();$("loginBtn").click()}});
-(async()=>{try{if(await ensureAuth()){$("login").hidden=true;$("app").hidden=false;$("userPill").textContent=userEmail;go("dashboard");db=await loadData();localSave();go("dashboard")}else{$("login").hidden=false;$("app").hidden=true}}catch(e){console.error(e);authClear();$("login").hidden=false;$("app").hidden=true}})();
+Olá, ${sale.client}! Tudo bem? 💕
 
-})();
+Passando para lembrar do valor em aberto da sua compra.
+
+🧾 Pedido: #${sale.id.slice(-6)}
+💰 Valor pendente: *${money(pending)}*
+📅 Vencimento: ${dateBR(sale.due)}
+
+Assim que realizar o pagamento, pode me enviar o comprovante por aqui.
+
+Obrigada pela preferência! 🌷
+*Telle Cosméticos*`;
+ window.open("https://wa.me/"+phone+"?text="+encodeURIComponent(text),"_blank")
+}
+function stockEdit(productId){const p=data.products.find(x=>x.id===productId);showModal("Ajustar estoque",`<div class="sale"><div class="info"><b>${esc(p.name)}</b><strong>${p.stock} un.</strong></div><label>Novo estoque<input id="newStock" type="number" min="0" value="${p.stock}"></label></div>`,async()=>{p.stock=Math.max(0,Number($("newStock").value)||0);saveLocal();closeModal();go("stock");notify("Estoque atualizado.")})}
+function clientHistory(clientId){const c=data.clients.find(x=>x.id===clientId),sales=data.sales.filter(s=>s.clientId===clientId);showModal("Histórico • "+esc(c.name),sales.map(s=>`<div class="title"><span>#${s.id.slice(-6)} · ${dateBR(s.created)}</span><b>${money(s.total)}</b></div>`).join("")||'<div class="empty">Nenhuma compra.</div>',async()=>closeModal(),"Fechar")}
+
+function saleRows(list){return list.length?list.map(s=>`<button class="item" data-action="sale" data-id="${s.id}" type="button"><span class="ico">🧾</span><span class="main"><b>${esc(s.client)}</b><small>#${s.id.slice(-6)} · ${dateBR(s.created)}</small></span><span class="right"><b>${money(s.total)}</b><small class="${s.total>s.paid?"bad":"ok"}">${s.total>s.paid?"Pendente":"Pago ✓"}</small></span><i>›</i></button>`).join(""):'<div class="empty">Nenhuma venda.</div>'}
+function productRows(list){return list.length?list.map(p=>`<button class="item" data-action="stock" data-id="${p.id}" type="button"><span class="ico">📦</span><span class="main"><b>${esc(p.name)}</b><small>${money(p.price)} · mínimo ${p.min}</small></span><span class="right"><b class="${p.stock<=p.min?"bad":""}">${p.stock}</b><small>un.</small></span><i>›</i></button>`).join(""):'<div class="empty">Nenhum produto.</div>'}
+function clientRows(list){return list.length?list.map(c=>`<button class="item" data-action="client" data-id="${c.id}" type="button"><span class="ico">👤</span><span class="main"><b>${esc(c.name)}</b><small>${esc(c.phone||"WhatsApp não cadastrado")}</small></span><i>›</i></button>`).join(""):'<div class="empty">Nenhum cliente.</div>'}
+function receivableRows(){const list=data.receivables.filter(r=>r.status!=="paid");return list.length?list.map(r=>`<button class="item" data-action="pay" data-id="${r.saleId}" type="button"><span class="ico">💰</span><span class="main"><b>${esc(r.client)}</b><small>Vencimento ${dateBR(r.due)}</small></span><span class="right"><b class="bad">${money(r.amount)}</b><small class="bad">Receber</small></span><i>›</i></button>`).join(""):'<div class="empty">Nenhuma pendência. 🎉</div>'}
+
+function layout(){return`<div class="app"><header class="top"><div class="brand"><img src="telle-logo.png"><div><b id="pageTitle">Início</b><small id="pageSub">Resumo da sua loja</small></div></div><button id="topPlus" class="plus" type="button">＋</button></header><main id="view" class="view"></main><nav class="nav"><button data-tab="home" type="button"><span>⌂</span><small>Início</small></button><button data-tab="sales" type="button"><span>🛍</span><small>Vendas</small></button><button data-tab="stock" type="button"><span>📦</span><small>Estoque</small></button><button data-tab="clients" type="button"><span>👥</span><small>Clientes</small></button><button data-tab="more" type="button"><span>☰</span><small>Mais</small></button></nav></div>`}
+const META={home:["Início","Resumo da sua loja"],sales:["Vendas","Pedidos e pagamentos"],stock:["Estoque","Produtos e quantidade"],clients:["Clientes","Cadastro e histórico"],more:["Mais","Financeiro e configurações"]};
+function renderHome(){const t=totals(),recent=data.sales.slice().reverse().slice(0,4);return`<div class="page"><section class="hero"><div><small>Olá! 🌸</small><h1>Telle Cosméticos</h1><p>Seu negócio em um só lugar.</p></div><span>☁️</span></section><div class="metrics"><div class="metric"><small>Faturamento</small><b>${money(t.revenue)}</b><i>${data.sales.length} venda(s)</i></div><div class="metric"><small>A receber</small><b class="bad">${money(t.open)}</b><i>${data.receivables.filter(r=>r.status!=="paid").length} pendência(s)</i></div><div class="metric"><small>Estoque baixo</small><b>${data.products.filter(p=>p.stock<=p.min).length}</b><i>itens para repor</i></div><div class="metric"><small>Lucro</small><b class="ok">${money(t.profit)}</b><i>resultado bruto</i></div></div><button id="homeSale" class="big" type="button"><span>＋</span><div><b>Nova venda</b><small>Pedido, pagamento e Pix</small></div><i>›</i></button><div class="title"><b>Últimas vendas</b><button class="link" data-tab="sales" type="button">Ver todas</button></div><div class="list">${saleRows(recent)}</div></div>`}
+function renderSales(){return`<div class="page"><div class="toolbar"><label class="search">🔎<input id="saleSearch" placeholder="Buscar venda ou cliente"></label><button id="salePlus" class="round" type="button">＋</button></div><div class="chips"><button class="chip active" data-filter="all" type="button">Todas</button><button class="chip" data-filter="open" type="button">Pendentes</button><button class="chip" data-filter="paid" type="button">Pagas</button></div><div id="saleList" class="list">${saleRows(data.sales.slice().reverse())}</div></div>`}
+function renderStock(){return`<div class="page"><div class="toolbar"><label class="search">🔎<input id="stockSearch" placeholder="Buscar produto"></label><button id="stockPlus" class="round" type="button">＋</button></div><div id="productList" class="list">${productRows(data.products)}</div></div>`}
+function renderClients(){return`<div class="page"><div class="toolbar"><label class="search">🔎<input id="clientSearch" placeholder="Buscar cliente"></label><button id="clientPlus" class="round" type="button">＋</button></div><div id="clientList" class="list">${clientRows(data.clients)}</div></div>`}
+function renderMore(){return`<div class="page"><div class="more"><button data-more="finance" type="button"><span>💰</span><b>Financeiro</b><small>Caixa e recebimentos</small></button><button data-more="charges" type="button"><span>💬</span><b>Cobranças</b><small>WhatsApp</small></button><button data-more="reports" type="button"><span>📊</span><b>Relatórios</b><small>Resultados</small></button><button data-more="suppliers" type="button"><span>🚚</span><b>Fornecedores</b><small>Cadastros</small></button><button data-more="config" type="button"><span>⚙️</span><b>Configurações</b><small>Pix</small></button><button id="backup" type="button"><span>💾</span><b>Backup</b><small>Salvar dados</small></button></div><button id="logout" class="logout" type="button">Sair da conta</button></div>`}
+
+function go(tab){
+ $("pageTitle").textContent=META[tab][0];$("pageSub").textContent=META[tab][1];
+ document.querySelectorAll(".nav [data-tab]").forEach(b=>b.classList.toggle("active",b.dataset.tab===tab));
+ $("view").innerHTML={home:renderHome,sales:renderSales,stock:renderStock,clients:renderClients,more:renderMore}[tab]();
+ bindPage(tab)
+}
+function bindPage(tab){
+ $("topPlus").onclick=newSale;
+ $("view").onclick=e=>{
+  const tabButton=e.target.closest("[data-tab]");if(tabButton){go(tabButton.dataset.tab);return}
+  const action=e.target.closest("[data-action]");
+  if(action){if(action.dataset.action==="sale")saleDetails(action.dataset.id);if(action.dataset.action==="pay")registerPayment(action.dataset.id);if(action.dataset.action==="stock")stockEdit(action.dataset.id);if(action.dataset.action==="client")clientHistory(action.dataset.id)}
+  const more=e.target.closest("[data-more]");if(more)openMore(more.dataset.more)
+ };
+ if(tab==="home")$("homeSale").onclick=newSale;
+ if(tab==="sales"){
+  $("salePlus").onclick=newSale;
+  const filter=()=>{let list=data.sales.slice().reverse(),q=$("saleSearch").value.toLowerCase();list=list.filter(s=>(s.client||"").toLowerCase().includes(q));if(saleFilter==="open")list=list.filter(s=>s.total>s.paid);if(saleFilter==="paid")list=list.filter(s=>s.total<=s.paid);$("saleList").innerHTML=saleRows(list)};
+  $("saleSearch").oninput=filter;document.querySelectorAll("[data-filter]").forEach(b=>b.onclick=()=>{saleFilter=b.dataset.filter;document.querySelectorAll("[data-filter]").forEach(x=>x.classList.remove("active"));b.classList.add("active");filter()})
+ }
+ if(tab==="stock"){$("stockPlus").onclick=addProduct;$("stockSearch").oninput=e=>$("productList").innerHTML=productRows(data.products.filter(p=>p.name.toLowerCase().includes(e.target.value.toLowerCase())))}
+ if(tab==="clients"){$("clientPlus").onclick=addClient;$("clientSearch").oninput=e=>$("clientList").innerHTML=clientRows(data.clients.filter(c=>c.name.toLowerCase().includes(e.target.value.toLowerCase())))}
+ if(tab==="more"){$("backup").onclick=downloadBackup;$("logout").onclick=signOut}
+}
+function downloadBackup(){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:"application/json"}));a.download="telle-backup.json";a.click();notify("Backup criado.")}
+function openMore(kind){
+ const names={finance:["Financeiro","Caixa e recebimentos"],charges:["Cobranças","Valores em aberto"],reports:["Relatórios","Resultados"],suppliers:["Fornecedores","Cadastros"],config:["Configurações","Pix"]};
+ $("pageTitle").textContent=names[kind][0];$("pageSub").textContent=names[kind][1];
+ let body="";
+ if(kind==="finance"){const t=totals(),inflow=data.cash.filter(x=>x.type==="in").reduce((a,x)=>a+x.value,0);body=`<div class="metrics"><div class="metric"><small>Entradas</small><b class="ok">${money(inflow)}</b></div><div class="metric"><small>Saldo</small><b>${money(inflow)}</b></div><div class="metric"><small>A receber</small><b class="bad">${money(t.open)}</b></div><div class="metric"><small>Vendas</small><b>${data.sales.length}</b></div></div><div class="list">${receivableRows()}</div>`}
+ if(kind==="charges")body=`<div class="list">${data.receivables.filter(r=>r.status!=="paid").map(r=>`<div class="item"><span class="ico">💬</span><span class="main"><b>${esc(r.client)}</b><small>${money(r.amount)} · ${dateBR(r.due)}</small></span><button class="soft" data-charge="${r.saleId}" type="button">Cobrar</button></div>`).join("")||'<div class="empty">Nenhuma pendência.</div>'}</div>`;
+ if(kind==="reports"){const t=totals();body=`<div class="metrics"><div class="metric"><small>Faturamento</small><b>${money(t.revenue)}</b></div><div class="metric"><small>Lucro</small><b class="ok">${money(t.profit)}</b></div><div class="metric"><small>Margem</small><b>${t.revenue?(t.profit/t.revenue*100).toFixed(1):0}%</b></div><div class="metric"><small>Produtos</small><b>${data.products.length}</b></div></div>`}
+ if(kind==="suppliers")body=`<div class="title"><b>Fornecedores</b><button id="supplierPlus" class="round" type="button">＋</button></div><div class="list">${data.suppliers.map(s=>`<div class="item"><span class="ico">🚚</span><span class="main"><b>${esc(s.name)}</b><small>${esc(s.phone||"")}</small></span></div>`).join("")||'<div class="empty">Nenhum fornecedor.</div>'}</div>`;
+ if(kind==="config")body=`<div class="field"><label>Chave Pix</label><input id="pixKey" value="${esc(data.settings.pix)}"></div><div class="field"><label>Nome do recebedor</label><input id="pixName" value="${esc(data.settings.pixName)}"></div><div class="field"><label>Cidade</label><input id="pixCity" value="${esc(data.settings.pixCity)}"></div><button id="savePix" class="enter" type="button">Salvar chave Pix</button>`;
+ $("view").innerHTML=`<div class="page"><button id="back" class="link" type="button">‹ Voltar</button>${body}</div>`;$("back").onclick=()=>go("more");
+ if(kind==="charges")document.querySelectorAll("[data-charge]").forEach(b=>b.onclick=()=>charge(b.dataset.charge));
+ if(kind==="suppliers")$("supplierPlus").onclick=addSupplier;
+ if(kind==="config")$("savePix").onclick=()=>{data.settings.pix=$("pixKey").value.trim();data.settings.pixName=$("pixName").value.trim()||"TELLE COSMETICOS";data.settings.pixCity=$("pixCity").value.trim()||"JOINVILLE";saveLocal();notify("Pix salvo.")};
+}
+async function startApp(){loadLocal();$("login").hidden=true;$("app").hidden=false;$("app").innerHTML=layout();go("home");notify("Telle conectada a nuvem ☁️")}
+$("loginButton").onclick=async()=>{const email=$("email").value.trim(),password=$("password").value;if(!email||!password){$("loginMessage").textContent="Informe e-mail e senha.";return}$("loginButton").disabled=true;$("loginButton").textContent="Entrando…";$("loginMessage").textContent="Conectando…";try{await signIn(email,password);await startApp()}catch(error){$("loginMessage").textContent=error.message;$("loginButton").disabled=false;$("loginButton").textContent="Entrar"}};
+$("password").addEventListener("keydown",event=>{if(event.key==="Enter")$("loginButton").click()});
+if(idToken&&userId)startApp();
 </script>
 </body>
 </html>
