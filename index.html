@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#9d174d">
+<title>Telle Cosméticos</title>
+<style>
+:root{--pink:#9d174d;--pink2:#be185d;--light:#fff1f7;--light2:#fce7f3;--bg:#fff9fc;--text:#341724;--muted:#806b75;--line:#ecd9e3;--green:#087a55;--red:#c3264c;--white:#fff;--shadow:0 8px 28px rgba(80,20,45,.07)}
+*{box-sizing:border-box}html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}
+.sidebar{position:fixed;left:0;top:0;bottom:0;width:245px;background:#fff;border-right:1px solid var(--line);padding:22px 14px;z-index:20;transition:.2s}
+.brand{display:flex;align-items:center;gap:11px;padding:0 8px 25px}.brand-logo{width:45px;height:45px;border-radius:14px;background:linear-gradient(145deg,#c1286b,#7b123f);display:grid;place-items:center;color:#fff;font:bold 25px Georgia}.brand-name{font:bold 22px Georgia;color:var(--pink)}.brand-sub{font-size:12px;color:var(--muted);margin-top:2px}
+.nav{display:flex;flex-direction:column;gap:3px}.nav button{width:100%;border:0;background:transparent;color:#735b67;text-align:left;padding:12px;border-radius:10px;display:flex;align-items:center;gap:12px}.nav button:hover,.nav button.active{background:var(--light);color:var(--pink);font-weight:700}.nav-icon{width:21px;text-align:center}
+.sidebar-bottom{position:absolute;left:14px;right:14px;bottom:18px;display:flex;gap:7px}.small-btn{flex:1;border:1px solid var(--line);background:var(--light);color:var(--pink);padding:9px;border-radius:9px;font-weight:700;text-align:center}.small-btn input{display:none}
+.main{margin-left:245px;min-height:100vh}.topbar{height:80px;background:#fff;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;padding:0 28px;position:sticky;top:0;z-index:10}.top-left{display:flex;align-items:center;gap:10px}.menu{display:none;background:transparent;border:0;font-size:23px}.topbar h1{font-size:23px;margin:0}.topbar p{font-size:13px;color:var(--muted);margin:3px 0 0}.primary{border:0;background:var(--pink);color:#fff;border-radius:10px;padding:11px 15px;font-weight:700}.primary:hover{background:#7b123f}
+.content{padding:26px 28px}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.card,.panel{background:#fff;border:1px solid var(--line);border-radius:15px;box-shadow:var(--shadow)}.card{padding:17px}.label{font-size:12px;color:var(--muted)}.value{font-size:24px;font-weight:800;margin:8px 0}.muted{font-size:12px;color:var(--muted)}.green{color:var(--green)}.red{color:var(--red)}
+.grid{display:grid;grid-template-columns:1.25fr .75fr;gap:16px;margin-top:16px}.panel{padding:18px}.panel-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}.panel h3{font-size:16px;margin:0}.light{border:0;background:var(--light);color:var(--pink);border-radius:9px;padding:9px 11px;font-weight:700}.danger{border:0;background:#fff0f3;color:var(--red);border-radius:9px;padding:9px 11px;font-weight:700}
+.toolbar{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:15px}.search{flex:1;min-width:200px;border:1px solid var(--line);border-radius:9px;padding:10px 12px;background:#fff;outline:none}.table-wrap{overflow:auto}.table{width:100%;border-collapse:collapse;font-size:13px}.table th,.table td{padding:11px 8px;border-bottom:1px solid #f0e6eb;text-align:left;white-space:nowrap}.table th{font-size:11px;color:var(--muted);text-transform:uppercase}.badge{font-size:11px;font-weight:700;padding:4px 8px;border-radius:99px}.paid{background:#e7f7ef;color:#08764e}.pending{background:#fff4d8;color:#94630a}.partial{background:#eee8fa;color:#63409a}.overdue{background:#ffe7ed;color:#b21d42}.empty{text-align:center;color:var(--muted);padding:36px}.notice{padding:11px;border-radius:10px;background:var(--light);font-size:13px;margin:7px 0}.notice.redbox{background:#fff0f3;color:#a41d40}
+.chart{height:210px;display:flex;align-items:flex-end;gap:9px;padding:10px 4px 25px}.bar{flex:1;min-height:4px;background:linear-gradient(#f39cc7,var(--pink));border-radius:7px 7px 2px 2px;position:relative}.bar small{position:absolute;bottom:-20px;left:0;width:100%;text-align:center;font-size:10px;color:var(--muted)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:5px}.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);border-radius:9px;padding:10px 11px;background:#fff;color:var(--text);outline:none}.field textarea{min-height:80px;resize:vertical}.full{grid-column:1/-1}
+.modal-bg{position:fixed;inset:0;background:rgba(35,11,23,.5);display:grid;place-items:center;padding:16px;z-index:100}.modal-box{background:#fff;width:min(720px,100%);max-height:92vh;overflow:auto;border-radius:17px;padding:21px}.modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}.modal-head h2{margin:0;font-size:20px}.close{border:0;background:var(--light);color:var(--pink);width:34px;height:34px;border-radius:50%;font-size:20px}.modal-foot{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}
+.quick-row{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #f0e6eb}.progress-row{display:flex;align-items:center;gap:10px;margin:12px 0}.progress-row span{width:135px;font-size:12px}.progress{height:7px;flex:1;background:#f1e3ea;border-radius:99px;overflow:hidden}.progress i{height:100%;display:block;background:var(--pink)}
+#toast{position:fixed;right:20px;bottom:20px;background:#341724;color:#fff;border-radius:10px;padding:12px 15px;opacity:0;transform:translateY(8px);transition:.2s;z-index:200;pointer-events:none}#toast.show{opacity:1;transform:none}
+@media(max-width:850px){.sidebar{transform:translateX(-100%)}.sidebar.open{transform:translateX(0)}.main{margin-left:0}.menu{display:block}.topbar{padding:0 15px}.content{padding:18px 15px}.cards{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}}
+@media(max-width:550px){.cards{gap:8px}.card{padding:13px}.value{font-size:19px}.form-grid{grid-template-columns:1fr}.full{grid-column:auto}.toolbar{display:grid;grid-template-columns:1fr}.toolbar>*{width:100%}.topbar h1{font-size:18px}.primary{padding:9px 11px;font-size:12px}}
+</style>
+</head>
+<body>
+<aside class="sidebar" id="sidebar">
+  <div class="brand"><div class="brand-logo">T</div><div><div class="brand-name">Telle</div><div class="brand-sub">Cosméticos</div></div></div>
+  <nav class="nav" id="nav">
+    <button class="active" data-page="dashboard"><span class="nav-icon">⌂</span>Dashboard</button>
+    <button data-page="vendas"><span class="nav-icon">🛍️</span>Vendas</button>
+    <button data-page="clientes"><span class="nav-icon">👥</span>Clientes</button>
+    <button data-page="estoque"><span class="nav-icon">📦</span>Estoque</button>
+    <button data-page="financeiro"><span class="nav-icon">💰</span>Financeiro</button>
+    <button data-page="fornecedores"><span class="nav-icon">🏷️</span>Fornecedores</button>
+    <button data-page="relatorios"><span class="nav-icon">📊</span>Relatórios</button>
+    <button data-page="config"><span class="nav-icon">⚙️</span>Configurações</button>
+  </nav>
+  <div class="sidebar-bottom">
+    <button class="small-btn" id="backup">↓ Backup</button>
+    <label class="small-btn">↑ Restaurar<input id="restore" type="file" accept=".json"></label>
+  </div>
+</aside>
+
+<main class="main">
+<header class="topbar">
+  <div class="top-left"><button class="menu" id="menu">☰</button><div><h1 id="title">Dashboard</h1><p id="subtitle">Visão geral da Telle Cosméticos</p></div></div>
+  <button class="primary" id="newSale">＋ Nova venda</button>
+</header>
+<div class="content" id="content"></div>
+</main>
+
+<div id="modal"></div><div id="toast"></div>
+
+<script>
+(function(){
+"use strict";
+
+const KEY="TELLE_COSMETICOS_UNICO_V1";
+const seed={
+ products:[
+  {id:1,name:"Body Splash",brand:"Telle",category:"Perfumes",sku:"BS001",cost:12.50,price:20,stock:12,min:3},
+  {id:2,name:"Geleia Corporal 190g",brand:"Soul",category:"Corpo",sku:"GC001",cost:11.29,price:17.90,stock:8,min:3},
+  {id:3,name:"Mousse Micelar Morango 150ml",brand:"Apinil",category:"Skincare",sku:"MM001",cost:10.60,price:16,stock:4,min:3},
+  {id:4,name:"Blush Jelly Tint",brand:"Belle Angel",category:"Maquiagem",sku:"BT001",cost:7.80,price:10.90,stock:2,min:3}
+ ],
+ clients:[],suppliers:[],sales:[],cash:[],receivables:[]
+};
+let db=load();
+
+function clone(o){return JSON.parse(JSON.stringify(o))}
+function load(){
+ try{
+  const raw=localStorage.getItem(KEY);
+  if(!raw)return clone(seed);
+  const d=JSON.parse(raw);
+  return Object.assign(clone(seed),d);
+ }catch(e){return clone(seed)}
+}
+function save(){localStorage.setItem(KEY,JSON.stringify(db))}
+function uid(){return Date.now()+Math.floor(Math.random()*100000)}
+function money(n){return Number(n||0).toLocaleString("pt-BR",{style:"currency",currency:"BRL"})}
+function today(){return new Date().toISOString().slice(0,10)}
+function dateBR(s){return s?new Date(s+"T12:00:00").toLocaleDateString("pt-BR"):"-"}
+function esc(v){return String(v==null?"":v).replace(/[&<>"']/g,function(c){return({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"})[c]})}
+function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");clearTimeout(window.__tt);window.__tt=setTimeout(function(){t.classList.remove("show")},2300)}
+function closeModal(){document.getElementById("modal").innerHTML=""}
+function modal(title,body,action,label){
+ document.getElementById("modal").innerHTML='<div class="modal-bg"><div class="modal-box"><div class="modal-head"><h2>'+title+'</h2><button class="close" id="closeModal">×</button></div>'+body+'<div class="modal-foot"><button class="light" id="cancelModal">Cancelar</button><button class="primary" id="modalAction">'+(label||"Salvar")+'</button></div></div></div>';
+ document.getElementById("closeModal").onclick=closeModal;
+ document.getElementById("cancelModal").onclick=closeModal;
+ document.getElementById("modalAction").onclick=action;
+}
+const meta={
+ dashboard:["Dashboard","Visão geral da Telle Cosméticos"],
+ vendas:["Vendas","Registre e acompanhe suas vendas"],
+ clientes:["Clientes","Cadastros e histórico de compras"],
+ estoque:["Estoque","Produtos e movimentações"],
+ financeiro:["Financeiro","Caixa, recebimentos e despesas"],
+ fornecedores:["Fornecedores","Seus fornecedores e contatos"],
+ relatorios:["Relatórios","Indicadores da sua loja"],
+ config:["Configurações","Dados e segurança"]
+};
+
+function go(page){
+ document.querySelectorAll("#nav button").forEach(function(b){b.classList.toggle("active",b.dataset.page===page)});
+ document.getElementById("title").textContent=meta[page][0];
+ document.getElementById("subtitle").textContent=meta[page][1];
+ document.getElementById("sidebar").classList.remove("open");
+ document.getElementById("content").innerHTML=pages[page]();
+}
+
+document.getElementById("nav").addEventListener("click",function(e){const b=e.target.closest("button");if(b)go(b.dataset.page)});
+document.getElementById("menu").onclick=function(){document.getElementById("sidebar").classList.toggle("open")};
+document.getElementById("newSale").onclick=openSale;
+document.getElementById("backup").onclick=backup;
+document.getElementById("restore").onchange=restore;
+
+function totals(){
+ const sales=db.sales.filter(function(s){return !s.cancelled});
+ const revenue=sales.reduce(function(a,s){return a+s.total},0);
+ const cost=sales.reduce(function(a,s){return a+s.cost},0);
+ return {revenue:revenue,cost:cost,profit:revenue-cost,open:sales.reduce(function(a,s){return a+s.total-s.paid},0)};
+}
+function dashboard(){
+ const t=totals(),low=db.products.filter(function(p){return p.stock<=p.min}),over=db.receivables.filter(function(r){return r.status!=="paid"&&r.due<today()}),recent=db.sales.slice().reverse().slice(0,5);
+ let days=[],max=1;
+ for(let i=6;i>=0;i--){let d=new Date();d.setDate(d.getDate()-i);let k=d.toISOString().slice(0,10),v=db.sales.filter(function(s){return !s.cancelled&&s.created.slice(0,10)===k}).reduce(function(a,s){return a+s.total},0);days.push({label:d.toLocaleDateString("pt-BR",{weekday:"short"}).replace(".",""),v:v});max=Math.max(max,v)}
+ return '<div class="cards">'+
+ '<div class="card"><div class="label">Faturamento</div><div class="value">'+money(t.revenue)+'</div><div class="muted">vendas registradas</div></div>'+
+ '<div class="card"><div class="label">Lucro bruto</div><div class="value green">'+money(t.profit)+'</div><div class="muted">receita menos custo</div></div>'+
+ '<div class="card"><div class="label">A receber</div><div class="value red">'+money(t.open)+'</div><div class="muted">'+db.receivables.filter(function(r){return r.status!=="paid"}).length+' cobrança(s)</div></div>'+
+ '<div class="card"><div class="label">Estoque baixo</div><div class="value">'+low.length+'</div><div class="muted">produto(s)</div></div></div>'+
+ '<div class="grid"><div class="panel"><div class="panel-head"><h3>Vendas dos últimos 7 dias</h3><span class="muted">'+money(t.revenue)+'</span></div><div class="chart">'+days.map(function(d){return '<div class="bar" style="height:'+Math.max(4,d.v/max*170)+'px" title="'+money(d.v)+'"><small>'+d.label+'</small></div>'}).join("")+'</div></div>'+
+ '<div class="panel"><div class="panel-head"><h3>Alertas</h3></div>'+
+ over.slice(0,4).map(function(r){return '<div class="notice redbox">🔴 <b>'+esc(r.client)+'</b> deve '+money(r.amount)+'. Vencido em '+dateBR(r.due)+'.</div>'}).join("")+
+ low.slice(0,4).map(function(p){return '<div class="notice">📦 <b>'+esc(p.name)+'</b>: '+p.stock+' unidade(s).</div>'}).join("")+
+ (!over.length&&!low.length?'<div class="notice">🌷 Nenhum alerta no momento.</div>':"")+
+ '</div></div><div class="panel" style="margin-top:16px"><div class="panel-head"><h3>Vendas recentes</h3><button class="light" onclick="go(\'vendas\')">Ver vendas</button></div>'+salesTable(recent)+'</div>';
+}
+function badge(s){if(s.paid>=s.total)return'<span class="badge paid">Pago</span>';if(s.paid>0)return'<span class="badge partial">Parcial</span>';return'<span class="badge pending">Pendente</span>'}
+function salesTable(arr){
+ if(!arr.length)return'<div class="empty">Nenhuma venda encontrada.</div>';
+ return '<div class="table-wrap"><table class="table"><tr><th>Data</th><th>Cliente</th><th>Itens</th><th>Total</th><th>Pago</th><th>Status</th><th></th></tr>'+
+ arr.map(function(s){return '<tr><td>'+dateBR(s.created.slice(0,10))+'</td><td>'+esc(s.client||"Balcão")+'</td><td>'+s.items.map(function(i){return esc(i.name)+" ×"+i.qty}).join(", ")+'</td><td>'+money(s.total)+'</td><td>'+money(s.paid)+'</td><td>'+badge(s)+'</td><td>'+(s.paid<s.total?'<button class="light" onclick="receivePayment('+s.id+')">Receber</button>':"")+'</td></tr>'}).join("")+
+ '</table></div>';
+}
+function vendas(){
+ return '<div class="toolbar"><input class="search" id="saleSearch" placeholder="Buscar cliente ou produto..."><button class="primary" id="saleNew">＋ Nova venda</button></div><div class="panel" id="salesPanel">'+salesTable(db.sales.slice().reverse())+'</div>';
+}
+function openSale(){
+ const ps=db.products.filter(function(p){return p.stock>0});
+ if(!ps.length){toast("Cadastre produtos com estoque antes de vender.");return}
+ modal("Nova venda",
+ '<div class="form-grid">'+
+ '<div class="field"><label>Cliente</label><select id="svClient"><option value="">Venda balcão</option>'+db.clients.map(function(c){return '<option value="'+c.id+'">'+esc(c.name)+'</option>'}).join("")+'</select></div>'+
+ '<div class="field"><label>Forma de pagamento</label><select id="svMethod"><option>PIX</option><option>Dinheiro</option><option>Cartão</option><option>Fiado</option></select></div>'+
+ '<div class="field"><label>Produto</label><select id="svProduct">'+ps.map(function(p){return '<option value="'+p.id+'">'+esc(p.name)+' | '+money(p.price)+' | estoque '+p.stock+'</option>'}).join("")+'</select></div>'+
+ '<div class="field"><label>Quantidade</label><input id="svQty" type="number" min="1" value="1"></div>'+
+ '<div class="field"><label>Valor pago agora</label><input id="svPaid" type="number" min="0" step="0.01" value="0"></div>'+
+ '<div class="field"><label>Data para cobrança</label><input id="svDue" type="date" value="'+today()+'"></div></div>'+
+ '<div id="svInfo" class="notice" style="margin-top:14px"></div>',saveSale,"Finalizar venda");
+ document.getElementById("svProduct").onchange=previewSale;document.getElementById("svQty").oninput=previewSale;previewSale();
+}
+function previewSale(){const p=db.products.find(function(x){return x.id==document.getElementById("svProduct").value}),q=Math.max(1,Number(document.getElementById("svQty").value)||1);document.getElementById("svInfo").innerHTML='<b>'+esc(p.name)+'</b> × '+q+' = <b>'+money(p.price*q)+'</b><br><span class="muted">Lucro estimado: '+money((p.price-p.cost)*q)+'</span>'}
+function saveSale(){
+ const p=db.products.find(function(x){return x.id==document.getElementById("svProduct").value}),q=Math.max(1,Number(document.getElementById("svQty").value)||1);
+ if(q>p.stock){toast("Estoque insuficiente.");return}
+ const cid=Number(document.getElementById("svClient").value)||null,c=db.clients.find(function(x){return x.id===cid}),total=p.price*q,method=document.getElementById("svMethod").value;
+ let paid=Number(document.getElementById("svPaid").value)||0;
+ if(method!=="Fiado"&&paid===0)paid=total;if(paid>total)paid=total;
+ const s={id:uid(),created:new Date().toISOString(),client:c?c.name:"",clientId:cid,total:total,cost:p.cost*q,paid:paid,method:method,due:document.getElementById("svDue").value,items:[{productId:p.id,name:p.name,qty:q,price:p.price,cost:p.cost}]};
+ db.sales.push(s);p.stock-=q;
+ if(paid>0)db.cash.push({id:uid(),date:today(),type:"in",description:"Venda - "+(c?c.name:"Balcão"),value:paid});
+ if(paid<total&&c)db.receivables.push({id:uid(),saleId:s.id,client:c.name,clientId:cid,amount:total-paid,due:s.due,status:"pending"});
+ save();closeModal();toast("Venda registrada com sucesso.");go("vendas");
+}
+function receivePayment(sid){
+ const s=db.sales.find(function(x){return x.id===sid}),rest=s.total-s.paid;
+ const v=prompt("Valor recebido (máximo "+money(rest)+"):",rest.toFixed(2));if(v===null)return;
+ const n=Number(v);if(!n||n>rest){toast("Valor inválido.");return}
+ s.paid+=n;db.cash.push({id:uid(),date:today(),type:"in",description:"Recebimento - "+(s.client||"venda"),value:n});
+ const r=db.receivables.find(function(x){return x.saleId===sid&&x.status!=="paid"});if(r){r.amount=Math.max(0,r.amount-n);if(r.amount===0)r.status="paid"}
+ save();toast("Pagamento registrado.");go("vendas");
+}
+
+function clientes(){return'<div class="toolbar"><input class="search" id="clientSearch" placeholder="Buscar cliente..."><button class="primary" id="clientNew">＋ Novo cliente</button></div><div class="panel" id="clientPanel">'+clientTable(db.clients)+'</div>'}
+function clientTable(arr){
+ if(!arr.length)return'<div class="empty">Nenhum cliente cadastrado.</div>';
+ return'<div class="table-wrap"><table class="table"><tr><th>Cliente</th><th>WhatsApp</th><th>Total comprado</th><th>Em aberto</th><th></th></tr>'+arr.map(function(c){const ss=db.sales.filter(function(s){return s.clientId===c.id}),tot=ss.reduce(function(a,s){return a+s.total},0),open=ss.reduce(function(a,s){return a+s.total-s.paid},0);return'<tr><td><b>'+esc(c.name)+'</b></td><td>'+esc(c.phone||"-")+'</td><td>'+money(tot)+'</td><td class="'+(open?"red":"")+'">'+money(open)+'</td><td><button class="light" onclick="clientHistory('+c.id+')">Histórico</button></td></tr>'}).join("")+'</table></div>';
+}
+function openClient(){
+ modal("Novo cliente",'<div class="form-grid"><div class="field"><label>Nome *</label><input id="cName"></div><div class="field"><label>WhatsApp</label><input id="cPhone"></div><div class="field"><label>CPF</label><input id="cCpf"></div><div class="field"><label>Cidade</label><input id="cCity" value="Joinville"></div><div class="field full"><label>Endereço</label><input id="cAddress"></div><div class="field full"><label>Observações</label><textarea id="cObs"></textarea></div></div>',saveClient);
+}
+function saveClient(){const name=document.getElementById("cName").value.trim();if(!name){toast("Informe o nome.");return}db.clients.push({id:uid(),name:name,phone:document.getElementById("cPhone").value,cpf:document.getElementById("cCpf").value,city:document.getElementById("cCity").value,address:document.getElementById("cAddress").value,obs:document.getElementById("cObs").value});save();closeModal();toast("Cliente cadastrado.");go("clientes")}
+function clientHistory(cid){const c=db.clients.find(function(x){return x.id===cid});modal(esc(c.name),'<div class="notice">WhatsApp: '+esc(c.phone||"-")+'<br>Endereço: '+esc(c.address||"-")+'</div>'+salesTable(db.sales.filter(function(s){return s.clientId===cid})) ,closeModal,"Fechar")}
+
+function estoque(){return'<div class="toolbar"><input class="search" id="prodSearch" placeholder="Buscar produto..."><button class="primary" id="prodNew">＋ Novo produto</button></div><div class="panel" id="prodPanel">'+productTable(db.products)+'</div>'}
+function productTable(arr){
+ if(!arr.length)return'<div class="empty">Nenhum produto encontrado.</div>';
+ return'<div class="table-wrap"><table class="table"><tr><th>Produto</th><th>Categoria</th><th>Custo</th><th>Venda</th><th>Margem</th><th>Estoque</th><th></th></tr>'+arr.map(function(p){const m=p.price?((p.price-p.cost)/p.price*100):0;return'<tr><td><b>'+esc(p.name)+'</b><br><span class="muted">'+esc(p.brand||"")+' • '+esc(p.sku||"")+'</span></td><td>'+esc(p.category||"-")+'</td><td>'+money(p.cost)+'</td><td>'+money(p.price)+'</td><td>'+m.toFixed(1)+'%</td><td class="'+(p.stock<=p.min?"red":"")+'">'+p.stock+(p.stock<=p.min?" ⚠️":"")+'</td><td><button class="light" onclick="moveStock('+p.id+')">Movimentar</button></td></tr>'}).join("")+'</table></div>';
+}
+function openProduct(){modal("Novo produto",'<div class="form-grid"><div class="field"><label>Nome *</label><input id="pName"></div><div class="field"><label>Marca</label><input id="pBrand"></div><div class="field"><label>Categoria</label><input id="pCat"></div><div class="field"><label>Código</label><input id="pSku"></div><div class="field"><label>Custo</label><input id="pCost" type="number" step="0.01"></div><div class="field"><label>Preço de venda</label><input id="pPrice" type="number" step="0.01"></div><div class="field"><label>Estoque inicial</label><input id="pStock" type="number" min="0" value="0"></div><div class="field"><label>Estoque mínimo</label><input id="pMin" type="number" min="0" value="3"></div></div>',saveProduct)}
+function saveProduct(){const name=document.getElementById("pName").value.trim();if(!name){toast("Informe o nome.");return}db.products.push({id:uid(),name:name,brand:document.getElementById("pBrand").value,category:document.getElementById("pCat").value,sku:document.getElementById("pSku").value,cost:Number(document.getElementById("pCost").value)||0,price:Number(document.getElementById("pPrice").value)||0,stock:Number(document.getElementById("pStock").value)||0,min:Number(document.getElementById("pMin").value)||0});save();closeModal();toast("Produto cadastrado.");go("estoque")}
+function moveStock(pid){const p=db.products.find(function(x){return x.id===pid}),v=prompt("Quantidade. Positivo = entrada, negativo = saída:","1");if(v===null)return;const n=Number(v);if(!n||p.stock+n<0){toast("Movimentação inválida.");return}p.stock+=n;save();toast("Estoque atualizado.");go("estoque")}
+
+function financeiro(){const ins=db.cash.filter(function(x){return x.type==="in"}).reduce(function(a,x){return a+x.value},0),outs=db.cash.filter(function(x){return x.type==="out"}).reduce(function(a,x){return a+x.value},0),open=db.receivables.filter(function(x){return x.status!=="paid"});return'<div class="cards"><div class="card"><div class="label">Entradas</div><div class="value green">'+money(ins)+'</div></div><div class="card"><div class="label">Saídas</div><div class="value red">'+money(outs)+'</div></div><div class="card"><div class="label">Saldo</div><div class="value">'+money(ins-outs)+'</div></div><div class="card"><div class="label">A receber</div><div class="value">'+money(open.reduce(function(a,r){return a+r.amount},0))+'</div></div></div><div class="grid"><div class="panel"><div class="panel-head"><h3>Contas a receber</h3><button class="primary" id="expenseBtn">＋ Lançar saída</button></div>'+(open.length?'<div class="table-wrap"><table class="table"><tr><th>Cliente</th><th>Valor</th><th>Vencimento</th><th>Status</th></tr>'+open.map(function(r){return'<tr><td>'+esc(r.client)+'</td><td>'+money(r.amount)+'</td><td>'+dateBR(r.due)+'</td><td>'+(r.due<today()?'<span class="badge overdue">Vencido</span>':'<span class="badge pending">Pendente</span>')+'</td></tr>'}).join("")+'</table></div>':'<div class="empty">Nenhuma cobrança em aberto.</div>')+'</div><div class="panel"><div class="panel-head"><h3>Movimentações</h3></div>'+db.cash.slice().reverse().slice(0,12).map(function(x){return'<div class="quick-row"><span>'+esc(x.description)+'<br><small class="muted">'+dateBR(x.date)+'</small></span><b class="'+(x.type==="in"?"green":"red")+'">'+(x.type==="in"?"+":"-")+money(x.value)+'</b></div>'}).join("")+'</div></div>'}
+function expense(){const d=prompt("Descrição da saída:");if(!d)return;const v=Number(prompt("Valor:","0"));if(!v){toast("Valor inválido.");return}db.cash.push({id:uid(),date:today(),type:"out",description:d,value:v});save();toast("Saída registrada.");go("financeiro")}
+
+function fornecedores(){return'<div class="toolbar"><button class="primary" id="supplierNew">＋ Novo fornecedor</button></div><div class="panel">'+(db.suppliers.length?'<table class="table"><tr><th>Fornecedor</th><th>Telefone</th><th>CNPJ/CPF</th></tr>'+db.suppliers.map(function(s){return'<tr><td>'+esc(s.name)+'</td><td>'+esc(s.phone||"-")+'</td><td>'+esc(s.doc||"-")+'</td></tr>'}).join("")+'</table>':'<div class="empty">Nenhum fornecedor cadastrado.</div>')+'</div>'}
+function openSupplier(){modal("Novo fornecedor",'<div class="form-grid"><div class="field"><label>Nome *</label><input id="fName"></div><div class="field"><label>Telefone</label><input id="fPhone"></div><div class="field"><label>CNPJ/CPF</label><input id="fDoc"></div><div class="field"><label>Observações</label><input id="fObs"></div></div>',saveSupplier)}
+function saveSupplier(){const name=document.getElementById("fName").value.trim();if(!name){toast("Informe o nome.");return}db.suppliers.push({id:uid(),name:name,phone:document.getElementById("fPhone").value,doc:document.getElementById("fDoc").value,obs:document.getElementById("fObs").value});save();closeModal();toast("Fornecedor cadastrado.");go("fornecedores")}
+
+function relatorios(){const t=totals(),map={};db.sales.forEach(function(s){s.items.forEach(function(i){map[i.name]=(map[i.name]||0)+i.qty})});const best=Object.entries(map).sort(function(a,b){return b[1]-a[1]}).slice(0,8),stockCost=db.products.reduce(function(a,p){return a+p.cost*p.stock},0),stockSale=db.products.reduce(function(a,p){return a+p.price*p.stock},0);return'<div class="cards"><div class="card"><div class="label">Faturamento</div><div class="value">'+money(t.revenue)+'</div></div><div class="card"><div class="label">Lucro bruto</div><div class="value green">'+money(t.profit)+'</div></div><div class="card"><div class="label">Margem</div><div class="value">'+(t.revenue?(t.profit/t.revenue*100).toFixed(1):0)+'%</div></div><div class="card"><div class="label">Vendas</div><div class="value">'+db.sales.length+'</div></div></div><div class="grid"><div class="panel"><div class="panel-head"><h3>Produtos mais vendidos</h3></div>'+(best.length?best.map(function(x,i){return'<div class="progress-row"><span>'+(i+1)+'. '+esc(x[0])+'</span><div class="progress"><i style="width:'+(x[1]/best[0][1]*100)+'%"></i></div><b>'+x[1]+'</b></div>'}).join(""):'<div class="empty">Ainda não há vendas.</div>')+'</div><div class="panel"><h3>Valor do estoque</h3><div class="value">'+money(stockCost)+'</div><div class="muted">Pelo custo</div><hr style="border:0;border-top:1px solid var(--line);margin:18px 0"><div class="value">'+money(stockSale)+'</div><div class="muted">Potencial de venda</div></div></div>'}
+function config(){return'<div class="panel"><h3>Dados e segurança</h3><p class="muted">A V1 salva os dados neste navegador. Faça backups regularmente.</p><div class="toolbar" style="margin-top:15px"><button class="primary" onclick="backup()">↓ Baixar backup</button><button class="danger" onclick="resetData()">Apagar dados</button></div></div>'}
+
+function backup(){const blob=new Blob([JSON.stringify(db,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="telle-cosmeticos-backup.json";document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(a.href)},500);toast("Backup baixado.")}
+function restore(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(){try{const d=JSON.parse(r.result);if(!d.products||!d.sales)throw Error();db=d;save();toast("Backup restaurado.");go("dashboard")}catch(err){toast("Arquivo de backup inválido.")}};r.readAsText(f)}
+function resetData(){if(confirm("Apagar todos os dados deste navegador?")){localStorage.removeItem(KEY);location.reload()}}
+
+document.addEventListener("click",function(e){
+ if(e.target.id==="saleNew")openSale();
+ if(e.target.id==="clientNew")openClient();
+ if(e.target.id==="prodNew")openProduct();
+ if(e.target.id==="supplierNew")openSupplier();
+ if(e.target.id==="expenseBtn")expense();
+});
+document.addEventListener("input",function(e){
+ if(e.target.id==="saleSearch"){const q=e.target.value.toLowerCase();document.getElementById("salesPanel").innerHTML=salesTable(db.sales.slice().reverse().filter(function(s){return(s.client||"").toLowerCase().includes(q)||s.items.some(function(i){return i.name.toLowerCase().includes(q)})}))}
+ if(e.target.id==="clientSearch"){const q=e.target.value.toLowerCase();document.getElementById("clientPanel").innerHTML=clientTable(db.clients.filter(function(c){return(c.name+" "+(c.phone||"")).toLowerCase().includes(q)}))}
+ if(e.target.id==="prodSearch"){const q=e.target.value.toLowerCase();document.getElementById("prodPanel").innerHTML=productTable(db.products.filter(function(p){return(p.name+" "+p.brand+" "+p.category+" "+p.sku).toLowerCase().includes(q)}))}
+});
+
+const pages={dashboard:dashboard,vendas:vendas,clientes:clientes,estoque:estoque,financeiro:financeiro,fornecedores:fornecedores,relatorios:relatorios,config:config};
+window.go=go;window.openSale=openSale;window.receivePayment=receivePayment;window.clientHistory=clientHistory;window.moveStock=moveStock;window.backup=backup;window.resetData=resetData;
+go("dashboard");
+})();
+</script>
+</body>
+</html>
