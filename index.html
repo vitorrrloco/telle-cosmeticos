@@ -43,7 +43,23 @@ let saleFilter="all";
 
 function notify(text){const box=$("toast");box.textContent=text;box.classList.add("show");clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>box.classList.remove("show"),2200)}
 function storageKey(){return "telle_data_"+userId}
-function loadLocal(){try{const saved=JSON.parse(localStorage.getItem(storageKey())||"null");if(saved)data=Object.assign(blank(),saved)}catch{}}
+function loadLocal(){
+ try{
+  const saved=JSON.parse(localStorage.getItem(storageKey())||"null");
+  const base=blank();
+  if(saved&&typeof saved==="object"){
+   data=Object.assign(base,saved);
+   ["products","clients","sales","receivables","cash","suppliers"].forEach(k=>{
+    if(!Array.isArray(data[k]))data[k]=[];
+   });
+   data.settings=Object.assign(base.settings,
+    saved.settings&&typeof saved.settings==="object"?saved.settings:{});
+  }else data=base;
+ }catch(error){
+  console.warn("TELLE_LOCAL_DATA_RESET",error);
+  data=blank();
+ }
+}
 function saveLocal(){localStorage.setItem(storageKey(),JSON.stringify(data))}
 async function signIn(email,password){
  const controller=new AbortController();
@@ -226,19 +242,32 @@ function openMore(kind){
  if(kind==="config")$("savePix").onclick=()=>{data.settings.pix=$("pixKey").value.trim();data.settings.pixName=$("pixName").value.trim()||"TELLE COSMETICOS";data.settings.pixCity=$("pixCity").value.trim()||"JOINVILLE";saveLocal();notify("Pix salvo.")};
 }
 function startApp(){
+ const login=document.getElementById("login");
+ const app=document.getElementById("app");
+
+ login.hidden=true;
+ login.style.display="none";
+ app.hidden=false;
+ app.style.display="block";
+
  try{
   loadLocal();
-  $("login").hidden=true;
-  $("app").hidden=false;
-  $("app").innerHTML=layout();
+  app.innerHTML=layout();
   go("home");
   notify("Telle conectada à nuvem ☁️");
   return true;
  }catch(error){
-  console.error("TELLE_START_APP_ERROR",error);
-  $("login").hidden=false;
-  $("app").hidden=true;
-  throw error;
+  console.error("TELLE_DASHBOARD_ERROR",error);
+  app.innerHTML=`<div class="app"><header class="top"><div class="brand"><img src="telle-logo.png"><div><b>Início</b><small>Telle Cosméticos</small></div></div></header><main class="view"><div class="page"><section class="hero"><div><small>Olá! 🌸</small><h1>Telle Cosméticos</h1><p>Aplicativo conectado.</p></div><span>☁️</span></section><div class="empty">O aplicativo foi aberto, mas encontrou um erro ao carregar os dados antigos.</div><button id="resetLocalData" class="enter" type="button">Começar com dados limpos</button></div></main></div>`;
+  const reset=document.getElementById("resetLocalData");
+  if(reset)reset.onclick=()=>{
+   localStorage.removeItem(storageKey());
+   data=blank();
+   app.innerHTML=layout();
+   go("home");
+   notify("Dados locais recriados.");
+  };
+  return false;
  }
 }
 $("loginButton").onclick=async()=>{
@@ -253,7 +282,7 @@ $("loginButton").onclick=async()=>{
   message.textContent="Login confirmado. Abrindo o aplicativo…";
   button.disabled=false;
   button.textContent="Entrar";
-  startApp();
+  window.requestAnimationFrame(()=>startApp());
  }catch(error){
   console.error("TELLE_LOGIN_ERROR",error);
   message.textContent=error.message||"Não foi possível entrar.";
@@ -261,6 +290,7 @@ $("loginButton").onclick=async()=>{
   button.textContent="Entrar";
  }
 };
+
 $("password").addEventListener("keydown",event=>{if(event.key==="Enter")$("loginButton").click()});
 if(idToken&&userId){
  try{startApp()}catch(error){
