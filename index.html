@@ -196,17 +196,32 @@ onAuthStateChanged(auth,async user=>{
   userPillEl.textContent=user.email||"Usuário";
   loginMsgEl.textContent="Login confirmado. Carregando seus dados…";
   try{
-    db=await withTimeout(migrateLocalIfCloudEmpty(),15000,"FIRESTORE_TIMEOUT");
-    saveLocal();
+    // Authentication is the gate. Show the app immediately after Auth succeeds.
+    // Firestore loading happens next, so a slow/failed read can never trap the user on login.
     showApp();
-    toast("Telle conectada à nuvem ☁️");
     go("dashboard");
+    toast("Telle conectada à nuvem ☁️");
+    try{
+      db=await withTimeout(migrateLocalIfCloudEmpty(),15000,"FIRESTORE_TIMEOUT");
+      saveLocal();
+    }catch(dataError){
+      console.error("Firestore:",dataError);
+      toast("Sistema aberto. Não foi possível sincronizar os dados agora.");
+    }
   }catch(e){
-    console.error("Firebase/Firestore:",e);
-    const code=e?.code||"";
-    if(code.includes("permission-denied")) showLogin("Login OK, mas o Firestore recusou o acesso. Confira as regras do banco.");
-    else if(e?.message==="FIRESTORE_TIMEOUT") showLogin("Login OK, mas o Firestore demorou demais para responder. Verifique a conexão.");
-    else showLogin("Login OK, mas não consegui carregar o banco: "+(e?.message||"erro desconhecido"));
+    console.error("Firebase/Authentication:",e);
+    // If Firebase has already confirmed a user, never return to the login screen.
+    // Only authentication errors should show the login UI.
+    if(auth.currentUser){
+      showApp();
+      go("dashboard");
+      toast("Sistema aberto. Há uma falha de inicialização, mas seu login está ativo.");
+    }else{
+      const code=e?.code||"";
+      if(code.includes("permission-denied")) showLogin("Login OK, mas o Firestore recusou o acesso. Confira as regras do banco.");
+      else if(e?.message==="FIRESTORE_TIMEOUT") showLogin("Login OK, mas o Firestore demorou demais para responder. Verifique a conexão.");
+      else showLogin("Não consegui iniciar o sistema: "+(e?.message||"erro desconhecido"));
+    }
   }
 });
 
