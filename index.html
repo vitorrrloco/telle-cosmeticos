@@ -225,7 +225,22 @@ function openMore(kind){
  if(kind==="suppliers")$("supplierPlus").onclick=addSupplier;
  if(kind==="config")$("savePix").onclick=()=>{data.settings.pix=$("pixKey").value.trim();data.settings.pixName=$("pixName").value.trim()||"TELLE COSMETICOS";data.settings.pixCity=$("pixCity").value.trim()||"JOINVILLE";saveLocal();notify("Pix salvo.")};
 }
-async function startApp(){loadLocal();$("login").hidden=true;$("app").hidden=false;$("app").innerHTML=layout();go("home");notify("Telle conectada a nuvem ☁️")}
+function startApp(){
+ try{
+  loadLocal();
+  $("login").hidden=true;
+  $("app").hidden=false;
+  $("app").innerHTML=layout();
+  go("home");
+  notify("Telle conectada à nuvem ☁️");
+  return true;
+ }catch(error){
+  console.error("TELLE_START_APP_ERROR",error);
+  $("login").hidden=false;
+  $("app").hidden=true;
+  throw error;
+ }
+}
 $("loginButton").onclick=async()=>{
  const button=$("loginButton"),message=$("loginMessage");
  const email=$("email").value.trim(),password=$("password").value;
@@ -236,8 +251,11 @@ $("loginButton").onclick=async()=>{
  try{
   await signIn(email,password);
   message.textContent="Login confirmado. Abrindo o aplicativo…";
-  await startApp();
+  button.disabled=false;
+  button.textContent="Entrar";
+  startApp();
  }catch(error){
+  console.error("TELLE_LOGIN_ERROR",error);
   message.textContent=error.message||"Não foi possível entrar.";
   button.disabled=false;
   button.textContent="Entrar";
@@ -245,9 +263,10 @@ $("loginButton").onclick=async()=>{
 };
 $("password").addEventListener("keydown",event=>{if(event.key==="Enter")$("loginButton").click()});
 if(idToken&&userId){
-  // Sessão local é usada somente como atalho visual. Se houver problema,
-  // o usuário pode sair e fazer login novamente sem ficar preso no carregamento.
-  startApp().catch(()=>{localStorage.removeItem("telle_token");localStorage.removeItem("telle_uid");location.reload()});
+ try{startApp()}catch(error){
+  localStorage.removeItem("telle_token");
+  localStorage.removeItem("telle_uid");
+ }
 }
 </script>
 </body>
