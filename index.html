@@ -3,355 +3,294 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#8d1749">
-<title>Telle Cosméticos V4</title>
+<meta name="theme-color" content="#9d1854">
+<title>Telle Cosméticos • V4.1</title>
 <style>
+:root{--pink:#a51d55;--pink2:#7b123e;--soft:#fff0f6;--soft2:#f9dce9;--bg:#fffafd;--ink:#301622;--muted:#806a75;--line:#ead8e2;--green:#087b58;--red:#bd2349;--gold:#8d650b;--shadow:0 12px 34px rgba(74,17,43,.08)}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Arial,sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}input,select,textarea{font-size:16px}
 [hidden]{display:none!important}
-
-:root{--pink:#a51d55;--pink2:#7d123e;--soft:#fff1f6;--soft2:#f9dfeb;--bg:#fffafd;--ink:#301622;--muted:#806a75;--line:#ead8e2;--green:#087b58;--red:#c1264b;--shadow:0 10px 30px rgba(74,17,43,.08)}
-*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Arial,sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}
-#login{min-height:100vh;display:grid;place-items:center;padding:22px;background:radial-gradient(circle at top,#fff 0,#fff7fa 45%,#fde7f0 100%)}.loginCard{width:min(410px,100%);background:#fff;border:1px solid var(--line);border-radius:26px;padding:30px;box-shadow:0 25px 70px rgba(80,18,45,.12)}.logo{display:flex;justify-content:center;align-items:center;gap:12px;margin-bottom:25px}.mark{width:54px;height:54px;border-radius:18px;background:linear-gradient(145deg,#ce3b7a,#78103d);display:grid;place-items:center;color:#fff;font:700 30px Georgia}.logo strong{font:700 28px Georgia;color:var(--pink);display:block}.logo span{font-size:12px;color:var(--muted)}.loginCard h1{font-size:21px;margin:0 0 5px}.loginCard p{font-size:13px;color:var(--muted);margin:0 0 20px}.loginField{margin:12px 0}.loginField label{display:block;font-size:11px;color:var(--muted);margin-bottom:5px}.loginField input{width:100%;padding:13px;border:1px solid var(--line);border-radius:12px;outline:none}.loginBtn{width:100%;margin-top:8px;border:0;background:var(--pink);color:#fff;padding:13px;border-radius:12px;font-weight:800}.loginMsg{min-height:20px;text-align:center;font-size:12px;margin-top:12px;color:var(--red)}.loginFoot{text-align:center;font-size:11px;color:var(--muted);margin-top:20px}
-.app{min-height:100vh}.sidebar{position:fixed;left:0;top:0;bottom:0;width:250px;background:rgba(255,255,255,.97);border-right:1px solid var(--line);padding:22px 14px;z-index:50}.brand{display:flex;align-items:center;gap:11px;padding:2px 8px 24px}.brand .mark{width:45px;height:45px;font-size:26px}.brand strong{font:700 22px Georgia;color:var(--pink);display:block}.brand span{font-size:12px;color:var(--muted)}.nav{display:grid;gap:3px}.nav button{border:0;background:transparent;color:#765f69;text-align:left;border-radius:12px;padding:12px;display:flex;align-items:center;gap:12px}.nav button.active{background:var(--soft);color:var(--pink);font-weight:750}.nav button:hover{background:#fff5f9}.nav em{font-style:normal;width:22px;text-align:center}.sidebarFoot{position:absolute;bottom:16px;left:14px;right:14px;display:flex;gap:6px}.mini{border:1px solid var(--line);background:var(--soft);color:var(--pink);border-radius:10px;padding:9px;font-size:11px;font-weight:700;flex:1;text-align:center}.mini input{display:none}
-main{margin-left:250px;min-height:100vh}.topbar{height:78px;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:30}.heading{display:flex;gap:11px;align-items:center}.hamb{display:none;border:0;background:none;font-size:23px}.heading h1{font-size:21px;margin:0}.heading p{margin:3px 0 0;font-size:12px;color:var(--muted)}.topActions{display:flex;align-items:center;gap:8px}.userPill{font-size:11px;color:var(--muted);max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.content{padding:24px 28px 100px;animation:pageIn .16s ease-out}.content.leaving{animation:pageOut .08s ease-in}@keyframes pageIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}@keyframes pageOut{to{opacity:0;transform:translateY(-3px)}}
-.primary{border:0;background:var(--pink);color:#fff;padding:11px 15px;border-radius:11px;font-weight:750;box-shadow:0 5px 16px rgba(165,29,85,.16)}.softBtn{border:0;background:var(--soft);color:var(--pink);padding:9px 11px;border-radius:10px;font-weight:700}.danger{border:0;background:#fff0f3;color:var(--red);padding:9px 11px;border-radius:10px;font-weight:700}
-.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}.card{background:#fff;border:1px solid var(--line);border-radius:17px;padding:17px;box-shadow:var(--shadow)}.eyebrow{font-size:11px;color:var(--muted)}.big{font-size:23px;font-weight:800;margin:7px 0}.green{color:var(--green)}.red{color:var(--red)}.muted{font-size:12px;color:var(--muted)}.layout{display:grid;grid-template-columns:1.35fr .65fr;gap:15px;margin-top:15px}.panel{background:#fff;border:1px solid var(--line);border-radius:17px;padding:17px;box-shadow:var(--shadow)}.panelHead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:13px}.panel h3{margin:0;font-size:16px}.chart{height:205px;display:flex;align-items:flex-end;gap:9px;padding:12px 2px 25px}.bar{flex:1;min-height:5px;background:linear-gradient(#f29cc4,var(--pink));border-radius:8px 8px 2px 2px;position:relative}.bar small{position:absolute;bottom:-21px;width:100%;text-align:center;font-size:10px;color:var(--muted)}.notice{padding:11px 12px;background:var(--soft);border-radius:11px;margin:7px 0;font-size:13px}.notice.over{background:#fff0f3;color:#9f183d}.quick{display:flex;justify-content:space-between;gap:10px;padding:11px 0;border-bottom:1px solid #f1e6eb}.quick:last-child{border-bottom:0}
-.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.search{flex:1;min-width:180px;border:1px solid var(--line);border-radius:11px;padding:11px;background:#fff;outline:none}.tableWrap{overflow:auto}.table{width:100%;border-collapse:collapse;font-size:13px}.table th,.table td{padding:11px 8px;border-bottom:1px solid #f0e7eb;text-align:left;white-space:nowrap}.table th{font-size:10px;color:var(--muted);text-transform:uppercase}.badge{display:inline-block;padding:4px 8px;border-radius:99px;font-size:10px;font-weight:750}.bpaid{background:#e6f7ef;color:#087b58}.bpart{background:#eee7f9;color:#624099}.bpending{background:#fff3d6;color:#8e620b}.boverdue{background:#ffe7ed;color:#ae1e42}.empty{text-align:center;color:var(--muted);padding:38px 12px}
-.modalBg{position:fixed;inset:0;background:rgba(39,9,24,.52);backdrop-filter:blur(3px);display:grid;place-items:center;padding:14px;z-index:100;animation:fade .12s ease-out}@keyframes fade{from{opacity:0}to{opacity:1}}.modal{width:min(720px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:20px;padding:20px;box-shadow:0 25px 70px rgba(30,0,18,.25);animation:modalIn .14s ease-out}@keyframes modalIn{from{transform:translateY(7px) scale(.99);opacity:0}to{transform:none;opacity:1}}.modalHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.modalHead h2{font-size:20px;margin:0}.close{border:0;background:var(--soft);color:var(--pink);width:35px;height:35px;border-radius:50%;font-size:20px}.form{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field label{display:block;font-size:11px;color:var(--muted);margin-bottom:5px}.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px;background:#fff;color:var(--ink);outline:none}.field textarea{min-height:78px}.full{grid-column:1/-1}.modalFoot{display:flex;justify-content:flex-end;gap:8px;margin-top:17px}
-.bottom{display:none}.progressRow{display:flex;align-items:center;gap:8px;margin:12px 0}.progressRow span{width:145px;font-size:12px}.progress{flex:1;height:7px;background:#f0e3e9;border-radius:99px;overflow:hidden}.progress i{display:block;height:100%;background:var(--pink)}
-#toast{position:fixed;right:18px;bottom:18px;z-index:200;background:#321722;color:#fff;padding:12px 15px;border-radius:11px;opacity:0;transform:translateY(8px);transition:.18s}.toastOn{opacity:1!important;transform:none!important}
-@media(max-width:900px){.sidebar{transform:translateX(-100%);transition:.16s}.sidebar.open{transform:none}.hamb{display:block}main{margin-left:0}.topbar{padding:0 15px}.content{padding:16px 14px 92px}.cards{grid-template-columns:1fr 1fr}.layout{grid-template-columns:1fr}.bottom{display:grid;position:fixed;left:0;right:0;bottom:0;height:68px;background:rgba(255,255,255,.97);backdrop-filter:blur(14px);border-top:1px solid var(--line);z-index:40;grid-template-columns:repeat(5,1fr);padding-bottom:env(safe-area-inset-bottom)}.bottom button{border:0;background:none;color:var(--muted);font-size:10px}.bottom button.active{color:var(--pink);font-weight:750}.bottom b{display:block;font-size:20px;margin-bottom:2px}.userPill{display:none}}
-@media(max-width:560px){.topbar{height:70px}.heading h1{font-size:18px}.heading p{display:none}.topbar>.primary{font-size:12px;padding:9px 10px}.form{grid-template-columns:1fr}.full{grid-column:auto}.toolbar{display:grid;grid-template-columns:1fr}.toolbar>*{width:100%}.big{font-size:19px}.card{padding:14px}.panel{padding:14px}}
-
-/* V4 visual system */
-:root{
-  --pink:#c52d70;--pink2:#9d1854;--soft:#fff0f6;--soft2:#fbe0ec;
-  --bg:#fffafd;--ink:#2e1722;--muted:#826b77;--line:#efdce5;
-  --green:#16835f;--red:#c12850;--gold:#b47b1f;
-  --shadow:0 12px 35px rgba(104,25,61,.08);
-}
-body{background:linear-gradient(180deg,#fffafd 0%,#fff7fa 100%)}
-.loginCard{width:min(430px,calc(100vw - 28px));padding:30px 28px 24px;border-radius:30px;box-shadow:0 28px 80px rgba(104,25,61,.14)}
-.logoMain{height:112px;margin:-4px auto 18px;border-radius:22px;overflow:hidden;background:#fff7fa;border:1px solid #f4dce6;padding:10px 18px}
-.logoMain img{width:100%;height:100%;object-fit:contain;display:block}
-.loginCard h1{font-size:24px;letter-spacing:-.4px}
-.loginCard p{font-size:14px}
-.loginField input{padding:14px;border-radius:14px;background:#fff}
-.loginBtn{padding:14px;border-radius:14px;font-size:15px;transition:transform .12s,box-shadow .12s}
-.loginBtn:active,.primary:active,.softBtn:active{transform:scale(.98)}
-.loginFoot{margin-top:22px}
-
-.sidebar{width:258px;padding:18px 12px;background:rgba(255,255,255,.9);backdrop-filter:blur(18px);box-shadow:8px 0 35px rgba(100,20,55,.03)}
-.brandLogo{height:106px;padding:4px 8px 18px;display:flex;align-items:center;justify-content:center}
-.brandLogo img{width:100%;height:100%;object-fit:contain}
-.nav{gap:5px}
-.nav button{padding:12px 13px;border-radius:14px;font-size:13px;transition:background .12s,color .12s,transform .12s}
-.nav button.active{box-shadow:inset 3px 0 0 var(--pink)}
-.nav button:active{transform:scale(.99)}
-main{margin-left:258px}
-.topbar{height:82px;padding:0 30px;border-bottom:1px solid rgba(239,220,229,.9)}
-.heading h1{font-size:23px;letter-spacing:-.5px}
-.heading p{font-size:12px}
-.content{padding:26px 30px 105px}
-.cards{gap:15px}
-.card{border-radius:20px;padding:19px;box-shadow:var(--shadow);position:relative;overflow:hidden}
-.card:after{content:"";position:absolute;width:90px;height:90px;border-radius:50%;right:-35px;top:-35px;background:var(--soft);opacity:.9}
-.card .eyebrow,.card .big,.card .muted{position:relative;z-index:1}
-.big{font-size:25px;letter-spacing:-.5px}
-.layout{gap:16px;margin-top:16px}
-.panel{border-radius:20px;padding:19px;box-shadow:var(--shadow)}
-.panelHead{margin-bottom:15px}
-.panel h3{font-size:17px}
-.primary{border-radius:13px;background:linear-gradient(135deg,var(--pink),#d93d82);box-shadow:0 8px 20px rgba(197,45,112,.18)}
-.softBtn{border-radius:11px}
-.toolbar{margin-bottom:15px}
-.search{padding:12px 14px;border-radius:13px;box-shadow:0 4px 15px rgba(100,20,55,.03)}
-.table{font-size:13px}
-.table th,.table td{padding:13px 9px}
-.modal{border-radius:24px;padding:22px}
-.notice{border-radius:13px}
-.quick{padding:13px 0}
-.bottom{height:72px;box-shadow:0 -10px 30px rgba(100,20,55,.06)}
-.bottom button{font-size:10px}
-.bottom b{font-size:21px}
-#toast{border-radius:13px;box-shadow:0 12px 30px rgba(30,0,18,.18)}
-
-@media(max-width:900px){
-  .sidebar{width:280px}
-  main{margin-left:0}
-  .topbar{padding:0 15px}
-  .content{padding:17px 14px 96px}
-}
-@media(max-width:560px){
-  #login{padding:14px}
-  .loginCard{padding:24px 20px 20px}
-  .logoMain{height:96px}
-  .topbar{height:68px}
-  .heading h1{font-size:19px}
-  .content{padding-top:14px}
-  .cards{gap:10px}
-  .card{border-radius:17px;padding:14px}
-  .big{font-size:20px}
-  .panel{border-radius:17px;padding:14px}
-  .toolbar{gap:7px}
-}
-
-
-button,a,input,select,textarea,label{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
-button{cursor:pointer;position:relative;z-index:2}
-.modalBg{z-index:9999}.modal{position:relative;z-index:10000}
-@media(max-width:700px){.nav button,.bottom button,.primary,.softBtn,.loginBtn{min-height:44px}.topActions .userPill{display:none}.tableWrap{-webkit-overflow-scrolling:touch}.modal{max-height:90vh;overflow:auto}}
+#login{min-height:100vh;display:grid;place-items:center;padding:18px;background:radial-gradient(circle at top,#fff 0,#fff7fa 50%,#f9dce9 100%)}
+.loginCard{width:min(420px,100%);background:#fff;border:1px solid var(--line);border-radius:28px;padding:28px;box-shadow:0 24px 70px rgba(70,10,40,.13)}
+.loginLogo{height:105px;display:flex;align-items:center;justify-content:center;margin-bottom:18px}.loginLogo img{max-width:100%;max-height:100%;object-fit:contain}
+.loginCard h1{margin:0;font-size:23px;text-align:center}.loginCard p{margin:7px 0 20px;text-align:center;color:var(--muted);font-size:13px}
+.field{margin:11px 0}.field label{display:block;font-size:11px;color:var(--muted);margin-bottom:5px}.field input,.field select,.field textarea{width:100%;padding:13px;border:1px solid var(--line);border-radius:13px;background:#fff;color:var(--ink);outline:none}.field input:focus,.field select:focus,.field textarea:focus{border-color:#d77ca2;box-shadow:0 0 0 3px var(--soft)}
+.loginBtn{width:100%;margin-top:8px;border:0;background:linear-gradient(135deg,var(--pink),#cf397a);color:#fff;padding:14px;border-radius:14px;font-weight:800;box-shadow:0 9px 22px rgba(165,29,85,.18)}
+.loginMsg{min-height:22px;text-align:center;font-size:12px;margin-top:12px;color:var(--red)}.loginFoot{text-align:center;color:var(--muted);font-size:11px;margin-top:18px}
+.app{min-height:100vh}.sidebar{position:fixed;left:0;top:0;bottom:0;width:250px;background:rgba(255,255,255,.98);border-right:1px solid var(--line);padding:17px 13px;z-index:50}
+.brand{height:98px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--line);margin-bottom:10px}.brand img{width:190px;height:90px;object-fit:contain}
+.nav{display:grid;gap:4px}.nav button{border:0;background:transparent;color:#765f69;text-align:left;border-radius:13px;padding:12px;display:flex;align-items:center;gap:11px}.nav button.active{background:var(--soft);color:var(--pink);font-weight:800}.nav em{font-style:normal;width:22px;text-align:center}
+.sidebarFoot{position:absolute;bottom:14px;left:13px;right:13px;display:flex;gap:6px}.mini{border:1px solid var(--line);background:var(--soft);color:var(--pink);border-radius:10px;padding:9px;font-size:11px;font-weight:750;flex:1;text-align:center}.mini input{display:none}
+main{margin-left:250px;min-height:100vh}.topbar{height:78px;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:30}.heading{display:flex;gap:10px;align-items:center}.hamb{display:none;border:0;background:none;font-size:23px}.heading h1{font-size:21px;margin:0}.heading p{margin:3px 0 0;font-size:12px;color:var(--muted)}.topActions{display:flex;align-items:center;gap:8px}.userPill{font-size:11px;color:var(--muted);max-width:230px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.content{padding:24px 28px 100px;animation:pageIn .15s ease-out}.content.leaving{animation:pageOut .07s ease-in}@keyframes pageIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}@keyframes pageOut{to{opacity:0;transform:translateY(-3px)}}
+.primary,.softBtn,.danger{border:0;border-radius:11px;padding:10px 13px;font-weight:750}.primary{background:linear-gradient(135deg,var(--pink),#cf397a);color:#fff;box-shadow:0 6px 17px rgba(165,29,85,.14)}.softBtn{background:var(--soft);color:var(--pink)}.danger{background:#fff0f3;color:var(--red)}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:17px;box-shadow:var(--shadow)}.eyebrow{font-size:11px;color:var(--muted)}.big{font-size:23px;font-weight:850;margin:7px 0}.green{color:var(--green)}.red{color:var(--red)}.muted{font-size:12px;color:var(--muted)}
+.layout{display:grid;grid-template-columns:1.35fr .65fr;gap:15px;margin-top:15px}.panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:17px;box-shadow:var(--shadow)}.panelHead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:13px}.panel h3{margin:0;font-size:16px}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.search{flex:1;min-width:190px;border:1px solid var(--line);border-radius:12px;padding:11px;background:#fff;outline:none}
+.tableWrap{overflow:auto;-webkit-overflow-scrolling:touch}.table{width:100%;border-collapse:collapse;font-size:13px}.table th,.table td{padding:11px 8px;border-bottom:1px solid #f0e7eb;text-align:left;white-space:nowrap}.table th{font-size:10px;color:var(--muted);text-transform:uppercase}.badge{display:inline-block;padding:4px 8px;border-radius:99px;font-size:10px;font-weight:800}.bpaid{background:#e5f7ee;color:var(--green)}.bpart{background:#eee7f9;color:#624099}.bpending{background:#fff2d4;color:var(--gold)}.boverdue{background:#ffe7ed;color:var(--red)}
+.notice{padding:11px 12px;background:var(--soft);border-radius:12px;margin:7px 0;font-size:13px}.empty{text-align:center;color:var(--muted);padding:38px 12px}.quick{display:flex;justify-content:space-between;gap:10px;padding:11px 0;border-bottom:1px solid #f1e6eb}.quick:last-child{border-bottom:0}
+.chart{height:205px;display:flex;align-items:flex-end;gap:8px;padding:12px 2px 25px}.bar{flex:1;min-height:5px;background:linear-gradient(#f29cc4,var(--pink));border-radius:8px 8px 2px 2px;position:relative}.bar small{position:absolute;bottom:-21px;width:100%;text-align:center;font-size:10px;color:var(--muted)}
+.progressRow{display:grid;grid-template-columns:1.4fr 2fr auto;gap:8px;align-items:center;padding:9px 0}.progress{height:8px;background:var(--soft2);border-radius:99px;overflow:hidden}.progress i{display:block;height:100%;background:var(--pink);border-radius:99px}
+.modalBg{position:fixed;inset:0;background:rgba(39,9,24,.54);backdrop-filter:blur(3px);display:grid;place-items:center;padding:13px;z-index:1000}.modal{width:min(720px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:22px;padding:20px;box-shadow:0 25px 70px rgba(30,0,18,.28)}.modalHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}.modalHead h2{font-size:20px;margin:0}.close{border:0;background:var(--soft);color:var(--pink);width:37px;height:37px;border-radius:50%;font-size:21px}.form{display:grid;grid-template-columns:1fr 1fr;gap:11px}.full{grid-column:1/-1}.modalFoot{display:flex;justify-content:flex-end;gap:8px;margin-top:17px}
+.pixBox{display:grid;place-items:center;padding:15px;background:var(--soft);border:1px dashed #dfa0bc;border-radius:15px;margin-top:12px}.pixBox canvas,.pixBox img{max-width:230px;height:auto;background:#fff;padding:8px;border-radius:10px}.copyBox{width:100%;font-size:11px;padding:10px;border:1px solid var(--line);border-radius:10px;background:#fff;word-break:break-all}
+#toast{position:fixed;right:18px;bottom:18px;z-index:2000;background:#321722;color:#fff;padding:12px 15px;border-radius:12px;opacity:0;transform:translateY(8px);transition:.18s;max-width:330px}.toastOn{opacity:1!important;transform:none!important}
+.bottom{display:none}
+@media(max-width:900px){.sidebar{transform:translateX(-100%);transition:.16s}.sidebar.open{transform:none}.hamb{display:block}main{margin-left:0}.topbar{padding:0 14px}.content{padding:16px 13px 94px}.cards{grid-template-columns:1fr 1fr}.layout{grid-template-columns:1fr}.bottom{display:grid;position:fixed;left:0;right:0;bottom:0;height:70px;background:rgba(255,255,255,.98);backdrop-filter:blur(14px);border-top:1px solid var(--line);z-index:900;grid-template-columns:repeat(5,1fr);padding-bottom:env(safe-area-inset-bottom)}.bottom button{border:0;background:none;color:var(--muted);font-size:10px}.bottom button.active{color:var(--pink);font-weight:800}.bottom b{display:block;font-size:20px;margin-bottom:2px}.userPill{display:none}}
+@media(max-width:560px){.loginCard{padding:23px 19px}.loginLogo{height:90px}.brand{height:84px}.brand img{height:78px}.topbar{height:68px}.heading h1{font-size:18px}.content{padding-top:13px}.card{padding:14px;border-radius:16px}.big{font-size:19px}.panel{padding:14px;border-radius:16px}.form{grid-template-columns:1fr}.full{grid-column:auto}.modal{padding:15px;border-radius:19px}.modalFoot{position:sticky;bottom:0;background:#fff;padding-top:10px}.toolbar .primary,.toolbar .softBtn{min-height:44px}.table{font-size:12px}}
+@media print{body{background:#fff}.sidebar,.topbar,.bottom,#toast,#modal{display:none!important}main{margin:0}.content{padding:0!important}.noPrint{display:none!important}.printOnly{display:block!important}}
+.printOnly{display:none}
 </style>
 </head>
 <body>
-<div id="login">
+
+<section id="login">
   <div class="loginCard">
-    <div class="logo logoMain"><img src="telle-logo.png" alt="Telle Cosméticos"></div>
-    <h1>Entrar no sistema</h1>
-    <p>Seus dados ficam sincronizados na nuvem.</p>
-    <div class="loginField"><label>E-mail</label><input id="loginEmail" type="email" autocomplete="username" placeholder="seu@email.com"></div>
-    <div class="loginField"><label>Senha</label><input id="loginPass" type="password" autocomplete="current-password" placeholder="Sua senha"></div>
-    <button class="loginBtn" id="loginBtn">Entrar</button>
-    <div class="loginMsg" id="loginMsg"></div>
-    <div class="loginFoot">Telle Cosméticos • Sistema V4</div>
+    <div class="loginLogo"><img src="telle-logo.png" alt="Telle Cosméticos"></div>
+    <h1>Bem-vinda à Telle Cosméticos</h1>
+    <p>Entre para acessar seu sistema de vendas.</p>
+    <div class="field"><label for="loginEmail">E-mail</label><input id="loginEmail" type="email" autocomplete="username" inputmode="email"></div>
+    <div class="field"><label for="loginPass">Senha</label><input id="loginPass" type="password" autocomplete="current-password"></div>
+    <button id="loginBtn" class="loginBtn" type="button">Entrar</button>
+    <div id="loginMsg" class="loginMsg" role="status" aria-live="polite"></div>
+    <div class="loginFoot">Telle Cosméticos • Sistema V4.1</div>
   </div>
-</div>
+</section>
 
-<div class="app" id="app" hidden>
-<aside class="sidebar" id="sidebar">
-<div class="brand brandLogo"><img src="telle-logo.png" alt="Telle Cosméticos"></div>
-<nav class="nav" id="nav">
-<button data-page="dashboard" class="active"><em>⌂</em>Início</button><button data-page="vendas"><em>🛍️</em>Vendas</button><button data-page="estoque"><em>📦</em>Estoque</button><button data-page="clientes"><em>👥</em>Clientes</button><button data-page="financeiro"><em>💰</em>Financeiro</button><button data-page="cobrancas"><em>📅</em>Cobranças</button><button data-page="fornecedores"><em>🏷️</em>Fornecedores</button><button data-page="relatorios"><em>📊</em>Relatórios</button><button data-page="config" ><em>⚙️</em>Configurações</button>
-</nav>
-<div class="sidebarFoot"><button class="mini" id="backup">↓ Backup</button><label class="mini">↑ Restaurar<input id="restore" type="file" accept=".json"></label></div>
-</aside>
-<main>
-<header class="topbar"><div class="heading"><button class="hamb" id="hamb">☰</button><div><h1 id="pageTitle">Dashboard</h1><p id="pageSub">Visão geral da Telle Cosméticos</p></div></div><div class="topActions"><span class="userPill" id="userPill"></span><button class="softBtn" id="logout">Sair</button><button class="primary" id="newSale">＋ Nova venda</button></div></header>
-<section class="content" id="content"></section>
-</main>
-<nav class="bottom" id="bottom"><button data-page="dashboard" class="active"><b>⌂</b>Início</button><button data-page="vendas"><b>🛍️</b>Vendas</button><button data-page="estoque"><b>📦</b>Estoque</button><button data-page="clientes"><b>👥</b>Clientes</button><button data-page="financeiro"><b>☰</b>Mais</button></nav>
-</div><div id="modal"></div><div id="toast"></div>
+<section id="app" class="app" hidden>
+  <aside id="sidebar" class="sidebar">
+    <div class="brand"><img src="telle-logo.png" alt="Telle Cosméticos"></div>
+    <nav id="nav" class="nav">
+      <button type="button" data-page="dashboard">🏠 <span>Dashboard</span></button>
+      <button type="button" data-page="vendas">🛍️ <span>Vendas</span></button>
+      <button type="button" data-page="estoque">📦 <span>Estoque</span></button>
+      <button type="button" data-page="clientes">👥 <span>Clientes</span></button>
+      <button type="button" data-page="financeiro">💰 <span>Financeiro</span></button>
+      <button type="button" data-page="cobrancas">💬 <span>Cobranças</span></button>
+      <button type="button" data-page="fornecedores">🚚 <span>Fornecedores</span></button>
+      <button type="button" data-page="relatorios">📊 <span>Relatórios</span></button>
+      <button type="button" data-page="config">⚙️ <span>Configurações</span></button>
+    </nav>
+    <div class="sidebarFoot">
+      <button id="backupBtn" class="mini" type="button">Backup</button>
+      <label class="mini">Restaurar<input id="restoreFile" type="file" accept=".json"></label>
+    </div>
+  </aside>
 
+  <main>
+    <header class="topbar">
+      <div class="heading"><button id="hamb" class="hamb" type="button">☰</button><div><h1 id="pageTitle">Dashboard</h1><p id="pageSub">Visão geral da Telle Cosméticos</p></div></div>
+      <div class="topActions"><span id="userPill" class="userPill"></span><button id="newSale" class="primary" type="button">＋ Nova venda</button><button id="logout" class="softBtn" type="button">Sair</button></div>
+    </header>
+    <div id="content" class="content"></div>
+  </main>
+  <nav id="bottom" class="bottom">
+    <button type="button" data-page="dashboard"><b>⌂</b>Início</button>
+    <button type="button" data-page="vendas"><b>🛍️</b>Vendas</button>
+    <button type="button" data-page="estoque"><b>📦</b>Estoque</button>
+    <button type="button" data-page="clientes"><b>👥</b>Clientes</button>
+    <button type="button" data-page="financeiro"><b>☰</b>Mais</button>
+  </nav>
+</section>
+
+<div id="modal"></div><div id="toast"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
-/* TELLE COSMÉTICOS V4 - Firebase REST runtime
-   No ES modules, no SDK race, no duplicated login handlers.
-   Designed for GitHub Pages + Safari/iPhone.
-*/
 (function(){
-'use strict';
+"use strict";
 
-const API_KEY='AIzaSyADx57Ilk5JCaZFoHOeC3APensUHX6P3C4';
-const PROJECT='telle-cosmeticos';
-const DB='(default)';
-const AUTH_KEY='TELLE_V4_AUTH';
-const LOCAL_KEY='TELLE_V4_LOCAL_BACKUP';
-const ROOT='https://firestore.googleapis.com/v1/projects/'+PROJECT+'/databases/'+DB+'/documents';
-const AUTH_URL='https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key='+encodeURIComponent(API_KEY);
-const REFRESH_URL='https://securetoken.googleapis.com/v1/token?key='+encodeURIComponent(API_KEY);
+const API_KEY="AIzaSyADx57Ilk5JCaZFoHOeC3APensUHX6P3C4";
+const PROJECT="telle-cosmeticos";
+const ROOT="https://firestore.googleapis.com/v1/projects/"+PROJECT+"/databases/(default)/documents";
+const AUTH_URL="https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key="+encodeURIComponent(API_KEY);
+const REFRESH_URL="https://securetoken.googleapis.com/v1/token?key="+encodeURIComponent(API_KEY);
+const AUTH_KEY="TELLE_V41_AUTH", LOCAL_KEY="TELLE_V41_LOCAL";
+const NAMES=["products","clients","sales","receivables","cash","suppliers"];
 
-const seed={products:[],clients:[],sales:[],receivables:[],cash:[],suppliers:[],settings:{pix:'',pixName:'TELLE COSMETICOS',pixCity:'JOINVILLE',instagram:'@tellecosmeticos'}};
-let db=copy(seed), uid=null, accessToken=null, refreshToken=null, userEmail='';
-let refreshPromise=null;
+let db={products:[],clients:[],sales:[],receivables:[],cash:[],suppliers:[],settings:{pix:"",pixName:"TELLE COSMETICOS",pixCity:"JOINVILLE",instagram:"@tellecosmeticos"}};
+let token=null,refreshToken=null,uid=null,userEmail="",refreshing=null;
 
-function copy(x){return JSON.parse(JSON.stringify(x));}
-function id(){return Date.now()+Math.floor(Math.random()*100000);}
-function brl(n){return Number(n||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});}
-function day(){return new Date().toISOString().slice(0,10);}
-function brdate(s){return s?new Date(s+'T12:00:00').toLocaleDateString('pt-BR'):'-';}
-function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));}
-function $(idv){return document.getElementById(idv);}
-function toast(s){const e=$('toast');if(!e)return;e.textContent=s;e.classList.add('toastOn');clearTimeout(window._toast);window._toast=setTimeout(()=>e.classList.remove('toastOn'),2400);}
-function closeModal(){const e=$('modal');if(e)e.innerHTML='';}
-function openModal(title,body,fn,label='Salvar'){
- const host=$('modal');
- host.innerHTML='<div class="modalBg"><div class="modal"><div class="modalHead"><h2>'+title+'</h2><button class="close" id="mclose" type="button">×</button></div>'+body+'<div class="modalFoot"><button class="softBtn" id="cancel" type="button">Cancelar</button><button class="primary" id="action" type="button">'+label+'</button></div></div></div>';
- $('mclose').onclick=closeModal;$('cancel').onclick=closeModal;$('action').onclick=async()=>{try{await fn();}catch(e){console.error(e);toast('Ocorreu um erro.');}};
-}
+const $=id=>document.getElementById(id);
+const clone=x=>JSON.parse(JSON.stringify(x));
+const money=n=>Number(n||0).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+const today=()=>new Date().toISOString().slice(0,10);
+const dateBR=s=>s?new Date(s+"T12:00:00").toLocaleDateString("pt-BR"):"-";
+const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[c]));
+const newid=()=>Date.now()+Math.floor(Math.random()*99999);
+function toast(text){const e=$("toast");e.textContent=text;e.classList.add("toastOn");clearTimeout(window.__tt);window.__tt=setTimeout(()=>e.classList.remove("toastOn"),2500);}
+function authGet(){try{return JSON.parse(localStorage.getItem(AUTH_KEY)||"null")}catch{return null}}
+function authSave(x){localStorage.setItem(AUTH_KEY,JSON.stringify(x))}
+function authClear(){localStorage.removeItem(AUTH_KEY);token=refreshToken=uid=userEmail=null}
+function localSave(){try{localStorage.setItem(LOCAL_KEY,JSON.stringify(db))}catch{}}
+function localLoad(){try{return JSON.parse(localStorage.getItem(LOCAL_KEY))||clone(db)}catch{return clone(db)}}
 
-const meta={dashboard:['Dashboard','Visão geral da Telle Cosméticos'],vendas:['Vendas','Vendas, pagamentos e comprovantes'],estoque:['Estoque','Produtos, preços e movimentações'],clientes:['Clientes','Cadastro e histórico'],financeiro:['Financeiro','Entradas, saídas e saldo'],cobrancas:['Cobranças','Valores pendentes e vencimentos'],fornecedores:['Fornecedores','Cadastro de fornecedores'],relatorios:['Relatórios','Desempenho da loja'],config:['Configurações','Dados da Telle']};
-const pages={dashboard,vendas,estoque,clientes,financeiro,cobrancas,fornecedores,relatorios,config};
-
-function authStore(){try{return JSON.parse(localStorage.getItem(AUTH_KEY)||'null')}catch{return null}}
-function saveAuth(a){localStorage.setItem(AUTH_KEY,JSON.stringify(a));}
-function clearAuth(){localStorage.removeItem(AUTH_KEY);accessToken=null;refreshToken=null;uid=null;userEmail='';}
-
-async function authLogin(email,password){
- const r=await fetch(AUTH_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password,returnSecureToken:true})});
- const j=await r.json();
- if(!r.ok){const code=j?.error?.message||'';const map={'INVALID_LOGIN_CREDENTIALS':'E-mail ou senha incorretos.','EMAIL_NOT_FOUND':'E-mail ou senha incorretos.','INVALID_PASSWORD':'E-mail ou senha incorretos.','INVALID_EMAIL':'O e-mail não é válido.','USER_DISABLED':'Este usuário está desativado.','TOO_MANY_ATTEMPTS_TRY_LATER':'Muitas tentativas. Aguarde alguns minutos.','OPERATION_NOT_ALLOWED':'O login por e-mail/senha não está ativado no Firebase.','API_KEY_INVALID':'A chave do Firebase está inválida.'};throw new Error(map[code]||'Não foi possível entrar: '+code)}
- accessToken=j.idToken;refreshToken=j.refreshToken;uid=j.localId;userEmail=j.email||email;
- saveAuth({idToken:accessToken,refreshToken,localId:uid,email:userEmail,expiresAt:Date.now()+Number(j.expiresIn||3600)*1000});
-}
-
-async function authRefresh(){
- const a=authStore(); if(!a?.refreshToken)throw new Error('NO_AUTH');
- if(refreshPromise)return refreshPromise;
- refreshPromise=(async()=>{
-  const r=await fetch(REFRESH_URL,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'grant_type=refresh_token&refresh_token='+encodeURIComponent(a.refreshToken)});
+async function loginRequest(email,password){
+  const r=await fetch(AUTH_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email,password,returnSecureToken:true})});
   const j=await r.json();
-  if(!r.ok)throw new Error('REFRESH_FAILED');
-  accessToken=j.id_token;refreshToken=j.refresh_token||a.refreshToken;uid=j.user_id||a.localId;userEmail=a.email||'';
-  saveAuth({idToken:accessToken,refreshToken,localId:uid,email:userEmail,expiresAt:Date.now()+Number(j.expires_in||3600)*1000});
- })().finally(()=>{refreshPromise=null});
- return refreshPromise;
+  if(!r.ok){const c=j?.error?.message||"LOGIN_FAILED";const map={INVALID_LOGIN_CREDENTIALS:"E-mail ou senha incorretos.",INVALID_PASSWORD:"E-mail ou senha incorretos.",EMAIL_NOT_FOUND:"E-mail ou senha incorretos.",INVALID_EMAIL:"E-mail inválido.",USER_DISABLED:"Usuário desativado.",TOO_MANY_ATTEMPTS_TRY_LATER:"Muitas tentativas. Aguarde alguns minutos.",OPERATION_NOT_ALLOWED:"Ative o login por e-mail/senha no Firebase.",API_KEY_INVALID:"Chave do Firebase inválida."};throw new Error(map[c]||"Não foi possível entrar.");}
+  token=j.idToken;refreshToken=j.refreshToken;uid=j.localId;userEmail=j.email||email;
+  authSave({idToken:token,refreshToken,localId:uid,email:userEmail,expiresAt:Date.now()+Number(j.expiresIn||3600)*1000});
 }
-
+async function refreshAuth(){
+  const a=authGet();if(!a?.refreshToken)throw new Error("NO_AUTH");if(refreshing)return refreshing;
+  refreshing=(async()=>{const r=await fetch(REFRESH_URL,{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:"grant_type=refresh_token&refresh_token="+encodeURIComponent(a.refreshToken)});const j=await r.json();if(!r.ok)throw new Error("REFRESH_FAILED");token=j.id_token;refreshToken=j.refresh_token||a.refreshToken;uid=j.user_id||a.localId;userEmail=a.email||"";authSave({idToken:token,refreshToken,localId:uid,email:userEmail,expiresAt:Date.now()+Number(j.expires_in||3600)*1000});})().finally(()=>refreshing=null);
+  return refreshing;
+}
 async function ensureAuth(){
- const a=authStore();
- if(!a?.idToken||!a?.localId) return false;
- accessToken=a.idToken;refreshToken=a.refreshToken;uid=a.localId;userEmail=a.email||'';
- if(a.expiresAt && Date.now()>a.expiresAt-60000){try{await authRefresh()}catch{clearAuth();return false}}
- return true;
+  const a=authGet();if(!a?.idToken||!a?.localId)return false;
+  token=a.idToken;refreshToken=a.refreshToken;uid=a.localId;userEmail=a.email||"";
+  if(a.expiresAt&&Date.now()>a.expiresAt-60000){try{await refreshAuth()}catch{authClear();return false}}
+  return true;
 }
-
-async function apiFetch(url,options={},retry=true){
- const h=new Headers(options.headers||{});h.set('Authorization','Bearer '+accessToken);h.set('Content-Type','application/json');
- let r=await fetch(url,{...options,headers:h});
- if(r.status===401 && retry){try{await authRefresh();return apiFetch(url,options,false)}catch{clearAuth();showLogin('Sua sessão expirou. Entre novamente.');throw new Error('AUTH_EXPIRED')}}
- return r;
+async function api(path,opts={}){
+  const h={"Content-Type":"application/json",...(opts.headers||{})};if(token)h.Authorization="Bearer "+token;
+  let r=await fetch(path,{...opts,headers:h});
+  if(r.status===401&&refreshToken){try{await refreshAuth();h.Authorization="Bearer "+token;r=await fetch(path,{...opts,headers:h})}catch{}}
+  return r;
 }
-
-function fsEncode(v){
- if(v===null)return {nullValue:null};
- if(typeof v==='boolean')return {booleanValue:v};
- if(typeof v==='number'){if(Number.isInteger(v))return {integerValue:String(v)};return {doubleValue:v};}
- if(typeof v==='string')return {stringValue:v};
- if(Array.isArray(v))return {arrayValue:{values:v.map(fsEncode)}};
- if(typeof v==='object')return {mapValue:{fields:Object.fromEntries(Object.entries(v).map(([k,val])=>[k,fsEncode(val)]))}};
- return {stringValue:String(v)};
+function fsFields(obj){const fields={};for(const [k,v] of Object.entries(obj)){if(k==="id")continue;if(v===null||v===undefined)fields[k]={nullValue:null};else if(typeof v==="boolean")fields[k]={booleanValue:v};else if(typeof v==="number")fields[k]={doubleValue:v};else if(Array.isArray(v))fields[k]={arrayValue:{values:v.map(x=>typeof x==="number"?{doubleValue:x}:typeof x==="boolean"?{booleanValue:x}:{stringValue:String(x??"")})}};else fields[k]={stringValue:String(v)}}return fields}
+function fsDecode(fields={}){const o={};for(const[k,v]of Object.entries(fields)){if("stringValue"in v)o[k]=v.stringValue;else if("doubleValue"in v)o[k]=Number(v.doubleValue);else if("integerValue"in v)o[k]=Number(v.integerValue);else if("booleanValue"in v)o[k]=v.booleanValue;else if("nullValue"in v)o[k]=null;else if(v.arrayValue)o[k]=(v.arrayValue.values||[]).map(x=>x.stringValue??x.doubleValue??x.integerValue??x.booleanValue??null)}return o}
+function docUrl(col,id){return ROOT+"/"+col+"/"+encodeURIComponent(String(id))}
+async function cloudGet(col){
+  const r=await api(ROOT+"/"+col+"?pageSize=1000");if(!r.ok){if(r.status===404)return[];throw new Error("FIRESTORE_"+r.status)}
+  const j=await r.json();return(j.documents||[]).map(d=>({id:decodeURIComponent(d.name.split("/").pop()),...fsDecode(d.fields)}));
 }
-function fsDecode(v){
- if(!v)return null;
- if('nullValue'in v)return null;
- if('stringValue'in v)return v.stringValue;
- if('booleanValue'in v)return v.booleanValue;
- if('integerValue'in v)return Number(v.integerValue);
- if('doubleValue'in v)return Number(v.doubleValue);
- if('timestampValue'in v)return v.timestampValue;
- if('arrayValue'in v)return (v.arrayValue.values||[]).map(fsDecode);
- if('mapValue'in v)return Object.fromEntries(Object.entries(v.mapValue.fields||{}).map(([k,x])=>[k,fsDecode(x)]));
- return null;
-}
-function encodeDoc(obj){return {fields:Object.fromEntries(Object.entries(obj).map(([k,v])=>[k,fsEncode(v)]))};}
-function decodeDoc(doc){return Object.fromEntries(Object.entries(doc.fields||{}).map(([k,v])=>[k,fsDecode(v)]));}
-function docUrl(name,idv){return ROOT+'/users/'+encodeURIComponent(uid)+'/'+encodeURIComponent(name)+'/'+encodeURIComponent(String(idv));}
-function colUrl(name){return ROOT+'/users/'+encodeURIComponent(uid)+'/'+encodeURIComponent(name)+'?pageSize=1000';}
-
-async function cloudGetCollection(name){
- const r=await apiFetch(colUrl(name));
- if(r.status===404)return [];
- if(!r.ok)throw new Error('FIRESTORE_'+r.status);
- const j=await r.json();return (j.documents||[]).map(decodeDoc);
-}
-async function cloudGetDoc(name,idv){
- const r=await apiFetch(docUrl(name,idv));
- if(r.status===404)return null;if(!r.ok)throw new Error('FIRESTORE_'+r.status);return decodeDoc(await r.json());
-}
-async function cloudPut(name,obj){
- const r=await apiFetch(docUrl(name,obj.id),{method:'PATCH',body:JSON.stringify(encodeDoc(obj))});
- if(!r.ok)throw new Error('FIRESTORE_'+r.status);return decodeDoc(await r.json());
-}
-async function cloudDelete(name,idv){const r=await apiFetch(docUrl(name,idv),{method:'DELETE'});if(!r.ok&&r.status!==404)throw new Error('FIRESTORE_'+r.status);}
+async function cloudGetOne(col,id){const r=await api(docUrl(col,id));if(r.status===404)return null;if(!r.ok)throw new Error("FIRESTORE_"+r.status);return{id:String(id),...fsDecode((await r.json()).fields)}}
+async function cloudPut(col,obj){const body={fields:fsFields(obj)};const r=await api(docUrl(col,obj.id),{method:"PATCH",body:JSON.stringify(body)});if(!r.ok)throw new Error("FIRESTORE_"+r.status);return obj}
+async function cloudDelete(col,id){const r=await api(docUrl(col,id),{method:"DELETE"});if(!r.ok&&r.status!==404)throw new Error("FIRESTORE_"+r.status)}
 async function cloudLoad(){
- const out=copy(seed);
- for(const name of ['products','clients','sales','receivables','cash','suppliers'])out[name]=await cloudGetCollection(name);
- const settings=await cloudGetDoc('settings','main');if(settings)out.settings=settings;
- return out;
+  const out={products:[],clients:[],sales:[],receivables:[],cash:[],suppliers:[],settings:clone(db.settings)};
+  for(const n of NAMES)out[n]=await cloudGet(n);
+  const st=await cloudGetOne("settings","main");if(st)out.settings={...out.settings,...st};
+  return out;
 }
-
-function saveLocal(){try{localStorage.setItem(LOCAL_KEY,JSON.stringify(db))}catch{}}
-function loadLocal(){try{return JSON.parse(localStorage.getItem(LOCAL_KEY))||copy(seed)}catch{return copy(seed)}}
-async function migrateLocalIfCloudEmpty(){
- const cloud=await cloudLoad(), local=loadLocal();
- const empty=['products','clients','sales','receivables','cash','suppliers'].every(k=>cloud[k].length===0);
- const hasLocal=['products','clients','sales','receivables','cash','suppliers'].some(k=>(local[k]||[]).length);
- if(empty&&hasLocal){
-  for(const name of ['products','clients','sales','receivables','cash','suppliers'])for(const obj of local[name]||[])await cloudPut(name,obj);
-  await cloudPut('settings',{id:'main',...(local.settings||seed.settings)});
-  toast('Dados antigos encontrados e enviados para a nuvem.');
-  return await cloudLoad();
- }
- return cloud;
+async function loadData(){
+  const local=localLoad();
+  try{
+    const cloud=await cloudLoad();
+    const empty=NAMES.every(n=>cloud[n].length===0),has=NAMES.some(n=>(local[n]||[]).length);
+    if(empty&&has){
+      for(const n of NAMES)for(const x of local[n]||[])await cloudPut(n,x);
+      await cloudPut("settings",{id:"main",...local.settings});
+      return await cloudLoad();
+    }
+    return cloud;
+  }catch(e){
+    console.error(e);
+    if(local)toast("Modo local ativo. A nuvem não respondeu agora.");
+    return local;
+  }
 }
-async function syncFromCloud(){db=await migrateLocalIfCloudEmpty();saveLocal()}
-async function addObject(name,obj){db[name].push(obj);saveLocal();await cloudPut(name,obj)}
-async function updateObject(name,idv,patch){const i=db[name].findIndex(x=>String(x.id)===String(idv));if(i<0)return;Object.assign(db[name][i],patch);saveLocal();await cloudPut(name,db[name][i])}
-async function deleteObject(name,idv){db[name]=db[name].filter(x=>String(x.id)!==String(idv));saveLocal();await cloudDelete(name,idv)}
-
-const loginScreen=$('login'),appShell=$('app'),loginBtn=$('loginBtn'),loginEmail=$('loginEmail'),loginPass=$('loginPass'),loginMsg=$('loginMsg');
-const sidebarEl=$('sidebar'),navEl=$('nav'),bottomEl=$('bottom'),hambEl=$('hamb'),newSaleEl=$('newSale'),logoutEl=$('logout'),backupEl=$('backup'),restoreEl=$('restore'),userPillEl=$('userPill');
-
-function showLogin(msg=''){loginScreen.hidden=false;appShell.hidden=true;loginBtn.disabled=false;loginBtn.textContent='Entrar';loginMsg.textContent=msg;}
-function showApp(){loginScreen.hidden=true;appShell.hidden=false;userPillEl.textContent=userEmail||'Usuário';}
-async function doLogin(){
- const email=loginEmail.value.trim(),pass=loginPass.value;loginMsg.textContent='';
- if(!email||!pass){loginMsg.textContent='Informe e-mail e senha.';return}
- loginBtn.disabled=true;loginBtn.textContent='Entrando…';
- try{await authLogin(email,pass);showApp();go('dashboard');toast('Telle conectada à nuvem ☁️');
-  try{db=await cloudLoad();saveLocal()}catch(e){console.error(e);toast('Sistema aberto. Sincronização indisponível no momento.')}
- }catch(e){console.error(e);loginMsg.textContent=e.message||'Não foi possível entrar.';loginBtn.disabled=false;loginBtn.textContent='Entrar';}
-}
-loginBtn.addEventListener('click',doLogin);loginPass.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();doLogin()}});
-logoutEl.onclick=()=>{clearAuth();showLogin('Sessão encerrada.');};
-
-function go(p){if(!pages[p])return;const c=$('content');c.classList.add('leaving');setTimeout(()=>{try{document.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===p));$('pageTitle').textContent=meta[p][0];$('pageSub').textContent=meta[p][1];sidebarEl.classList.remove('open');c.innerHTML=pages[p]();c.classList.remove('leaving');wire(p)}catch(e){console.error(e);c.classList.remove('leaving');c.innerHTML='<div class="panel"><h3>Não foi possível abrir esta tela</h3><p class="muted">Tente novamente.</p><button class="primary" id="retryPage" type="button">Tentar novamente</button></div>';$('retryPage').onclick=()=>go(p)}},80)}
-navEl.onclick=e=>{const b=e.target.closest('button');if(b&&b.dataset.page)go(b.dataset.page)};bottomEl.onclick=e=>{const b=e.target.closest('button');if(b&&b.dataset.page)go(b.dataset.page)};hambEl.onclick=()=>sidebarEl.classList.toggle('open');newSaleEl.onclick=newSaleFn;
-
-function sums(){const a=db.sales,r=a.reduce((x,s)=>x+Number(s.total||0),0),cost=a.reduce((x,s)=>x+Number(s.cost||0),0);return{r,p:r-cost,o:a.reduce((x,s)=>x+Math.max(0,Number(s.total||0)-Number(s.paid||0)),0)}}
-function dashboard(){let t=sums(),low=db.products.filter(p=>Number(p.stock)<=Number(p.min)),open=db.receivables.filter(r=>r.status!=='paid'),d=[],mx=1;for(let i=6;i>=0;i--){let x=new Date();x.setDate(x.getDate()-i);let k=x.toISOString().slice(0,10),v=db.sales.filter(s=>(s.created||'').slice(0,10)===k).reduce((a,s)=>a+Number(s.total||0),0);d.push({l:x.toLocaleDateString('pt-BR',{weekday:'short'}).replace('.',''),v});mx=Math.max(mx,v)}return '<div class="cards"><div class="card"><div class="eyebrow">Faturamento</div><div class="big">'+brl(t.r)+'</div><div class="muted">total de vendas</div></div><div class="card"><div class="eyebrow">Lucro bruto</div><div class="big green">'+brl(t.p)+'</div><div class="muted">venda menos custo</div></div><div class="card"><div class="eyebrow">A receber</div><div class="big red">'+brl(t.o)+'</div><div class="muted">'+open.length+' pendência(s)</div></div><div class="card"><div class="eyebrow">Estoque baixo</div><div class="big">'+low.length+'</div><div class="muted">produto(s)</div></div></div><div class="layout"><div class="panel"><div class="panelHead"><h3>Vendas da semana</h3><span class="muted">últimos 7 dias</span></div><div class="chart">'+d.map(x=>'<div class="bar" style="height:'+Math.max(5,x.v/mx*170)+'px"><small>'+x.l+'</small></div>').join('')+'</div></div><div class="panel"><div class="panelHead"><h3>Atenção</h3></div>'+open.slice(0,4).map(r=>'<div class="notice over">💳 <b>'+esc(r.client)+'</b> • '+brl(r.amount)+' <button class="softBtn" type="button" onclick="charge('+r.saleId+')">WhatsApp</button> <button class="softBtn" type="button" onclick="registerPayment('+r.saleId+')">Receber</button></div>').join('')+low.slice(0,4).map(p=>'<div class="notice">📦 '+esc(p.name)+' • '+p.stock+' unidade(s)</div>').join('')+(!open.length&&!low.length?'<div class="notice">🌷 Tudo em ordem.</div>':'')+'</div></div><div class="panel" style="margin-top:15px"><div class="panelHead"><h3>Últimas vendas</h3><button class="softBtn" type="button" onclick="go(\'vendas\')">Ver todas</button></div>'+salesTable(db.sales.slice().reverse().slice(0,5))+'</div>'}
+async function addObj(col,obj){db[col].push(obj);localSave();try{await cloudPut(col,obj)}catch(e){toast("Salvo neste aparelho; nuvem indisponível.")}}
+async function updateObj(col,id,patch){const i=db[col].findIndex(x=>String(x.id)===String(id));if(i<0)return;Object.assign(db[col][i],patch);localSave();try{await cloudPut(col,db[col][i])}catch{toast("Alterado localmente; nuvem indisponível.")}}
+function closeModal(){$("modal").innerHTML=""}
+function openModal(title,body,fn,label="Salvar"){const h=$("modal");h.innerHTML='<div class="modalBg"><div class="modal"><div class="modalHead"><h2>'+title+'</h2><button class="close" id="modalClose" type="button">×</button></div>'+body+'<div class="modalFoot"><button class="softBtn" id="modalCancel" type="button">Cancelar</button><button class="primary" id="modalAction" type="button">'+label+'</button></div></div></div>';$("modalClose").onclick=closeModal;$("modalCancel").onclick=closeModal;$("modalAction").onclick=async()=>{try{await fn()}catch(e){console.error(e);toast("Não foi possível concluir. Tente novamente.")}}}
 function status(s){return Number(s.paid)>=Number(s.total)?'<span class="badge bpaid">Pago</span>':Number(s.paid)>0?'<span class="badge bpart">Parcial</span>':'<span class="badge bpending">Pendente</span>'}
-function salesTable(a){if(!a.length)return '<div class="empty">Nenhuma venda registrada.</div>';return '<div class="tableWrap"><table class="table"><tr><th>Data</th><th>Cliente</th><th>Total</th><th>Pago</th><th>Status</th><th></th></tr>'+a.map(s=>'<tr><td>'+brdate((s.created||'').slice(0,10))+'</td><td>'+esc(s.client||'Balcão')+'</td><td>'+brl(s.total)+'</td><td>'+brl(s.paid)+'</td><td>'+status(s)+'</td><td><button class="softBtn" type="button" onclick="details('+s.id+')">Abrir</button></td></tr>').join('')+'</table></div>'}
-function vendas(){return '<div class="toolbar"><input class="search" id="saleSearch" placeholder="Buscar cliente ou produto"><button class="primary" id="saleNew" type="button">＋ Nova venda</button></div><div class="panel" id="salePanel">'+salesTable(db.sales.slice().reverse())+'</div>'}
-function newSaleFn(){let p=db.products.filter(x=>Number(x.stock)>0);if(!p.length){toast('Cadastre estoque antes de vender.');return}openModal('Nova venda','<div class="form"><div class="field"><label>Cliente</label><select id="sc"><option value="">Venda balcão</option>'+db.clients.map(c=>'<option value="'+c.id+'">'+esc(c.name)+'</option>').join('')+'</select></div><div class="field"><label>Forma de pagamento</label><select id="sm"><option>PIX</option><option>Dinheiro</option><option>Cartão</option><option>Fiado</option></select></div><div class="field"><label>Produto</label><select id="sp">'+p.map(x=>'<option value="'+x.id+'">'+esc(x.name)+' • '+brl(x.price)+' • '+x.stock+' un.</option>').join('')+'</select></div><div class="field"><label>Quantidade</label><input id="sq" type="number" min="1" value="1"></div><div class="field"><label>Pago agora</label><input id="sPaid" type="number" min="0" step=".01" value="0"></div><div class="field"><label>Vencimento</label><input id="sDue" type="date" value="'+day()+'"></div></div><div class="notice" id="sInfo"></div>',saveSale,'Finalizar venda');$('sp').onchange=preview;$('sq').oninput=preview;preview()}
-function preview(){const p=db.products.find(x=>String(x.id)===String($('sp').value)),q=Math.max(1,Number($('sq').value)||1);$('sInfo').innerHTML='<b>'+esc(p.name)+'</b> × '+q+' = <b>'+brl(p.price*q)+'</b>'}
-async function saveSale(){const p=db.products.find(x=>String(x.id)===String($('sp').value)),q=Math.max(1,Number($('sq').value)||1);if(!p||q>Number(p.stock)){toast('Estoque insuficiente.');return}const cid=Number($('sc').value)||null,c=db.clients.find(x=>Number(x.id)===cid),total=Number(p.price)*q;let paid=Number($('sPaid').value)||0;if($('sm').value!=='Fiado'&&paid===0)paid=total;if(paid>total)paid=total;const s={id:id(),created:new Date().toISOString(),client:c?.name||'',clientId:cid,total,cost:Number(p.cost)*q,paid,method:$('sm').value,due:$('sDue').value,items:[{name:p.name,qty:q,price:Number(p.price),cost:Number(p.cost),productId:p.id}]};p.stock=Number(p.stock)-q;await cloudPut('products',p);db.products=db.products.map(x=>x.id===p.id?p:x);await addObject('sales',s);if(paid)await addObject('cash',{id:id(),date:day(),type:'in',description:'Venda - '+(c?.name||'Balcão'),value:paid});if(paid<total&&c)await addObject('receivables',{id:id(),saleId:s.id,client:c.name,clientId:c.id,amount:total-paid,due:s.due,status:'pending'});closeModal();toast('Venda sincronizada ☁️');details(s.id)}
-function details(idv){
- const s=db.sales.find(x=>String(x.id)===String(idv));
- if(!s){toast('Venda não encontrada.');return}
- const r=Math.max(0,Number(s.total)-Number(s.paid));
- const itemRows=s.items.map(i=>'<div class="quick"><span><b>'+esc(i.name)+'</b><br><small class="muted">'+i.qty+' × '+brl(i.price)+'</small></span><b>'+brl(i.price*i.qty)+'</b></div>').join('');
- const actions='<div class="toolbar" style="margin-top:12px;display:flex;flex-wrap:wrap;gap:8px">'+(r&&s.client?'<button class="softBtn" id="paySale" type="button">💰 Registrar pagamento</button>':'')+(r&&db.settings.pix?'<button class="softBtn" id="pixSale" type="button">💠 Pix</button>':'')+'<button class="softBtn" id="receiptSale" type="button">📄 Comprovante</button></div>';
- openModal('Venda #'+String(s.id).slice(-6),'<div class="notice"><b>'+esc(s.client||'Balcão')+'</b><br>'+brdate(s.created.slice(0,10))+' • '+esc(s.method)+'</div><div class="panel" style="margin-top:12px"><h3>Itens da venda</h3>'+itemRows+'<hr style="border:0;border-top:1px solid var(--line);margin:12px 0"><div class="quick"><span>Total</span><b>'+brl(s.total)+'</b></div><div class="quick"><span>Pago</span><b>'+brl(s.paid)+'</b></div><div class="quick"><span>Em aberto</span><b class="'+(r?'red':'green')+'">'+brl(r)+'</b></div></div>'+actions, r&&s.client?()=>charge(s.id):()=>receipt(s.id), r&&s.client?'💬 Cobrar WhatsApp':'📄 Comprovante');
- if($('paySale'))$('paySale').onclick=()=>registerPayment(s.id);
- if($('pixSale'))$('pixSale').onclick=()=>pixModal(s.id);
- if($('receiptSale'))$('receiptSale').onclick=()=>receipt(s.id);
+function sums(){const r=db.sales.reduce((a,s)=>a+Number(s.total||0),0),c=db.sales.reduce((a,s)=>a+Number(s.cost||0),0),o=db.sales.reduce((a,s)=>a+Math.max(0,Number(s.total||0)-Number(s.paid||0)),0);return{r,p:r-c,o}}
+function salesTable(a){if(!a.length)return'<div class="empty">Nenhuma venda registrada.</div>';return'<div class="tableWrap"><table class="table"><tr><th>Data</th><th>Cliente</th><th>Total</th><th>Pago</th><th>Status</th><th></th></tr>'+a.map(s=>'<tr><td>'+dateBR((s.created||"").slice(0,10))+'</td><td>'+esc(s.client||"Balcão")+'</td><td>'+money(s.total)+'</td><td>'+money(s.paid)+'</td><td>'+status(s)+'</td><td><button class="softBtn" type="button" data-action="details" data-id="'+s.id+'">Abrir</button></td></tr>').join("")+'</table></div>'}
+function dashboard(){
+  const t=sums(),low=db.products.filter(p=>Number(p.stock)<=Number(p.min)),open=db.receivables.filter(r=>r.status!=="paid"),days=[],max={v:1};
+  for(let i=6;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);const k=d.toISOString().slice(0,10),v=db.sales.filter(s=>(s.created||"").slice(0,10)===k).reduce((a,s)=>a+Number(s.total||0),0);days.push({l:d.toLocaleDateString("pt-BR",{weekday:"short"}).replace(".",""),v});max.v=Math.max(max.v,v)}
+  return '<div class="cards"><div class="card"><div class="eyebrow">Faturamento</div><div class="big">'+money(t.r)+'</div><div class="muted">total de vendas</div></div><div class="card"><div class="eyebrow">Lucro bruto</div><div class="big green">'+money(t.p)+'</div><div class="muted">venda menos custo</div></div><div class="card"><div class="eyebrow">A receber</div><div class="big red">'+money(t.o)+'</div><div class="muted">'+open.length+' pendência(s)</div></div><div class="card"><div class="eyebrow">Estoque baixo</div><div class="big">'+low.length+'</div><div class="muted">produto(s)</div></div></div><div class="layout"><div class="panel"><div class="panelHead"><h3>Vendas da semana</h3><span class="muted">últimos 7 dias</span></div><div class="chart">'+days.map(x=>'<div class="bar" style="height:'+Math.max(5,x.v/max.v*170)+'px"><small>'+x.l+'</small></div>').join("")+'</div></div><div class="panel"><div class="panelHead"><h3>Atenção</h3></div>'+open.slice(0,4).map(r=>'<div class="notice">💳 <b>'+esc(r.client)+'</b> • '+money(r.amount)+' <button class="softBtn" type="button" data-action="charge" data-id="'+r.saleId+'">WhatsApp</button> <button class="softBtn" type="button" data-action="pay" data-id="'+r.saleId+'">Receber</button></div>').join("")+low.slice(0,4).map(p=>'<div class="notice">📦 '+esc(p.name)+' • '+p.stock+' un.</div>').join("")+(!open.length&&!low.length?'<div class="notice">🌷 Tudo em ordem.</div>':'')+'</div></div><div class="panel" style="margin-top:15px"><div class="panelHead"><h3>Últimas vendas</h3><button class="softBtn" type="button" data-page-jump="vendas">Ver todas</button></div>'+salesTable(db.sales.slice().reverse().slice(0,5))+'</div>';
 }
-function newProduct(){openModal('Novo produto','<div class="form"><div class="field"><label>Nome *</label><input id="pn"></div><div class="field"><label>Marca</label><input id="pb"></div><div class="field"><label>Categoria</label><input id="pc"></div><div class="field"><label>Código</label><input id="psku"></div><div class="field"><label>Custo</label><input id="pco" type="number" step=".01"></div><div class="field"><label>Preço</label><input id="ppr" type="number" step=".01"></div><div class="field"><label>Estoque</label><input id="pst" type="number" min="0" value="0"></div><div class="field"><label>Mínimo</label><input id="pmi" type="number" min="0" value="3"></div></div>',saveProduct)}
-async function saveProduct(){if(!$('pn').value.trim()){toast('Informe o nome.');return}await addObject('products',{id:id(),name:$('pn').value.trim(),brand:$('pb').value,category:$('pc').value,sku:$('psku').value,cost:Number($('pco').value)||0,price:Number($('ppr').value)||0,stock:Number($('pst').value)||0,min:Number($('pmi').value)||0});closeModal();toast('Produto salvo na nuvem.');go('estoque')}
-async function move(idv){const p=db.products.find(x=>String(x.id)===String(idv)),v=prompt('Quantidade: positivo entra, negativo sai','1');if(v===null)return;const n=Number(v);if(!n||Number(p.stock)+n<0){toast('Movimentação inválida.');return}p.stock=Number(p.stock)+n;await cloudPut('products',p);saveLocal();toast('Estoque atualizado na nuvem.');go('estoque')}
-function financeiro(){const i=db.cash.filter(x=>x.type==='in').reduce((a,x)=>a+Number(x.value||0),0),o=db.cash.filter(x=>x.type==='out').reduce((a,x)=>a+Number(x.value||0),0);return '<div class="cards"><div class="card"><div class="eyebrow">Entradas</div><div class="big green">'+brl(i)+'</div></div><div class="card"><div class="eyebrow">Saídas</div><div class="big red">'+brl(o)+'</div></div><div class="card"><div class="eyebrow">Saldo</div><div class="big">'+brl(i-o)+'</div></div><div class="card"><div class="eyebrow">A receber</div><div class="big red">'+brl(sums().o)+'</div></div></div><div class="layout"><div class="panel"><div class="panelHead"><h3>Recebimentos pendentes</h3><button class="primary" id="expense" type="button">＋ Saída</button></div>'+receivableTable()+'</div><div class="panel"><h3>Últimas movimentações</h3>'+db.cash.slice().reverse().slice(0,12).map(x=>'<div class="quick"><span>'+esc(x.description)+'<br><small class="muted">'+brdate(x.date)+'</small></span><b class="'+(x.type==='in'?'green':'red')+'">'+(x.type==='in'?'+':'-')+brl(x.value)+'</b></div>').join('')+'</div></div>'}
-function receivableTable(){const a=db.receivables.filter(x=>x.status!=='paid');if(!a.length)return '<div class="empty">Nenhuma pendência.</div>';return '<div class="tableWrap"><table class="table"><tr><th>Cliente</th><th>Valor</th><th>Venc.</th><th></th></tr>'+a.map(r=>'<tr><td>'+esc(r.client)+'</td><td>'+brl(r.amount)+'</td><td>'+brdate(r.due)+'</td><td><button class="softBtn" type="button" onclick="charge('+r.saleId+')">WhatsApp</button> <button class="softBtn" type="button" onclick="registerPayment('+r.saleId+')">Receber</button></td></tr>').join('')+'</table></div>'}
-async function expense(){const d=prompt('Descrição da saída:');if(!d)return;const v=Number(prompt('Valor:','0'));if(!v)return;await addObject('cash',{id:id(),date:day(),type:'out',description:d,value:v});toast('Saída registrada na nuvem.');go('financeiro')}
-function cobrancas(){return '<div class="cards"><div class="card"><div class="eyebrow">Em aberto</div><div class="big red">'+brl(db.receivables.filter(r=>r.status!=='paid').reduce((a,r)=>a+Number(r.amount||0),0))+'</div></div><div class="card"><div class="eyebrow">Pendências</div><div class="big">'+db.receivables.filter(r=>r.status!=='paid').length+'</div></div><div class="card"><div class="eyebrow">Vencidas</div><div class="big red">'+db.receivables.filter(r=>r.status!=='paid'&&r.due<day()).length+'</div></div><div class="card"><div class="eyebrow">Pagas</div><div class="big green">'+db.receivables.filter(r=>r.status==='paid').length+'</div></div></div><div class="panel" style="margin-top:15px">'+receivableTable()+'</div>'}
-function fornecedores(){return '<div class="toolbar"><button class="primary" id="newSupplier" type="button">＋ Novo fornecedor</button></div><div class="panel">'+(db.suppliers.length?'<table class="table"><tr><th>Fornecedor</th><th>Telefone</th><th>Documento</th></tr>'+db.suppliers.map(s=>'<tr><td>'+esc(s.name)+'</td><td>'+esc(s.phone||'-')+'</td><td>'+esc(s.doc||'-')+'</td></tr>').join('')+'</table>':'<div class="empty">Nenhum fornecedor.</div>')+'</div>'}
-function newSupplier(){openModal('Novo fornecedor','<div class="form"><div class="field"><label>Nome *</label><input id="fn"></div><div class="field"><label>Telefone</label><input id="fp"></div><div class="field"><label>CNPJ/CPF</label><input id="fd"></div><div class="field"><label>Observações</label><input id="fo"></div></div>',saveSupplier)}
-async function saveSupplier(){if(!$('fn').value.trim()){toast('Informe o nome.');return}await addObject('suppliers',{id:id(),name:$('fn').value.trim(),phone:$('fp').value,doc:$('fd').value,obs:$('fo').value});closeModal();toast('Fornecedor salvo na nuvem.');go('fornecedores')}
-function relatorios(){const t=sums(),map={};db.sales.forEach(s=>s.items.forEach(i=>map[i.name]=(map[i.name]||0)+Number(i.qty||0)));const best=Object.entries(map).sort((a,b)=>b[1]-a[1]).slice(0,7),stockCost=db.products.reduce((a,p)=>a+Number(p.cost||0)*Number(p.stock||0),0),stockSale=db.products.reduce((a,p)=>a+Number(p.price||0)*Number(p.stock||0),0);return '<div class="cards"><div class="card"><div class="eyebrow">Faturamento</div><div class="big">'+brl(t.r)+'</div></div><div class="card"><div class="eyebrow">Lucro bruto</div><div class="big green">'+brl(t.p)+'</div></div><div class="card"><div class="eyebrow">Margem</div><div class="big">'+(t.r?(t.p/t.r*100).toFixed(1):0)+'%</div></div><div class="card"><div class="eyebrow">Vendas</div><div class="big">'+db.sales.length+'</div></div></div><div class="layout"><div class="panel"><h3>Produtos mais vendidos</h3>'+(best.length?best.map((x,i)=>'<div class="progressRow"><span>'+(i+1)+'. '+esc(x[0])+'</span><div class="progress"><i style="width:'+(x[1]/best[0][1]*100)+'%"></i></div><b>'+x[1]+'</b></div>').join(''):'<div class="empty">Ainda sem vendas.</div>')+'</div><div class="panel"><h3>Valor do estoque</h3><div class="big">'+brl(stockCost)+'</div><div class="muted">a custo</div><hr style="border:0;border-top:1px solid var(--line);margin:18px 0"><div class="big">'+brl(stockSale)+'</div><div class="muted">potencial de venda</div></div></div>'}
-function config(){return '<div class="panel"><h3>Dados da Telle</h3><p class="muted">Usados no comprovante, Pix e cobranças.</p><div class="form" style="margin-top:15px"><div class="field"><label>Chave PIX</label><input id="pix" value="'+esc(db.settings.pix)+'" placeholder="sua chave Pix"></div><div class="field"><label>Nome no Pix</label><input id="pixName" value="'+esc(db.settings.pixName||'TELLE COSMETICOS')+'"></div><div class="field"><label>Cidade</label><input id="pixCity" value="'+esc(db.settings.pixCity||'JOINVILLE')+'"></div><div class="field"><label>Instagram</label><input id="insta" value="'+esc(db.settings.instagram)+'"></div></div><div class="toolbar" style="margin-top:15px"><button class="primary" id="saveConfig" type="button">Salvar</button><button class="danger" onclick="resetData()" type="button">Apagar dados locais</button></div><div class="notice" style="margin-top:15px">☁️ <b>Banco conectado:</b> seus dados desta conta são carregados do Firebase Firestore.</div></div>'}
-function wire(p){
- if(p==='vendas'){$('saleNew').onclick=newSaleFn;$('saleSearch').oninput=e=>{const q=e.target.value.toLowerCase();$('salePanel').innerHTML=salesTable(db.sales.slice().reverse().filter(s=>(s.client||'').toLowerCase().includes(q)||s.items.some(i=>String(i.name).toLowerCase().includes(q))))}}
- if(p==='clientes'){$('newClient').onclick=newClient;$('clientSearch').oninput=e=>{const q=e.target.value.toLowerCase();$('clientPanel').innerHTML=clientTable(db.clients.filter(c=>(c.name+' '+(c.phone||'')).toLowerCase().includes(q)))}}
- if(p==='estoque'){$('newProduct').onclick=newProduct;$('productSearch').oninput=e=>{const q=e.target.value.toLowerCase();$('productPanel').innerHTML=productTable(db.products.filter(x=>(x.name+' '+(x.brand||'')+' '+(x.category||'')+' '+(x.sku||'')).toLowerCase().includes(q)))}}
- if(p==='financeiro')$('expense').onclick=expense;
- if(p==='fornecedores')$('newSupplier').onclick=newSupplier;
- if(p==='config')$('saveConfig').onclick=async()=>{db.settings.pix=$('pix').value.trim();db.settings.pixName=$('pixName').value.trim()||'TELLE COSMETICOS';db.settings.pixCity=$('pixCity').value.trim()||'JOINVILLE';db.settings.instagram=$('insta').value;saveLocal();await cloudPut('settings',{id:'main',...db.settings});toast('Configurações salvas na nuvem.')};
-}
-function backup(){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(db,null,2)],{type:'application/json'}));a.download='telle-v4-backup.json';a.click();toast('Backup baixado.')}
-function restoreFile(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=async()=>{try{const x=JSON.parse(r.result);if(!x.products||!x.sales)throw new Error('invalid');for(const name of ['products','clients','sales','receivables','cash','suppliers'])for(const obj of x[name]||[])await cloudPut(name,obj);if(x.settings)await cloudPut('settings',{id:'main',...x.settings});db=await cloudLoad();saveLocal();toast('Backup restaurado na nuvem.');go('dashboard')}catch(e){console.error(e);toast('Backup inválido ou erro ao restaurar.')}};r.readAsText(f)}
-function resetData(){if(confirm('Isso apaga somente o backup local deste aparelho. Os dados da nuvem não serão apagados. Continuar?')){localStorage.removeItem(LOCAL_KEY);toast('Dados locais apagados.')}}
-backupEl.onclick=backup;restoreEl.onchange=restoreFile;
-window.go=go;window.charge=charge;window.registerPayment=registerPayment;window.pixModal=pixModal;window.details=details;window.receipt=receipt;window.historyClient=historyClient;window.move=move;window.resetData=resetData;
-window.addEventListener('error',e=>console.error('Telle error:',e.error||e.message));window.addEventListener('unhandledrejection',e=>console.error('Telle rejection:',e.reason));
+function vendas(){return'<div class="toolbar"><input class="search" id="saleSearch" placeholder="Buscar cliente ou produto"><button class="primary" id="saleNew" type="button">＋ Nova venda</button></div><div class="panel" id="salePanel">'+salesTable(db.sales.slice().reverse())+'</div>'}
+function clientes(){return'<div class="toolbar"><input class="search" id="clientSearch" placeholder="Buscar cliente"><button class="primary" id="newClient" type="button">＋ Novo cliente</button></div><div class="panel" id="clientPanel">'+clientTable(db.clients)+'</div>'}
+function clientTable(a){if(!a.length)return'<div class="empty">Nenhum cliente cadastrado.</div>';return'<div class="tableWrap"><table class="table"><tr><th>Cliente</th><th>WhatsApp</th><th>E-mail</th><th></th></tr>'+a.map(c=>'<tr><td>'+esc(c.name)+'</td><td>'+esc(c.phone||"-")+'</td><td>'+esc(c.email||"-")+'</td><td><button class="softBtn" type="button" data-action="history" data-id="'+c.id+'">Histórico</button></td></tr>').join("")+'</table></div>'}
+function estoque(){return'<div class="toolbar"><input class="search" id="productSearch" placeholder="Buscar produto"><button class="primary" id="newProduct" type="button">＋ Novo produto</button></div><div class="panel" id="productPanel">'+productTable(db.products)+'</div>'}
+function productTable(a){if(!a.length)return'<div class="empty">Nenhum produto cadastrado.</div>';return'<div class="tableWrap"><table class="table"><tr><th>Produto</th><th>Preço</th><th>Estoque</th><th>Mín.</th><th></th></tr>'+a.map(p=>'<tr><td><b>'+esc(p.name)+'</b><br><small class="muted">'+esc(p.brand||"")+'</small></td><td>'+money(p.price)+'</td><td class="'+(Number(p.stock)<=Number(p.min)?"red":"")+'">'+p.stock+'</td><td>'+p.min+'</td><td><button class="softBtn" type="button" data-action="move" data-id="'+p.id+'">Movimentar</button></td></tr>').join("")+'</table></div>'}
+function financeiro(){const ins=db.cash.filter(x=>x.type==="in").reduce((a,x)=>a+Number(x.value||0),0),outs=db.cash.filter(x=>x.type==="out").reduce((a,x)=>a+Number(x.value||0),0);return'<div class="cards"><div class="card"><div class="eyebrow">Entradas</div><div class="big green">'+money(ins)+'</div></div><div class="card"><div class="eyebrow">Saídas</div><div class="big red">'+money(outs)+'</div></div><div class="card"><div class="eyebrow">Saldo</div><div class="big">'+money(ins-outs)+'</div></div><div class="card"><div class="eyebrow">A receber</div><div class="big red">'+money(sums().o)+'</div></div></div><div class="layout"><div class="panel"><div class="panelHead"><h3>Recebimentos</h3><button class="primary" id="expense" type="button">＋ Saída</button></div>'+receivableTable()+'</div><div class="panel"><h3>Movimentações recentes</h3>'+db.cash.slice().reverse().slice(0,15).map(x=>'<div class="quick"><span>'+esc(x.description)+'<br><small class="muted">'+dateBR(x.date)+'</small></span><b class="'+(x.type==="in"?"green":"red")+'">'+(x.type==="in"?"+":"-")+money(x.value)+'</b></div>').join("")+'</div></div>'}
+function receivableTable(){const a=db.receivables.filter(x=>x.status!=="paid");if(!a.length)return'<div class="empty">Nenhuma pendência.</div>';return'<div class="tableWrap"><table class="table"><tr><th>Cliente</th><th>Valor</th><th>Vencimento</th><th></th></tr>'+a.map(r=>'<tr><td>'+esc(r.client)+'</td><td>'+money(r.amount)+'</td><td>'+dateBR(r.due)+'</td><td><button class="softBtn" type="button" data-action="charge" data-id="'+r.saleId+'">WhatsApp</button> <button class="softBtn" type="button" data-action="pay" data-id="'+r.saleId+'">Receber</button></td></tr>').join("")+'</table></div>'}
+function cobrancas(){return'<div class="cards"><div class="card"><div class="eyebrow">Em aberto</div><div class="big red">'+money(db.receivables.filter(r=>r.status!=="paid").reduce((a,r)=>a+Number(r.amount||0),0))+'</div></div><div class="card"><div class="eyebrow">Pendências</div><div class="big">'+db.receivables.filter(r=>r.status!=="paid").length+'</div></div><div class="card"><div class="eyebrow">Vencidas</div><div class="big red">'+db.receivables.filter(r=>r.status!=="paid"&&r.due<today()).length+'</div></div><div class="card"><div class="eyebrow">Pagas</div><div class="big green">'+db.receivables.filter(r=>r.status==="paid").length+'</div></div></div><div class="panel" style="margin-top:15px">'+receivableTable()+'</div>'}
+function fornecedores(){return'<div class="toolbar"><button class="primary" id="newSupplier" type="button">＋ Novo fornecedor</button></div><div class="panel">'+(db.suppliers.length?'<table class="table"><tr><th>Fornecedor</th><th>Telefone</th><th>Documento</th></tr>'+db.suppliers.map(s=>'<tr><td>'+esc(s.name)+'</td><td>'+esc(s.phone||"-")+'</td><td>'+esc(s.doc||"-")+'</td></tr>').join("")+'</table>':'<div class="empty">Nenhum fornecedor.</div>')+'</div>'}
+function relatorios(){const t=sums(),map={};db.sales.forEach(s=>(s.items||[]).forEach(i=>map[i.name]=(map[i.name]||0)+Number(i.qty||0)));const best=Object.entries(map).sort((a,b)=>b[1]-a[1]).slice(0,7),sc=db.products.reduce((a,p)=>a+Number(p.cost||0)*Number(p.stock||0),0),sv=db.products.reduce((a,p)=>a+Number(p.price||0)*Number(p.stock||0),0);return'<div class="cards"><div class="card"><div class="eyebrow">Faturamento</div><div class="big">'+money(t.r)+'</div></div><div class="card"><div class="eyebrow">Lucro bruto</div><div class="big green">'+money(t.p)+'</div></div><div class="card"><div class="eyebrow">Margem</div><div class="big">'+(t.r?(t.p/t.r*100).toFixed(1):"0")+'%</div></div><div class="card"><div class="eyebrow">Vendas</div><div class="big">'+db.sales.length+'</div></div></div><div class="layout"><div class="panel"><h3>Mais vendidos</h3>'+(best.length?best.map((x,i)=>'<div class="progressRow"><span>'+(i+1)+'. '+esc(x[0])+'</span><div class="progress"><i style="width:'+(x[1]/best[0][1]*100)+'%"></i></div><b>'+x[1]+'</b></div>').join(""):'<div class="empty">Ainda sem vendas.</div>')+'</div><div class="panel"><h3>Estoque</h3><div class="big">'+money(sc)+'</div><div class="muted">valor a custo</div><hr style="border:0;border-top:1px solid var(--line);margin:16px 0"><div class="big">'+money(sv)+'</div><div class="muted">potencial de venda</div></div></div>'}
+function config(){return'<div class="panel"><h3>Configurações da Telle</h3><p class="muted">A chave Pix será usada para gerar QR Codes com o valor exato de cada venda.</p><div class="form"><div class="field full"><label>Chave Pix</label><input id="pix" value="'+esc(db.settings.pix)+'" placeholder="CPF, e-mail, telefone ou chave aleatória"></div><div class="field"><label>Nome do recebedor</label><input id="pixName" value="'+esc(db.settings.pixName||"TELLE COSMETICOS")+'"></div><div class="field"><label>Cidade</label><input id="pixCity" value="'+esc(db.settings.pixCity||"JOINVILLE")+'"></div><div class="field full"><label>Instagram</label><input id="insta" value="'+esc(db.settings.instagram||"@tellecosmeticos")+'"></div></div><div class="toolbar" style="margin-top:14px"><button id="saveConfig" class="primary" type="button">Salvar configurações</button></div><div class="notice">☁️ Os dados são vinculados à conta autenticada e sincronizados com o Firestore quando disponível.</div></div>'}
 
-(async function boot(){
- try{
-  if(await ensureAuth()){
-   showApp();go('dashboard');toast('Telle conectada à nuvem ☁️');
-   try{db=await cloudLoad();saveLocal();go('dashboard')}catch(e){console.error('Firestore boot:',e);toast('Sistema aberto. A nuvem está indisponível agora.');}
-  }else showLogin('');
- }catch(e){console.error('Boot:',e);clearAuth();showLogin('');}
-})();
+function newClient(){openModal("Novo cliente",'<div class="form"><div class="field full"><label>Nome *</label><input id="cn"></div><div class="field"><label>WhatsApp</label><input id="cp" inputmode="tel"></div><div class="field"><label>E-mail</label><input id="ce" type="email"></div><div class="field full"><label>Observações</label><textarea id="co"></textarea></div></div>',async()=>{if(!$("cn").value.trim()){toast("Informe o nome.");return}await addObj("clients",{id:newid(),name:$("cn").value.trim(),phone:$("cp").value,email:$("ce").value,obs:$("co").value});closeModal();toast("Cliente salvo.");go("clientes")})}
+function newProduct(){openModal("Novo produto",'<div class="form"><div class="field"><label>Nome *</label><input id="pn"></div><div class="field"><label>Marca</label><input id="pb"></div><div class="field"><label>Categoria</label><input id="pc"></div><div class="field"><label>Código</label><input id="psku"></div><div class="field"><label>Custo</label><input id="pco" type="number" step=".01" inputmode="decimal"></div><div class="field"><label>Preço</label><input id="ppr" type="number" step=".01" inputmode="decimal"></div><div class="field"><label>Estoque</label><input id="pst" type="number" min="0" value="0"></div><div class="field"><label>Estoque mínimo</label><input id="pmi" type="number" min="0" value="3"></div></div>',async()=>{if(!$("pn").value.trim()){toast("Informe o nome.");return}await addObj("products",{id:newid(),name:$("pn").value.trim(),brand:$("pb").value,category:$("pc").value,sku:$("psku").value,cost:Number($("pco").value)||0,price:Number($("ppr").value)||0,stock:Number($("pst").value)||0,min:Number($("pmi").value)||0});closeModal();toast("Produto salvo.");go("estoque")})}
+function move(idv){const p=db.products.find(x=>String(x.id)===String(idv));openModal("Movimentar estoque",'<div class="notice"><b>'+esc(p?.name||"Produto")+'</b><br>Estoque atual: '+(p?.stock||0)+' unidade(s)</div><div class="field"><label>Quantidade</label><input id="mv" type="number" inputmode="numeric" placeholder="Use negativo para saída"></div>',async()=>{const n=Number($("mv").value);if(!n||Number(p.stock)+n<0){toast("Quantidade inválida.");return}await updateObj("products",p.id,{stock:Number(p.stock)+n});closeModal();toast("Estoque atualizado.");go("estoque")})}
+
+function newSaleFn(){
+  const products=db.products.filter(p=>Number(p.stock)>0);
+  if(!products.length){toast("Cadastre produtos com estoque antes de vender.");return}
+  const clients=db.clients;
+  openModal("Nova venda",'<div class="form"><div class="field full"><label>Cliente</label><select id="sc"><option value="">Venda balcão</option>'+clients.map(c=>'<option value="'+c.id+'">'+esc(c.name)+'</option>').join("")+'</select></div><div class="field"><label>Produto</label><select id="sp">'+products.map(p=>'<option value="'+p.id+'">'+esc(p.name)+' • '+money(p.price)+' • '+p.stock+' un.</option>').join("")+'</select></div><div class="field"><label>Quantidade</label><input id="sq" type="number" min="1" value="1"></div><div class="field"><label>Forma de pagamento</label><select id="sm"><option>PIX</option><option>Dinheiro</option><option>Cartão</option><option>Fiado</option></select></div><div class="field"><label>Pago agora</label><input id="sPaid" type="number" min="0" step=".01" value="0" inputmode="decimal"></div><div class="field"><label>Vencimento</label><input id="sDue" type="date" value="'+today()+'"></div></div><div id="sInfo" class="notice"></div>',saveSale,"Finalizar venda");
+  $("sp").oninput=preview;$("sq").oninput=preview;$("sm").onchange=()=>{if($("sm").value!=="Fiado")$("sPaid").value="0";};preview();
+}
+function preview(){const p=db.products.find(x=>String(x.id)===String($("sp").value)),q=Math.max(1,Number($("sq").value)||1);if(!p)return;$("sInfo").innerHTML='<b>'+esc(p.name)+'</b> × '+q+' = <b>'+money(Number(p.price)*q)+'</b>'}
+async function saveSale(){
+  const p=db.products.find(x=>String(x.id)===String($("sp").value)),q=Math.max(1,Number($("sq").value)||1);if(!p||q>Number(p.stock)){toast("Estoque insuficiente.");return}
+  const cid=Number($("sc").value)||null,c=db.clients.find(x=>Number(x.id)===cid),total=Number(p.price)*q;let paid=Number($("sPaid").value)||0;if($("sm").value!=="Fiado"&&paid===0)paid=total;if(paid>total)paid=total;
+  const sale={id:newid(),created:new Date().toISOString(),client:c?.name||"",clientId:cid,total,cost:Number(p.cost)*q,paid,method:$("sm").value,due:$("sDue").value,items:[{name:p.name,qty:q,price:Number(p.price),cost:Number(p.cost),productId:p.id}]};
+  p.stock=Number(p.stock)-q;await updateObj("products",p.id,{stock:p.stock});await addObj("sales",sale);
+  if(paid)await addObj("cash",{id:newid(),date:today(),type:"in",description:"Venda - "+(c?.name||"Balcão"),value:paid,saleId:sale.id});
+  if(paid<total&&c)await addObj("receivables",{id:newid(),saleId:sale.id,client:c.name,clientId:c.id,amount:total-paid,due:sale.due,status:"pending"});
+  closeModal();toast("Venda registrada.");details(sale.id);
+}
+
+function details(idv){
+  const s=db.sales.find(x=>String(x.id)===String(idv));if(!s){toast("Venda não encontrada.");return}
+  const open=Math.max(0,Number(s.total)-Number(s.paid)),r=db.receivables.find(x=>String(x.saleId)===String(s.id)&&x.status!=="paid");
+  const buttons='<div class="toolbar" style="margin-top:13px">'+(open&&s.client?'<button class="softBtn" id="dPay" type="button">💰 Registrar pagamento</button>':'')+(db.settings.pix&&open?'<button class="softBtn" id="dPix" type="button">💠 Pix</button>':'')+'<button class="softBtn" id="dWhats" type="button">💬 Cobrança</button><button class="softBtn" id="dPdf" type="button">🧾 Comprovante</button></div>';
+  openModal("Venda #"+String(s.id).slice(-6),'<div class="notice"><b>'+esc(s.client||"Balcão")+'</b><br>'+dateBR((s.created||"").slice(0,10))+' • '+esc(s.method||"")+'</div><div class="panel" style="margin-top:10px">'+(s.items||[]).map(i=>'<div class="quick"><span><b>'+esc(i.name)+'</b><br><small class="muted">'+i.qty+' × '+money(i.price)+'</small></span><b>'+money(i.qty*i.price)+'</b></div>').join("")+'<div class="quick"><span>Total</span><b>'+money(s.total)+'</b></div><div class="quick"><span>Pago</span><b>'+money(s.paid)+'</b></div><div class="quick"><span>Em aberto</span><b class="'+(open?"red":"green")+'">'+money(open)+'</b></div></div>'+buttons,()=>closeModal(),"Fechar");
+  if($("dPay"))$("dPay").onclick=()=>registerPayment(s.id);if($("dPix"))$("dPix").onclick=()=>pixModal(s.id);$("dWhats").onclick=()=>charge(s.id);$("dPdf").onclick=()=>receipt(s.id);
+}
+function registerPayment(idv){
+  const s=db.sales.find(x=>String(x.id)===String(idv));if(!s)return;const open=Math.max(0,Number(s.total)-Number(s.paid));if(!open){toast("Esta venda já está paga.");return}
+  openModal("Registrar pagamento",'<div class="notice">Cliente: <b>'+esc(s.client||"Balcão")+'</b><br>Em aberto: <b>'+money(open)+'</b></div><div class="field"><label>Valor recebido</label><input id="payValue" type="number" min=".01" max="'+open+'" step=".01" value="'+open+'" inputmode="decimal"></div><div class="field"><label>Forma de pagamento</label><select id="payMethod"><option>PIX</option><option>Dinheiro</option><option>Cartão</option><option>Outro</option></select></div>',async()=>{const v=Number($("payValue").value);if(!v||v>open){toast("Valor inválido.");return}const np=Number(s.paid)+v;await updateObj("sales",s.id,{paid:np});const rec=db.receivables.find(x=>String(x.saleId)===String(s.id)&&x.status!=="paid");if(rec)await updateObj("receivables",rec.id,{amount:Math.max(0,Number(rec.amount)-v),status:np>=Number(s.total)?"paid":"pending"});await addObj("cash",{id:newid(),date:today(),type:"in",description:"Pagamento de "+(s.client||"Balcão"),value:v,saleId:s.id,method:$("payMethod").value});closeModal();toast(np>=Number(s.total)?"Venda quitada!":"Pagamento registrado.");go("vendas")})}
+function brCode(key,amount,name,city,txid="TELLE"){
+  const cleanName=String(name||"TELLE COSMETICOS").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toUpperCase().replace(/[^A-Z0-9 .-]/g,"").slice(0,25);
+  const cleanCity=String(city||"JOINVILLE").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toUpperCase().replace(/[^A-Z0-9 .-]/g,"").slice(0,15);
+  const amt=Number(amount).toFixed(2);
+  const field=(id,val)=>id+String(val.length).padStart(2,"0")+val;
+  let p="00120126";p+=field("26",field("00","BR.GOV.BCB.PIX")+field("01",key));p+="520400005303986";p+=field("54",amt)+"5802BR"+field("59",cleanName)+field("60",cleanCity)+field("62",field("05",String(txid).replace(/[^A-Za-z0-9]/g,"").slice(0,25)||"TELLE"))+"6304";
+  let crc=0xFFFF;for(let i=0;i<p.length;i++){crc^=p.charCodeAt(i)<<8;for(let j=0;j<8;j++)crc=(crc&0x8000)?((crc<<1)^0x1021)&0xFFFF:(crc<<1)&0xFFFF}return p+crc.toString(16).toUpperCase().padStart(4,"0");
+}
+function pixModal(idv){
+  const s=db.sales.find(x=>String(x.id)===String(idv));if(!s)return;const value=Math.max(0,Number(s.total)-Number(s.paid));if(!db.settings.pix){toast("Cadastre sua chave Pix em Configurações.");return}const payload=brCode(db.settings.pix,value,db.settings.pixName,db.settings.pixCity,String(s.id).slice(-10));
+  openModal("Pix da venda #"+String(s.id).slice(-6),'<div class="notice"><b>Valor do Pix: '+money(value)+'</b><br>O QR Code já contém o valor da venda.</div><div class="pixBox"><div id="qrcode"></div><button id="copyPix" class="softBtn" type="button" style="margin-top:10px">📋 Copiar Pix copia e cola</button></div><textarea id="pixPayload" class="copyBox" readonly>'+esc(payload)+'</textarea>',()=>closeModal(),"Fechar");
+  if(window.QRCode)new QRCode($("qrcode"),{text:payload,width:220,height:220,colorDark:"#301622",colorLight:"#ffffff"});
+  $("copyPix").onclick=async()=>{try{await navigator.clipboard.writeText(payload);toast("Código Pix copiado!")}catch{const e=$("pixPayload");e.select();document.execCommand("copy");toast("Código Pix copiado!")}};
+}
+function charge(idv){
+  const s=db.sales.find(x=>String(x.id)===String(idv));if(!s)return;const c=db.clients.find(x=>Number(x.id)===Number(s.clientId));const phone=(c?.phone||"").replace(/\D/g,"");if(!phone){toast("Cadastre o WhatsApp do cliente.");return}
+  const pending=Math.max(0,Number(s.total)-Number(s.paid)),lines=["🌸 *TELLE COSMÉTICOS*","","Olá, "+(c.name||"cliente")+"! Tudo bem? 💕","","Passando para lembrar do valor em aberto da sua compra.","","🧾 Pedido: #"+String(s.id).slice(-6),"💰 Valor pendente: *"+money(pending)+"*","📅 Vencimento: "+dateBR(s.due),"",db.settings.pix?"💠 *Pagamento via Pix*":"",db.settings.pix?"Chave Pix: "+db.settings.pix:"",db.settings.pix?"Valor: *"+money(pending)+"*":"",db.settings.pix?"":"", "Assim que realizar o pagamento, pode me enviar o comprovante por aqui.","","Obrigada pela preferência! 🌷","*Telle Cosméticos*"];
+  const message=lines.filter((x,i)=>!(x===""&&lines[i-1]==="")).join("\n");window.open("https://wa.me/55"+phone+"?text="+encodeURIComponent(message),"_blank");
+}
+function receipt(idv){
+  const s=db.sales.find(x=>String(x.id)===String(idv));if(!s)return;const html='<div class="printOnly"><div style="max-width:760px;margin:auto;font-family:Arial,sans-serif"><div style="text-align:center"><img src="telle-logo.png" style="max-width:260px;height:100px;object-fit:contain"><h1 style="color:#a51d55;margin:5px 0">Comprovante de compra</h1><p>Pedido #'+String(s.id).slice(-6)+'</p></div><hr><p><b>Cliente:</b> '+esc(s.client||"Balcão")+'<br><b>Data:</b> '+dateBR((s.created||"").slice(0,10))+'<br><b>Pagamento:</b> '+esc(s.method||"")+'</p><table style="width:100%;border-collapse:collapse"><tr><th style="text-align:left;border-bottom:1px solid #ddd;padding:8px">Produto</th><th style="text-align:right;border-bottom:1px solid #ddd;padding:8px">Valor</th></tr>'+s.items.map(i=>'<tr><td style="padding:8px;border-bottom:1px solid #eee">'+esc(i.name)+' × '+i.qty+'</td><td style="text-align:right;padding:8px;border-bottom:1px solid #eee">'+money(i.qty*i.price)+'</td></tr>').join("")+'</table><p style="text-align:right;font-size:18px"><b>Total: '+money(s.total)+'</b><br>Pago: '+money(s.paid)+'<br>Em aberto: '+money(Math.max(0,s.total-s.paid))+'</p><p style="text-align:center;color:#a51d55">Obrigada pela preferência! 🌷<br><b>Telle Cosméticos</b></p></div></div>';
+  const w=window.open("","_blank");if(!w){toast("Permita pop-ups para gerar o comprovante.");return}w.document.write("<html><head><title>Comprovante Telle</title></head><body>"+html+"</body></html>");w.document.close();setTimeout(()=>w.print(),250);
+}
+function historyClient(idv){const c=db.clients.find(x=>String(x.id)===String(idv));if(!c)return;const sales=db.sales.filter(s=>Number(s.clientId)===Number(c.id));openModal("Histórico • "+esc(c.name),salesTable(sales),"", "Fechar")}
+function newSupplier(){openModal("Novo fornecedor",'<div class="form"><div class="field"><label>Nome *</label><input id="fn"></div><div class="field"><label>Telefone</label><input id="fp"></div><div class="field"><label>CNPJ/CPF</label><input id="fd"></div><div class="field full"><label>Observações</label><textarea id="fo"></textarea></div></div>',async()=>{if(!$("fn").value.trim()){toast("Informe o nome.");return}await addObj("suppliers",{id:newid(),name:$("fn").value.trim(),phone:$("fp").value,doc:$("fd").value,obs:$("fo").value});closeModal();toast("Fornecedor salvo.");go("fornecedores")})}
+async function expense(){const d=prompt("Descrição da saída:");if(!d)return;const v=Number(prompt("Valor:","0"));if(!v)return;await addObj("cash",{id:newid(),date:today(),type:"out",description:d,value:v});toast("Saída registrada.");go("financeiro")}
+function wire(p){
+  if(p==="vendas"){$("saleNew").onclick=newSaleFn;$("saleSearch").oninput=e=>{const q=e.target.value.toLowerCase();$("salePanel").innerHTML=salesTable(db.sales.slice().reverse().filter(s=>(s.client||"").toLowerCase().includes(q)||(s.items||[]).some(i=>String(i.name).toLowerCase().includes(q))))}}
+  if(p==="clientes"){$("newClient").onclick=newClient;$("clientSearch").oninput=e=>{const q=e.target.value.toLowerCase();$("clientPanel").innerHTML=clientTable(db.clients.filter(c=>(c.name+" "+(c.phone||"")).toLowerCase().includes(q)))}}
+  if(p==="estoque"){$("newProduct").onclick=newProduct;$("productSearch").oninput=e=>{const q=e.target.value.toLowerCase();$("productPanel").innerHTML=productTable(db.products.filter(x=>(x.name+" "+(x.brand||"")+" "+(x.category||"")+" "+(x.sku||"")).toLowerCase().includes(q)))}}
+  if(p==="financeiro")$("expense").onclick=expense;
+  if(p==="fornecedores")$("newSupplier").onclick=newSupplier;
+  if(p==="config")$("saveConfig").onclick=async()=>{db.settings.pix=$("pix").value.trim();db.settings.pixName=$("pixName").value.trim()||"TELLE COSMETICOS";db.settings.pixCity=$("pixCity").value.trim()||"JOINVILLE";db.settings.instagram=$("insta").value.trim();localSave();try{await cloudPut("settings",{id:"main",...db.settings});toast("Configurações salvas na nuvem.")}catch{toast("Configurações salvas neste aparelho.")}};
+}
+const META={dashboard:["Dashboard","Visão geral da Telle Cosméticos"],vendas:["Vendas","Vendas, pagamentos e comprovantes"],estoque:["Estoque","Produtos, preços e movimentações"],clientes:["Clientes","Cadastro e histórico"],financeiro:["Financeiro","Entradas, saídas e saldo"],cobrancas:["Cobranças","Valores pendentes e vencimentos"],fornecedores:["Fornecedores","Cadastro de fornecedores"],relatorios:["Relatórios","Desempenho da loja"],config:["Configurações","Dados da Telle"]};
+const PAGES={dashboard,vendas,estoque,clientes,financeiro,cobrancas,fornecedores,relatorios,config};
+function go(p){if(!PAGES[p]){toast("Tela indisponível.");return}const c=$("content");c.classList.add("leaving");setTimeout(()=>{try{$("pageTitle").textContent=META[p][0];$("pageSub").textContent=META[p][1];$("sidebar").classList.remove("open");document.querySelectorAll("[data-page]").forEach(b=>b.classList.toggle("active",b.dataset.page===p));c.innerHTML=PAGES[p]();c.classList.remove("leaving");wire(p)}catch(e){console.error(e);c.classList.remove("leaving");c.innerHTML='<div class="panel"><h3>Não foi possível abrir esta tela</h3><p class="muted">Tente novamente.</p><button id="retry" class="primary" type="button">Tentar novamente</button></div>';$("retry").onclick=()=>go(p)}},70)}
+function delegate(root){
+  root.addEventListener("click",e=>{
+    const b=e.target.closest("[data-action]");if(b){const id=b.dataset.id,a=b.dataset.action;if(a==="details")details(id);if(a==="charge")charge(id);if(a==="pay")registerPayment(id);if(a==="pix")pixModal(id);if(a==="move")move(id);if(a==="history")historyClient(id);return}
+    const j=e.target.closest("[data-page-jump]");if(j)go(j.dataset.pageJump);
+  });
+}
+delegate($("content"));
+$("nav").onclick=e=>{const b=e.target.closest("[data-page]");if(b)go(b.dataset.page)};
+$("bottom").onclick=e=>{const b=e.target.closest("[data-page]");if(b)go(b.dataset.page)};
+$("hamb").onclick=()=>$("sidebar").classList.toggle("open");
+$("newSale").onclick=newSaleFn;
+$("logout").onclick=()=>{authClear();$("app").hidden=true;$("login").hidden=false;$("loginEmail").value="";$("loginPass").value="";$("loginMsg").textContent="Sessão encerrada."};
+$("backupBtn").onclick=()=>{const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(db,null,2)],{type:"application/json"}));a.download="telle-cosmeticos-backup.json";a.click();toast("Backup criado.")};
+$("restoreFile").onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=async()=>{try{const x=JSON.parse(r.result);db={...db,...x};localSave();for(const n of NAMES)for(const o of db[n]||[])await cloudPut(n,o);if(db.settings)await cloudPut("settings",{id:"main",...db.settings});toast("Backup restaurado.");go("dashboard")}catch{toast("Backup inválido.")}};r.readAsText(f)};
+$("loginBtn").onclick=async()=>{const email=$("loginEmail").value.trim(),pass=$("loginPass").value;if(!email||!pass){$("loginMsg").textContent="Informe e-mail e senha.";return}$("loginBtn").disabled=true;$("loginBtn").textContent="Entrando…";$("loginMsg").textContent="Conectando…";try{await loginRequest(email,pass);$("login").hidden=true;$("app").hidden=false;$("userPill").textContent=userEmail;go("dashboard");toast("Telle conectada à nuvem ☁️");db=await loadData();localSave();go("dashboard")}catch(e){console.error(e);$("loginMsg").textContent=e.message||"Não foi possível entrar.";$("loginBtn").disabled=false;$("loginBtn").textContent="Entrar"}};
+$("loginPass").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();$("loginBtn").click()}});
+(async()=>{try{if(await ensureAuth()){$("login").hidden=true;$("app").hidden=false;$("userPill").textContent=userEmail;go("dashboard");db=await loadData();localSave();go("dashboard")}else{$("login").hidden=false;$("app").hidden=true}}catch(e){console.error(e);authClear();$("login").hidden=false;$("app").hidden=true}})();
+
 })();
 </script>
-
-</body></html>
+</body>
+</html>
