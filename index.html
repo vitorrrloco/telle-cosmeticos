@@ -78,6 +78,10 @@ body:has(#login:not([hidden])) #telleMobileNav{display:none!important}
 }
 #telleMobileNav{display:none!important}
 
+
+/* V4.2.6: direct touch target */
+#app .nav{pointer-events:auto!important;z-index:2147483647!important}
+#app .nav button{position:relative!important;z-index:2147483647!important;pointer-events:auto!important;cursor:pointer!important;touch-action:manipulation!important;-webkit-tap-highlight-color:transparent!important}
 </style>
 </head>
 <body>
@@ -266,6 +270,16 @@ function go(tab){
  bindPage(tab)
 }
 function bindPage(tab){
+ // V4.2.6: the navigation lives outside #view, so it must have its own
+ // click handlers. The previous version only handled clicks inside #view.
+ document.querySelectorAll(".nav [data-tab]").forEach(button=>{
+  button.onclick=(event)=>{
+   event.preventDefault();
+   event.stopPropagation();
+   const destination=button.dataset.tab;
+   if(META[destination]) go(destination);
+  };
+ });
  $("topPlus").onclick=newSale;
  $("view").onclick=e=>{
   const tabButton=e.target.closest("[data-tab]");if(tabButton){go(tabButton.dataset.tab);return}
@@ -298,6 +312,18 @@ function openMore(kind){
  if(kind==="suppliers")$("supplierPlus").onclick=addSupplier;
  if(kind==="config")$("savePix").onclick=()=>{data.settings.pix=$("pixKey").value.trim();data.settings.pixName=$("pixName").value.trim()||"TELLE COSMETICOS";data.settings.pixCity=$("pixCity").value.trim()||"JOINVILLE";saveLocal();notify("Pix salvo.")};
 }
+
+// V4.2.6 mobile navigation safety net
+document.addEventListener("click",function(event){
+ const button=event.target.closest("#app .nav [data-tab]");
+ if(!button) return;
+ const destination=button.dataset.tab;
+ if(!META[destination]) return;
+ event.preventDefault();
+ event.stopPropagation();
+ try{go(destination)}catch(error){console.error("TELLE_NAV_ERROR",error)}
+},true);
+
 function startApp(){
  const login=document.getElementById("login");
  const app=document.getElementById("app");
