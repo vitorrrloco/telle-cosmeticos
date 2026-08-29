@@ -21,6 +21,40 @@ button,input,select,textarea{font:inherit}button{touch-action:manipulation;-webk
 .modalbg{position:fixed;inset:0;background:#2b0a1b88;display:grid;place-items:end center;padding:9px;z-index:100}.modal{width:min(620px,100%);max-height:93vh;overflow:auto;background:#fff;border-radius:23px;padding:15px}.mh{display:flex;justify-content:space-between;align-items:center}.mh h2{font-size:17px;margin:0}.close{width:35px;height:35px;border:0;border-radius:50%;background:var(--soft);color:var(--p);font-size:20px}.mf{display:flex;justify-content:flex-end;gap:7px;margin-top:11px}.soft,.primary{border:0;border-radius:11px;padding:10px 13px;font-weight:800}.soft{background:var(--soft);color:var(--p)}.primary{background:var(--p);color:#fff}.sale label{display:block;color:var(--muted);font-size:10px;margin:8px 0}.sale input,.sale select{display:block;width:100%;margin-top:5px;border:1px solid var(--line);border-radius:11px;padding:11px;outline:0}.two{display:grid;grid-template-columns:1fr 90px;gap:8px}.info{display:flex;align-items:center;gap:7px;background:var(--soft);padding:10px;border-radius:12px;font-size:10px}.info strong{margin-left:auto}.pix{margin-top:8px;background:var(--soft);border-radius:15px;padding:13px;text-align:center}.pix b,.pix strong{display:block}.pix strong{font-size:20px;margin:4px}.pix canvas,.pix img{background:#fff;padding:7px;border-radius:10px}.pix button{display:block;width:100%;border:0;border-radius:11px;background:#fff;color:var(--p);padding:10px;font-weight:800;margin-top:9px}.pix textarea{width:100%;height:65px;border:1px solid var(--line);border-radius:10px;font-size:9px;margin-top:7px}.warning{margin-top:8px;background:#fff4d8;color:#73580a;padding:10px;border-radius:11px;font-size:10px}
 #toast{position:fixed;z-index:200;left:50%;bottom:92px;transform:translate(-50%,15px);opacity:0;background:#321724;color:#fff;padding:10px 13px;border-radius:12px;font-size:10px;transition:.2s}.show{opacity:1!important;transform:translate(-50%,0)!important}
 @media(min-width:700px){.metrics{grid-template-columns:repeat(4,1fr)}.more{grid-template-columns:repeat(3,1fr)}.modalbg{place-items:center}}
+
+/* V4.2.4: controls must remain visible and touchable on mobile */
+button,.btn,.action,.nav-btn,.tab-btn,.enter,[role="button"]{
+  -webkit-appearance:none;
+  appearance:none;
+  pointer-events:auto!important;
+  touch-action:manipulation;
+}
+button:disabled{pointer-events:auto}
+.app button,.app .btn,.app .action,.app .nav-btn,.app .tab-btn{
+  display:flex!important;
+  visibility:visible!important;
+  opacity:1!important;
+}
+.app .bottom-nav{
+  position:fixed!important;
+  left:0!important;
+  right:0!important;
+  bottom:0!important;
+  z-index:9999!important;
+  display:flex!important;
+  visibility:visible!important;
+  opacity:1!important;
+}
+.app .bottom-nav button{
+  flex:1 1 0;
+  min-height:58px;
+}
+.app main,.app .view{
+  padding-bottom:90px!important;
+}
+
+
+body:has(#login:not([hidden])) #telleMobileNav{display:none!important}
 </style>
 </head>
 <body>
@@ -253,6 +287,24 @@ function startApp(){
  try{
   loadLocal();
   app.innerHTML=layout();
+  // Guaranteed mobile navigation for V4.2.4
+  if(!document.getElementById("telleMobileNav")){
+   const nav=document.createElement("nav");
+   nav.id="telleMobileNav";
+   nav.style.cssText="position:fixed;left:12px;right:12px;bottom:12px;z-index:99999;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:8px;background:#fff;border:1px solid #f0c9da;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,.12);";
+   const items=[
+    ["🏠","Início","home"],["🛒","Vendas","sales"],["📦","Estoque","products"],["👥","Clientes","clients"]
+   ];
+   items.forEach(([icon,label,page])=>{
+    const b=document.createElement("button");
+    b.type="button";
+    b.style.cssText="border:0;border-radius:14px;background:#fff4f8;color:#a71958;min-height:58px;font-weight:700;font-size:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;";
+    b.innerHTML=`<span style="font-size:20px;line-height:1">${icon}</span><span>${label}</span>`;
+    b.onclick=()=>{try{go(page)}catch(e){console.error(e)}};
+    nav.appendChild(b);
+   });
+   document.body.appendChild(nav);
+  }
   go("home");
   notify("Telle conectada à nuvem ☁️");
   return true;
