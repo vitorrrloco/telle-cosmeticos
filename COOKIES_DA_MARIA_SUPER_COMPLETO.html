@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#6f3b25">
+<title>Cookies da Maria • Gestão Completa</title>
+<style>
+:root{
+ --bg:#f6eee8;--surface:#fffaf7;--surface2:#f1e2d7;--ink:#382218;--muted:#80685b;
+ --brand:#6f3b25;--brand2:#a8623d;--line:#e4d1c4;--green:#3e7954;--red:#b54d4d;--gold:#b98231;
+ --shadow:0 10px 30px rgba(70,39,24,.09);--radius:18px
+}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+button,input,select,textarea{font:inherit}button{border:0;border-radius:12px;padding:10px 14px;background:var(--brand);color:#fff;font-weight:800;cursor:pointer}
+button.secondary{background:var(--surface2);color:var(--ink)}button.success{background:var(--green)}button.danger{background:var(--red)}button.gold{background:var(--gold)}button.small{font-size:12px;padding:7px 10px}
+.app{min-height:100vh;display:flex}.sidebar{width:260px;background:#352219;color:#fff;padding:18px;position:fixed;left:0;top:0;bottom:0;overflow:auto;z-index:20}
+.logo{font-size:23px;font-weight:950;letter-spacing:-.5px;margin:5px 4px 22px}.logo span{color:#e4ad88}
+.nav-title{font-size:10px;color:#c7a895;text-transform:uppercase;letter-spacing:1.2px;margin:16px 6px 6px}
+.nav button{display:flex;align-items:center;gap:9px;width:100%;text-align:left;background:transparent;color:#f8eee8;margin:2px 0}
+.nav button.active,.nav button:hover{background:#65402e}.main{margin-left:260px;width:calc(100% - 260px);padding:24px;max-width:1700px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:18px}.top h1{margin:0;font-size:28px}.top-actions{display:flex;gap:8px;flex-wrap:wrap}
+.page{display:block}.hidden{display:none!important}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+.metric{font-size:27px;font-weight:950;margin-top:4px}.muted{color:var(--muted);font-size:13px}.section{margin-top:16px}
+.two{display:grid;grid-template-columns:1.25fr .75fr;gap:16px}.three{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px}.form{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.field{display:flex;flex-direction:column;gap:5px}.field label{font-size:12px;color:var(--muted);font-weight:800}.field input,.field select,.field textarea{width:100%;padding:10px 11px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);outline:none}.field textarea{min-height:85px;resize:vertical}.full{grid-column:1/-1}
+.tablewrap{overflow:auto;border:1px solid var(--line);border-radius:14px;background:#fff}.table{width:100%;border-collapse:collapse;min-width:800px}.table th,.table td{padding:10px 11px;border-bottom:1px solid #f0e4dc;text-align:left;font-size:13px}.table th{background:#fbf2ec;color:#644638;position:sticky;top:0}.table tr:last-child td{border-bottom:0}
+.pill{display:inline-flex;align-items:center;padding:4px 8px;border-radius:999px;font-size:11px;font-weight:900;background:#eee}.ok{background:#e1f2e7;color:#28623e}.warn{background:#fff0d5;color:#855b1e}.bad{background:#f8dddd;color:#8c3333}.blue{background:#e2ecfa;color:#315b8a}
+.notice{padding:12px 14px;border-radius:13px;background:#f7eee8;border:1px solid var(--line);font-size:13px}.empty{text-align:center;padding:28px;color:var(--muted)}
+.order{border:1px solid var(--line);border-radius:16px;padding:15px;background:#fff;margin-bottom:10px}.order-head{display:flex;justify-content:space-between;gap:12px}.order-title{font-weight:900}.order-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:12px}.mini{font-size:12px;color:var(--muted)}.mini b{display:block;color:var(--ink);font-size:14px;margin-top:2px}
+.progress{height:8px;border-radius:99px;background:#eaded6;overflow:hidden}.progress>span{display:block;height:100%;background:var(--brand2)}
+.recipe-row{display:grid;grid-template-columns:1.5fr .7fr .8fr .8fr auto;gap:8px;margin:8px 0}.recipe-row input,.recipe-row select{padding:9px;border:1px solid var(--line);border-radius:9px}
+.toast{position:fixed;right:18px;bottom:18px;background:#352219;color:white;padding:13px 16px;border-radius:12px;box-shadow:var(--shadow);display:none;z-index:100}
+.modal-back{position:fixed;inset:0;background:rgba(28,17,11,.48);display:flex;align-items:center;justify-content:center;padding:18px;z-index:90}.modal{background:var(--surface);border-radius:20px;width:min(850px,100%);max-height:90vh;overflow:auto;padding:20px}.modal-head{display:flex;justify-content:space-between;align-items:center}
+.kpi-note{margin-top:5px;font-size:12px;color:var(--muted)}
+.mobile-bar{display:none}
+@media(max-width:1100px){.grid{grid-template-columns:repeat(2,1fr)}.form{grid-template-columns:repeat(2,1fr)}.two,.three{grid-template-columns:1fr}.order-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:760px){
+ .sidebar{position:fixed;left:-280px;transition:.2s;width:260px}.sidebar.open{left:0}.main{margin-left:0;width:100%;padding:15px;padding-bottom:85px}
+ .mobile-bar{display:flex;position:fixed;bottom:0;left:0;right:0;background:#352219;z-index:30;padding:8px 10px;gap:5px}.mobile-bar button{flex:1;background:transparent;padding:8px 4px;font-size:11px}
+ .top{align-items:flex-start}.top h1{font-size:22px}.grid{grid-template-columns:1fr 1fr}.form{grid-template-columns:1fr}.full{grid-column:auto}.order-grid{grid-template-columns:1fr 1fr}
+ .table{min-width:650px}.top-actions .hide-mobile{display:none}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<aside id="sidebar" class="sidebar">
+ <div class="logo">COOKIES <span>DA MARIA</span></div>
+ <div class="nav-title">Visão geral</div>
+ <div class="nav">
+  <button data-page="dashboard" class="active">◉ Dashboard</button>
+  <button data-page="orders">▣ Encomendas</button>
+  <button data-page="customers">♙ Clientes</button>
+ </div>
+ <div class="nav-title">Produção</div>
+ <div class="nav">
+  <button data-page="products">▤ Produtos</button>
+  <button data-page="ingredients">◫ Ingredientes</button>
+  <button data-page="recipes">⌁ Receitas</button>
+  <button data-page="production">⚙ Produção</button>
+  <button data-page="stock">▥ Estoque</button>
+ </div>
+ <div class="nav-title">Financeiro</div>
+ <div class="nav">
+  <button data-page="finance">R$ Financeiro</button>
+  <button data-page="deliveries">⌂ Entregas</button>
+  <button data-page="reports">▦ Relatórios</button>
+ </div>
+ <div class="nav-title">Sistema</div>
+ <div class="nav">
+  <button data-page="backup">↥ Backup / Config.</button>
+ </div>
+</aside>
+
+<main class="main">
+ <div class="top">
+  <div><h1 id="pageTitle">Dashboard</h1><div class="muted" id="today"></div></div>
+  <div class="top-actions">
+   <button class="secondary small hide-mobile" onclick="openPage('orders')">+ Encomenda</button>
+   <button class="secondary small" onclick="exportBackup()">Backup</button>
+  </div>
+ </div>
+
+ <section id="dashboard" class="page">
+  <div class="grid">
+   <div class="card"><div class="muted">Faturamento recebido</div><div class="metric" id="kpiReceived">R$ 0,00</div><div class="kpi-note">pagamentos efetivamente recebidos</div></div>
+   <div class="card"><div class="muted">A receber</div><div class="metric" id="kpiReceivable">R$ 0,00</div><div class="kpi-note">encomendas ainda não quitadas</div></div>
+   <div class="card"><div class="muted">Lucro estimado</div><div class="metric" id="kpiProfit">R$ 0,00</div><div class="kpi-note">vendas menos custo estimado</div></div>
+   <div class="card"><div class="muted">Encomendas abertas</div><div class="metric" id="kpiOrders">0</div><div class="kpi-note">produção, pendentes e entregas</div></div>
+  </div>
+  <div class="grid section">
+   <div class="card"><div class="muted">Vencendo hoje</div><div class="metric" id="kpiDueToday">R$ 0,00</div></div>
+   <div class="card"><div class="muted">Entregas hoje</div><div class="metric" id="kpiDeliveriesToday">0</div></div>
+   <div class="card"><div class="muted">Cookies possíveis</div><div class="metric" id="kpiCookies">0</div></div>
+   <div class="card"><div class="muted">Estoque em alerta</div><div class="metric" id="kpiLow">0</div></div>
+  </div>
+  <div class="two section">
+   <div class="card"><h2>Próximas encomendas</h2><div id="nextOrders"></div></div>
+   <div class="card"><h2>Alertas</h2><div id="alerts"></div></div>
+  </div>
+ </section>
+
+ <section id="orders" class="page hidden">
+  <div class="card">
+   <h2>Nova encomenda</h2>
+   <div class="form">
+    <div class="field"><label>Cliente</label><select id="orderCustomer"></select></div>
+    <div class="field"><label>Produto / cookie</label><select id="orderProduct"></select></div>
+    <div class="field"><label>Quantidade</label><input id="orderQty" type="number" min="1" value="1"></div>
+    <div class="field"><label>Preço unitário</label><input id="orderUnit" type="number" step=".01" value="0"></div>
+    <div class="field"><label>Data do pedido</label><input id="orderDate" type="date"></div>
+    <div class="field"><label>Prazo / entrega</label><input id="orderDue" type="date"></div>
+    <div class="field"><label>Hora</label><input id="orderTime" type="time" value="18:00"></div>
+    <div class="field"><label>Forma de pagamento</label><select id="orderPayment"><option>Pix</option><option>Dinheiro</option><option>Cartão</option><option>Transferência</option><option>Outro</option></select></div>
+    <div class="field"><label>Quanto foi pago agora?</label><input id="orderPaid" type="number" step=".01" value="0"></div>
+    <div class="field"><label>Vencimento do restante</label><input id="orderPayDue" type="date"></div>
+    <div class="field"><label>Status</label><select id="orderStatus"><option>Pendente</option><option>Confirmada</option><option>Em produção</option><option>Pronta</option><option>Saiu para entrega</option><option>Entregue</option><option>Cancelada</option></select></div>
+    <div class="field"><label>Tipo de entrega</label><select id="orderDeliveryType"><option>Retirada</option><option>Entrega</option></select></div>
+    <div class="field full"><label>Observações</label><textarea id="orderNotes" placeholder="Sabor, decoração, mensagem, endereço, horário combinado..."></textarea></div>
+   </div>
+   <br><button onclick="addOrder()">Salvar encomenda</button>
+  </div>
+  <div class="card section"><div class="toolbar"><input id="orderSearch" placeholder="Buscar encomenda..." oninput="renderOrders()" style="flex:1;min-width:200px;padding:10px;border:1px solid var(--line);border-radius:10px"><select id="orderFilter" onchange="renderOrders()" style="padding:10px;border:1px solid var(--line);border-radius:10px"><option value="">Todos</option><option>Pendente</option><option>Confirmada</option><option>Em produção</option><option>Pronta</option><option>Saiu para entrega</option><option>Entregue</option><option>Cancelada</option></select></div><div id="ordersList"></div></div>
+ </section>
+
+ <section id="customers" class="page hidden">
+  <div class="card"><h2>Novo cliente</h2><div class="form">
+   <div class="field"><label>Nome</label><input id="custName"></div>
+   <div class="field"><label>WhatsApp / telefone</label><input id="custPhone"></div>
+   <div class="field"><label>Endereço</label><input id="custAddress"></div>
+   <div class="field"><label>Bairro / cidade</label><input id="custCity"></div>
+   <div class="field full"><label>Observações</label><textarea id="custNotes"></textarea></div>
+  </div><br><button onclick="addCustomer()">Salvar cliente</button></div>
+  <div class="card section"><h2>Clientes</h2><div id="customersTable"></div></div>
+ </section>
+
+ <section id="products" class="page hidden">
+  <div class="card"><h2>Produtos vendidos</h2><div class="form">
+   <div class="field"><label>Nome</label><input id="prodName"></div><div class="field"><label>SKU</label><input id="prodSku"></div>
+   <div class="field"><label>Custo unitário</label><input id="prodCost" type="number" step=".01"></div><div class="field"><label>Preço de venda</label><input id="prodPrice" type="number" step=".01"></div>
+   <div class="field"><label>Estoque</label><input id="prodStock" type="number" step=".01" value="0"></div><div class="field"><label>Estoque mínimo</label><input id="prodMin" type="number" step=".01" value="0"></div>
+   <div class="field"><label>Unidade</label><select id="prodUnit"><option>un</option><option>kg</option><option>g</option><option>caixa</option></select></div>
+  </div><br><button onclick="addProduct()">Cadastrar produto</button></div>
+  <div class="card section"><h2>Produtos</h2><div id="productsTable"></div></div>
+ </section>
+
+ <section id="ingredients" class="page hidden">
+  <div class="card"><h2>Ingredientes</h2><div class="notice">Cadastre a quantidade realmente disponível. O sistema calcula o custo por unidade e usa esses dados para descobrir automaticamente quantos cookies podem ser produzidos.</div><br>
+   <div class="form"><div class="field"><label>Ingrediente</label><input id="ingName"></div><div class="field"><label>Estoque</label><input id="ingStock" type="number" step=".001"></div><div class="field"><label>Unidade</label><select id="ingUnit"><option>g</option><option>kg</option><option>ml</option><option>l</option><option>un</option></select></div><div class="field"><label>Custo por unidade</label><input id="ingCost" type="number" step=".0001"></div><div class="field"><label>Estoque mínimo</label><input id="ingMin" type="number" step=".001" value="0"></div></div><br><button onclick="addIngredient()">Cadastrar ingrediente</button>
+  </div><div class="card section"><div id="ingredientsTable"></div></div>
+ </section>
+
+ <section id="recipes" class="page hidden">
+  <div class="card"><h2>Receita de cookie</h2><div class="form">
+   <div class="field"><label>Nome da receita</label><input id="recName" placeholder="Cookie de chocolate"></div><div class="field"><label>Cookies por lote</label><input id="recYield" type="number" value="12"></div><div class="field"><label>Peso por cookie (g)</label><input id="recWeight" type="number" value="50"></div><div class="field"><label>Preço sugerido por cookie</label><input id="recPrice" type="number" step=".01" value="8"></div>
+  </div>
+  <div id="recipeIngredients" class="section"></div><br><button class="secondary" onclick="addRecipeRow()">+ Ingrediente</button> <button onclick="saveRecipe()">Salvar receita</button></div>
+  <div class="section" id="recipesList"></div>
+ </section>
+
+ <section id="production" class="page hidden">
+  <div class="card"><h2>Planejamento inteligente de produção</h2><div class="form"><div class="field"><label>Receita</label><select id="prodRecipe"></select></div><div class="field"><label>Quantidade desejada de cookies</label><input id="desiredCookies" type="number" min="1" value="12"></div><div class="field"><label>Data de produção</label><input id="productionDate" type="date"></div><div class="field"><label>Observação</label><input id="productionNote"></div></div><br><button onclick="calculateProduction()">Calcular produção</button><div id="productionResult" class="section"></div></div>
+  <div class="card section"><h2>Produções registradas</h2><div id="productionTable"></div></div>
+ </section>
+
+ <section id="stock" class="page hidden">
+  <div class="card"><h2>Movimentação de estoque</h2><div class="form">
+   <div class="field"><label>Tipo</label><select id="stockType"><option>Entrada</option><option>Saída</option><option>Ajuste</option></select></div>
+   <div class="field"><label>Produto</label><select id="stockProduct"></select></div><div class="field"><label>Quantidade</label><input id="stockQty" type="number" step=".01"></div><div class="field"><label>Motivo</label><input id="stockReason" placeholder="Compra, venda, perda..."></div>
+  </div><br><button onclick="moveStock()">Registrar movimentação</button></div>
+  <div class="card section"><h2>Movimentações</h2><div id="stockMoves"></div></div>
+ </section>
+
+ <section id="finance" class="page hidden">
+  <div class="grid">
+   <div class="card"><div class="muted">Recebido</div><div class="metric" id="finReceived">R$ 0,00</div></div>
+   <div class="card"><div class="muted">A receber</div><div class="metric" id="finReceivable">R$ 0,00</div></div>
+   <div class="card"><div class="muted">Despesas</div><div class="metric" id="finExpenses">R$ 0,00</div></div>
+   <div class="card"><div class="muted">Saldo estimado</div><div class="metric" id="finBalance">R$ 0,00</div></div>
+  </div>
+  <div class="card section"><h2>Lançar movimentação financeira</h2><div class="form">
+   <div class="field"><label>Tipo</label><select id="finType"><option>Receita</option><option>Despesa</option></select></div><div class="field"><label>Descrição</label><input id="finDesc"></div><div class="field"><label>Valor</label><input id="finValue" type="number" step=".01"></div><div class="field"><label>Vencimento</label><input id="finDue" type="date"></div><div class="field"><label>Status</label><select id="finStatus"><option>Pago</option><option>Pendente</option></select></div></div><br><button onclick="addFinance()">Salvar lançamento</button></div>
+  <div class="card section"><h2>Fluxo financeiro</h2><div id="financeTable"></div></div>
+ </section>
+
+ <section id="deliveries" class="page hidden">
+  <div class="card"><h2>Entregas e retiradas</h2><div class="notice">Acompanhe prazo, horário, endereço, taxa de entrega e situação de cada encomenda.</div><div class="section" id="deliveryList"></div></div>
+ </section>
+
+ <section id="reports" class="page hidden">
+  <div class="grid"><div class="card"><div class="muted">Faturamento total</div><div class="metric" id="repRevenue">R$ 0,00</div></div><div class="card"><div class="muted">Custo estimado</div><div class="metric" id="repCost">R$ 0,00</div></div><div class="card"><div class="muted">Lucro estimado</div><div class="metric" id="repProfit">R$ 0,00</div></div><div class="card"><div class="muted">Ticket médio</div><div class="metric" id="repTicket">R$ 0,00</div></div></div>
+  <div class="two section"><div class="card"><h2>Vendas por produto</h2><div id="salesRanking"></div></div><div class="card"><h2>Produção / capacidade</h2><div id="capacityReport"></div></div></div>
+ </section>
+
+ <section id="backup" class="page hidden">
+  <div class="card"><h2>Backup, restauração e configurações</h2><p class="muted">Nesta versão os dados ficam no navegador. Exporte o backup regularmente. Para sincronização automática em tempo real entre celular e PC, o sistema precisa de uma base de dados online.</p>
+  <div class="toolbar"><button onclick="exportBackup()">Baixar backup JSON</button><button class="secondary" onclick="document.getElementById('restore').click()">Restaurar backup</button><input id="restore" class="hidden" type="file" accept=".json" onchange="restoreBackup(event)"><button class="danger" onclick="resetDB()">Apagar todos os dados</button></div>
+  <div class="notice section"><b>Estrutura pronta para evolução:</b> clientes, encomendas, receitas, ingredientes, produção, estoque, financeiro, entregas, relatórios e backup estão separados para futura sincronização com banco online.</div></div>
+ </section>
+</main>
+</div>
+
+<div class="mobile-bar">
+ <button onclick="openPage('dashboard')">Início</button><button onclick="openPage('orders')">Pedidos</button><button onclick="openPage('production')">Produção</button><button onclick="openPage('finance')">Financeiro</button><button onclick="toggleMenu()">Menu</button>
+</div>
+<div id="toast" class="toast"></div>
+
+<script>
+const KEY='cookies_da_maria_super_v1';
+const todayISO=()=>new Date().toISOString().slice(0,10);
+let db=JSON.parse(localStorage.getItem(KEY)||'null')||{
+ customers:[],products:[],ingredients:[],recipes:[],orders:[],production:[],stockMoves:[],finance:[]
+};
+const $=id=>document.getElementById(id);
+const money=v=>(Number(v)||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+function save(){localStorage.setItem(KEY,JSON.stringify(db));renderAll()}
+function notify(t){const x=$('toast');x.textContent=t;x.style.display='block';setTimeout(()=>x.style.display='none',2200)}
+function openPage(p){document.querySelectorAll('.page').forEach(x=>x.classList.add('hidden'));$(p).classList.remove('hidden');document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===p));$('pageTitle').textContent={dashboard:'Dashboard',orders:'Encomendas',customers:'Clientes',products:'Produtos',ingredients:'Ingredientes',recipes:'Receitas',production:'Produção',stock:'Estoque',finance:'Financeiro',deliveries:'Entregas',reports:'Relatórios',backup:'Backup / Configurações'}[p];$('sidebar').classList.remove('open');renderAll()}
+function toggleMenu(){$('sidebar').classList.toggle('open')}
+document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>openPage(b.dataset.page));
+$('today').textContent=new Date().toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'long',year:'numeric'});
+$('orderDate').value=todayISO();$('orderDue').value=todayISO();$('orderPayDue').value=todayISO();$('productionDate').value=todayISO();$('finDue').value=todayISO();
+
+function addCustomer(){
+ let name=$('custName').value.trim();if(!name)return notify('Informe o nome do cliente.');
+ db.customers.push({id:crypto.randomUUID(),name,phone:$('custPhone').value.trim(),address:$('custAddress').value.trim(),city:$('custCity').value.trim(),notes:$('custNotes').value.trim()});
+ ['custName','custPhone','custAddress','custCity','custNotes'].forEach(id=>$(id).value='');save();notify('Cliente cadastrado.');
+}
+function addProduct(){
+ let name=$('prodName').value.trim();if(!name)return notify('Informe o produto.');
+ db.products.push({id:crypto.randomUUID(),name,sku:$('prodSku').value.trim(),cost:+$('prodCost').value||0,price:+$('prodPrice').value||0,stock:+$('prodStock').value||0,min:+$('prodMin').value||0,unit:$('prodUnit').value});
+ ['prodName','prodSku','prodCost','prodPrice','prodStock','prodMin'].forEach(id=>$(id).value='');save();notify('Produto cadastrado.');
+}
+function addIngredient(){
+ let name=$('ingName').value.trim();if(!name)return notify('Informe o ingrediente.');
+ db.ingredients.push({id:crypto.randomUUID(),name,stock:+$('ingStock').value||0,unit:$('ingUnit').value,cost:+$('ingCost').value||0,min:+$('ingMin').value||0});
+ ['ingName','ingStock','ingCost','ingMin'].forEach(id=>$(id).value='');save();notify('Ingrediente cadastrado.');
+}
+function addRecipeRow(data={name:'',amount:'',unit:'g'}){
+ let d=document.createElement('div');d.className='recipe-row';
+ d.innerHTML=`<select class="rr-name">${db.ingredients.map(i=>`<option value="${esc(i.name)}" ${i.name===data.name?'selected':''}>${esc(i.name)}</option>`).join('')}</select><input class="rr-amount" type="number" step=".001" placeholder="Quantidade" value="${data.amount||''}"><select class="rr-unit"><option ${data.unit==='g'?'selected':''}>g</option><option ${data.unit==='kg'?'selected':''}>kg</option><option ${data.unit==='ml'?'selected':''}>ml</option><option ${data.unit==='l'?'selected':''}>l</option><option ${data.unit==='un'?'selected':''}>un</option></select><span></span><button class="danger small" onclick="this.parentElement.remove()">Remover</button>`;
+ $('recipeIngredients').appendChild(d);
+}
+function saveRecipe(){
+ let name=$('recName').value.trim(),yieldN=+$('recYield').value||0,weight=+$('recWeight').value||0,price=+$('recPrice').value||0;
+ let ingredients=[...document.querySelectorAll('.recipe-row')].map(r=>({name:r.querySelector('.rr-name').value,amount:+r.querySelector('.rr-amount').value,unit:r.querySelector('.rr-unit').value})).filter(x=>x.amount>0);
+ if(!name||yieldN<1||!ingredients.length)return notify('Preencha a receita e os ingredientes.');
+ db.recipes.push({id:crypto.randomUUID(),name,yield:yieldN,weight,price,ingredients});$('recipeIngredients').innerHTML='';save();notify('Receita salva.');
+}
+function addOrder(){
+ let product=db.products.find(p=>p.id===$('orderProduct').value), customer=db.customers.find(c=>c.id===$('orderCustomer').value);
+ if(!product||!customer)return notify('Cadastre/selecione cliente e produto.');
+ let q=+$('orderQty').value||1,u=+$('orderUnit').value||product.price,total=q*u,paid=+$('orderPaid').value||0;
+ db.orders.unshift({id:crypto.randomUUID(),customerId:customer.id,customer:customer.name,productId:product.id,product:product.name,qty:q,unit:u,total,paid,remaining:Math.max(0,total-paid),orderDate:$('orderDate').value,due:$('orderDue').value,time:$('orderTime').value,payDue:$('orderPayDue').value,payment:$('orderPayment').value,status:$('orderStatus').value,delivery:$('orderDeliveryType').value,notes:$('orderNotes').value.trim(),created:new Date().toISOString()});
+ if(paid>0)db.finance.push({id:crypto.randomUUID(),type:'Receita',desc:`Pagamento pedido ${customer.name}`,value:paid,due:todayISO(),status:'Pago',orderId:db.orders[0].id,date:todayISO()});
+ ['orderQty','orderPaid','orderNotes'].forEach(id=>$(id).value=id==='orderQty'?1:'');save();notify('Encomenda criada.');
+}
+function setOrderStatus(id,status){let o=db.orders.find(x=>x.id===id);if(o){o.status=status;save();notify('Status atualizado.')} }
+function payOrder(id){
+ let o=db.orders.find(x=>x.id===id);if(!o||o.remaining<=0)return;
+ let val=prompt(`Quanto recebeu? Restante: ${money(o.remaining)}`,o.remaining);val=Number(val);if(!val||val<=0)return;
+ val=Math.min(val,o.remaining);o.paid+=val;o.remaining=Math.max(0,o.total-o.paid);
+ db.finance.push({id:crypto.randomUUID(),type:'Receita',desc:`Pagamento pedido ${o.customer}`,value:val,due:todayISO(),status:'Pago',orderId:id,date:todayISO()});
+ save();notify('Pagamento registrado.');
+}
+function moveStock(){
+ let p=db.products.find(x=>x.id===$('stockProduct').value),q=+$('stockQty').value||0,t=$('stockType').value;if(!p||q<=0)return notify('Preencha a movimentação.');
+ if(t==='Entrada')p.stock+=q;if(t==='Saída')p.stock=Math.max(0,p.stock-q);if(t==='Ajuste')p.stock=q;
+ db.stockMoves.unshift({id:crypto.randomUUID(),date:new Date().toISOString(),type:t,product:p.name,qty:q,reason:$('stockReason').value.trim()});save();notify('Estoque atualizado.');
+}
+function addFinance(){
+ let v=+$('finValue').value||0;if(v<=0)return notify('Informe o valor.');
+ db.finance.unshift({id:crypto.randomUUID(),type:$('finType').value,desc:$('finDesc').value.trim(),value:v,due:$('finDue').value,status:$('finStatus').value,date:todayISO()});['finDesc','finValue'].forEach(id=>$(id).value='');save();notify('Lançamento salvo.');
+}
+function recipeCost(r){return r.ingredients.reduce((sum,x)=>{let i=db.ingredients.find(y=>y.name.toLowerCase()===x.name.toLowerCase());return sum+(i?x.amount*i.cost:0)},0)}
+function capacity(r){
+ let limits=r.ingredients.map(x=>{let i=db.ingredients.find(y=>y.name.toLowerCase()===x.name.toLowerCase());if(!i)return {name:x.name,lots:0,missing:true};return {name:x.name,lots:Math.floor(i.stock/x.amount),missing:false}});
+ let lots=limits.length?Math.min(...limits.map(x=>x.lots)):0;return {lots,cookies:lots*r.yield,limit:limits.sort((a,b)=>a.lots-b.lots)[0],cost:recipeCost(r)};
+}
+function calculateProduction(){
+ let r=db.recipes.find(x=>x.id===$('prodRecipe').value);if(!r)return notify('Selecione uma receita.');
+ let want=+$('desiredCookies').value||r.yield,p=capacity(r),batches=Math.ceil(want/r.yield),need=batches*r.yield;
+ let cost=p.cost*batches,available=p.cookies;
+ let lines=r.ingredients.map(x=>{let i=db.ingredients.find(y=>y.name.toLowerCase()===x.name.toLowerCase());let needIng=x.amount*batches;return `<tr><td>${esc(x.name)}</td><td>${needIng} ${esc(x.unit)}</td><td>${i?i.stock:'não cadastrado'} ${i?esc(i.unit):''}</td><td>${i&&i.stock>=needIng?'<span class="pill ok">OK</span>':'<span class="pill bad">Falta</span>'}</td></tr>`}).join('');
+ $('productionResult').innerHTML=`<div class="notice"><b>Resultado:</b> ${p.cookies} cookies podem ser produzidos com o estoque atual. Para ${want} cookies, serão necessários ${batches} lote(s), produzindo ${need} cookies.</div><div class="three section"><div class="card"><div class="muted">Custo dos lotes</div><div class="metric">${money(cost)}</div></div><div class="card"><div class="muted">Custo por cookie</div><div class="metric">${money(cost/need)}</div></div><div class="card"><div class="muted">Ingrediente limitante</div><div class="metric" style="font-size:18px">${esc(p.limit?.name||'')}</div></div></div><div class="tablewrap section"><table class="table"><tr><th>Ingrediente</th><th>Necessário</th><th>Disponível</th><th>Status</th></tr>${lines}</table></div><br><button class="success" onclick="registerProduction('${r.id}',${batches})">Registrar produção</button>`;
+}
+function registerProduction(rid,batches){
+ let r=db.recipes.find(x=>x.id===rid);if(!r)return;
+ for(const x of r.ingredients){let i=db.ingredients.find(y=>y.name.toLowerCase()===x.name.toLowerCase());if(i)i.stock-=x.amount*batches}
+ db.production.unshift({id:crypto.randomUUID(),recipe:r.name,batches,cookies:batches*r.yield,date:$('productionDate').value,note:$('productionNote').value,cost:recipeCost(r)*batches});
+ save();notify('Produção registrada e ingredientes descontados.');
+}
+function renderSelects(){
+ $('orderCustomer').innerHTML=db.customers.length?db.customers.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join(''):'<option value="">Cadastre um cliente</option>';
+ $('orderProduct').innerHTML=db.products.length?db.products.map(p=>`<option value="${p.id}">${esc(p.name)} • ${money(p.price)}</option>`).join(''):'<option value="">Cadastre um produto</option>';
+ $('stockProduct').innerHTML=db.products.map(p=>`<option value="${p.id}">${esc(p.name)} (${p.stock})</option>`).join('');
+ $('prodRecipe').innerHTML=db.recipes.map(r=>`<option value="${r.id}">${esc(r.name)}</option>`).join('');
+ let p=db.products.find(x=>x.id===$('orderProduct').value);if(p&&!$('orderUnit').value)$('orderUnit').value=p.price;
+}
+$('orderProduct').addEventListener('change',()=>{let p=db.products.find(x=>x.id===$('orderProduct').value);if(p)$('orderUnit').value=p.price});
+function renderDashboard(){
+ let received=db.orders.reduce((a,o)=>a+o.paid,0),receivable=db.orders.reduce((a,o)=>a+o.remaining,0),cost=db.orders.reduce((a,o)=>{let p=db.products.find(x=>x.id===o.productId);return a+(p?p.cost*o.qty:0)},0);
+ $('kpiReceived').textContent=money(received);$('kpiReceivable').textContent=money(receivable);$('kpiProfit').textContent=money(received+receivable-cost);$('kpiOrders').textContent=db.orders.filter(o=>!['Entregue','Cancelada'].includes(o.status)).length;
+ let td=todayISO();$('kpiDueToday').textContent=money(db.orders.filter(o=>o.payDue===td&&o.remaining>0).reduce((a,o)=>a+o.remaining,0));$('kpiDeliveriesToday').textContent=db.orders.filter(o=>o.due===td&&!['Entregue','Cancelada'].includes(o.status)).length;
+ $('kpiCookies').textContent=db.recipes.reduce((a,r)=>a+capacity(r).cookies,0);$('kpiLow').textContent=db.products.filter(p=>p.stock<=p.min).length+db.ingredients.filter(i=>i.stock<=i.min).length;
+ let upcoming=db.orders.filter(o=>!['Entregue','Cancelada'].includes(o.status)).sort((a,b)=>(a.due||'').localeCompare(b.due||'')).slice(0,6);
+ $('nextOrders').innerHTML=upcoming.length?upcoming.map(o=>`<div class="order"><div class="order-head"><div><div class="order-title">${esc(o.customer)} • ${esc(o.product)}</div><div class="muted">${o.qty} un. • ${o.due||'-'} ${o.time||''}</div></div><span class="pill ${o.remaining?'warn':'ok'}">${o.remaining?money(o.remaining)+' a receber':'Pago'}</span></div></div>`).join(''):'<div class="empty">Nenhuma encomenda aberta.</div>';
+ let low=[...db.products.filter(p=>p.stock<=p.min).map(p=>`Produto: <b>${esc(p.name)}</b> (${p.stock} ${p.unit})`),...db.ingredients.filter(i=>i.stock<=i.min).map(i=>`Ingrediente: <b>${esc(i.name)}</b> (${i.stock} ${i.unit})`)];
+ $('alerts').innerHTML=low.length?low.map(x=>`<div class="notice section">${x}</div>`).join(''):'<div class="empty">Tudo em ordem.</div>';
+}
+function renderOrders(){
+ let q=($('orderSearch').value||'').toLowerCase(),f=$('orderFilter').value;
+ let arr=db.orders.filter(o=>(!f||o.status===f)&&(!q||`${o.customer} ${o.product} ${o.notes}`.toLowerCase().includes(q)));
+ $('ordersList').innerHTML=arr.length?arr.map(o=>`<div class="order"><div class="order-head"><div><div class="order-title">#${o.id.slice(0,6).toUpperCase()} • ${esc(o.customer)}</div><div class="muted">${esc(o.product)} • ${o.qty} unidade(s)</div></div><span class="pill ${o.status==='Entregue'?'ok':o.status==='Cancelada'?'bad':'warn'}">${esc(o.status)}</span></div><div class="order-grid"><div class="mini">Total<b>${money(o.total)}</b></div><div class="mini">Pago<b>${money(o.paid)}</b></div><div class="mini">Restante<b>${money(o.remaining)}</b></div><div class="mini">Entrega<b>${o.due||'-'} ${o.time||''}</b></div><div class="mini">Pagamento<b>${esc(o.payment)}</b></div></div><div class="toolbar section"><select onchange="setOrderStatus('${o.id}',this.value)" style="padding:7px;border:1px solid var(--line);border-radius:9px"><option ${o.status==='Pendente'?'selected':''}>Pendente</option><option ${o.status==='Confirmada'?'selected':''}>Confirmada</option><option ${o.status==='Em produção'?'selected':''}>Em produção</option><option ${o.status==='Pronta'?'selected':''}>Pronta</option><option ${o.status==='Saiu para entrega'?'selected':''}>Saiu para entrega</option><option ${o.status==='Entregue'?'selected':''}>Entregue</option><option ${o.status==='Cancelada'?'selected':''}>Cancelada</option></select>${o.remaining>0?`<button class="success small" onclick="payOrder('${o.id}')">Registrar pagamento</button>`:''}<span class="muted" style="padding:8px">Obs.: ${esc(o.notes||'sem observações')}</span></div></div>`).join(''):'<div class="empty">Nenhuma encomenda encontrada.</div>';
+}
+function renderCustomers(){
+ $('customersTable').innerHTML=db.customers.length?`<div class="tablewrap"><table class="table"><tr><th>Cliente</th><th>Contato</th><th>Endereço</th><th>Pedidos</th><th>A receber</th></tr>${db.customers.map(c=>{let os=db.orders.filter(o=>o.customerId===c.id);return `<tr><td><b>${esc(c.name)}</b></td><td>${esc(c.phone)}</td><td>${esc(c.address)} ${esc(c.city)}</td><td>${os.length}</td><td>${money(os.reduce((a,o)=>a+o.remaining,0))}</td></tr>`}).join('')}</table></div>`:'<div class="empty">Nenhum cliente.</div>';
+}
+function renderProducts(){
+ $('productsTable').innerHTML=db.products.length?`<div class="tablewrap"><table class="table"><tr><th>Produto</th><th>SKU</th><th>Estoque</th><th>Custo</th><th>Venda</th><th>Margem</th></tr>${db.products.map(p=>`<tr><td>${esc(p.name)}</td><td>${esc(p.sku)}</td><td><span class="pill ${p.stock<=p.min?'bad':'ok'}">${p.stock} ${p.unit}</span></td><td>${money(p.cost)}</td><td>${money(p.price)}</td><td>${p.price?Math.round((p.price-p.cost)/p.price*100):0}%</td></tr>`).join('')}</table></div>`:'<div class="empty">Nenhum produto.</div>';
+}
+function renderIngredients(){
+ $('ingredientsTable').innerHTML=db.ingredients.length?`<div class="tablewrap"><table class="table"><tr><th>Ingrediente</th><th>Estoque</th><th>Unid.</th><th>Custo/unid.</th><th>Status</th></tr>${db.ingredients.map(i=>`<tr><td>${esc(i.name)}</td><td>${i.stock}</td><td>${i.unit}</td><td>${money(i.cost)}</td><td><span class="pill ${i.stock<=i.min?'bad':'ok'}">${i.stock<=i.min?'Repor':'OK'}</span></td></tr>`).join('')}</table></div>`:'<div class="empty">Nenhum ingrediente.</div>';
+}
+function renderRecipes(){
+ $('recipesList').innerHTML=db.recipes.length?db.recipes.map(r=>{let c=capacity(r),cost=recipeCost(r),unit=cost/r.yield;return `<div class="card section"><div class="order-head"><div><h3 style="margin:0">${esc(r.name)}</h3><div class="muted">${r.yield} cookies/lote • ${r.weight}g • venda ${money(r.price)}</div></div><span class="pill ${c.cookies?'ok':'bad'}">${c.cookies} cookies possíveis</span></div><div class="three section"><div class="notice">Custo do lote<br><b>${money(cost)}</b></div><div class="notice">Custo por cookie<br><b>${money(unit)}</b></div><div class="notice">Ingrediente limitante<br><b>${esc(c.limit?.name||'-')}</b></div></div><div class="muted section">${r.ingredients.map(x=>`${esc(x.name)}: ${x.amount}${x.unit}`).join(' • ')}</div></div>`}).join(''):'<div class="card empty">Nenhuma receita.</div>';
+}
+function renderProduction(){
+ $('productionTable').innerHTML=db.production.length?`<div class="tablewrap"><table class="table"><tr><th>Data</th><th>Receita</th><th>Lotes</th><th>Cookies</th><th>Custo</th><th>Observação</th></tr>${db.production.map(p=>`<tr><td>${p.date}</td><td>${esc(p.recipe)}</td><td>${p.batches}</td><td>${p.cookies}</td><td>${money(p.cost)}</td><td>${esc(p.note)}</td></tr>`).join('')}</table></div>`:'<div class="empty">Nenhuma produção registrada.</div>';
+}
+function renderStock(){
+ $('stockMoves').innerHTML=db.stockMoves.length?`<div class="tablewrap"><table class="table"><tr><th>Data</th><th>Tipo</th><th>Produto</th><th>Qtd</th><th>Motivo</th></tr>${db.stockMoves.slice(0,100).map(m=>`<tr><td>${new Date(m.date).toLocaleString('pt-BR')}</td><td>${esc(m.type)}</td><td>${esc(m.product)}</td><td>${m.qty}</td><td>${esc(m.reason)}</td></tr>`).join('')}</table></div>`:'<div class="empty">Nenhuma movimentação.</div>';
+}
+function renderFinance(){
+ let rec=db.finance.filter(x=>x.type==='Receita').reduce((a,x)=>a+x.value,0),exp=db.finance.filter(x=>x.type==='Despesa').reduce((a,x)=>a+x.value,0),pend=db.orders.reduce((a,o)=>a+o.remaining,0);
+ $('finReceived').textContent=money(rec);$('finExpenses').textContent=money(exp);$('finReceivable').textContent=money(pend);$('finBalance').textContent=money(rec-exp);
+ $('financeTable').innerHTML=db.finance.length?`<div class="tablewrap"><table class="table"><tr><th>Data</th><th>Tipo</th><th>Descrição</th><th>Valor</th><th>Vencimento</th><th>Status</th></tr>${db.finance.map(x=>`<tr><td>${x.date}</td><td>${esc(x.type)}</td><td>${esc(x.desc)}</td><td>${money(x.value)}</td><td>${x.due}</td><td><span class="pill ${x.status==='Pago'?'ok':'warn'}">${esc(x.status)}</span></td></tr>`).join('')}</table></div>`:'<div class="empty">Nenhum lançamento.</div>';
+}
+function renderDeliveries(){
+ let arr=db.orders.filter(o=>!['Entregue','Cancelada'].includes(o.status)).sort((a,b)=>(a.due||'').localeCompare(b.due||''));
+ $('deliveryList').innerHTML=arr.length?arr.map(o=>{let c=db.customers.find(x=>x.id===o.customerId);return `<div class="order"><div class="order-head"><div><div class="order-title">${esc(o.customer)} • ${esc(o.product)}</div><div class="muted">${o.delivery} • ${o.due||'-'} ${o.time||''}</div></div><span class="pill ${o.due<todayISO()?'bad':'warn'}">${esc(o.status)}</span></div><div class="section mini">Endereço<b>${esc(c?.address||'Retirada / endereço não cadastrado')} ${esc(c?.city||'')}</b></div><div class="section mini">Pagamento restante<b>${money(o.remaining)}</b></div></div>`}).join(''):'<div class="empty">Nenhuma entrega pendente.</div>';
+}
+function renderReports(){
+ let revenue=db.orders.reduce((a,o)=>a+o.total,0),cost=db.orders.reduce((a,o)=>{let p=db.products.find(x=>x.id===o.productId);return a+(p?p.cost*o.qty:0)},0);
+ $('repRevenue').textContent=money(revenue);$('repCost').textContent=money(cost);$('repProfit').textContent=money(revenue-cost);$('repTicket').textContent=money(db.orders.length?revenue/db.orders.length:0);
+ let map={};db.orders.forEach(o=>map[o.product]=(map[o.product]||0)+o.qty);let arr=Object.entries(map).sort((a,b)=>b[1]-a[1]);$('salesRanking').innerHTML=arr.length?`<div class="tablewrap"><table class="table"><tr><th>Produto</th><th>Quantidade</th></tr>${arr.map(x=>`<tr><td>${esc(x[0])}</td><td>${x[1]}</td></tr>`).join('')}</table></div>`:'<div class="empty">Sem vendas.</div>';
+ $('capacityReport').innerHTML=db.recipes.length?db.recipes.map(r=>{let c=capacity(r);return `<div class="notice section"><b>${esc(r.name)}</b><br>${c.cookies} cookies possíveis • limitante: ${esc(c.limit?.name||'-')}<div class="progress section"><span style="width:${Math.min(100,c.cookies?100:0)}%"></span></div></div>`}).join(''):'<div class="empty">Cadastre receitas.</div>';
+}
+function renderAll(){renderSelects();renderDashboard();renderOrders();renderCustomers();renderProducts();renderIngredients();renderRecipes();renderProduction();renderStock();renderFinance();renderDeliveries();renderReports()}
+function exportBackup(){let blob=new Blob([JSON.stringify(db,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='cookies-da-maria-backup.json';a.click();URL.revokeObjectURL(a.href)}
+function restoreBackup(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let x=JSON.parse(r.result);if(!x.orders||!x.customers)throw 0;db=x;save();notify('Backup restaurado.')}catch{notify('Backup inválido.')}};r.readAsText(f)}
+function resetDB(){if(confirm('ATENÇÃO: isso apagará os dados deste navegador. Continuar?')){db={customers:[],products:[],ingredients:[],recipes:[],orders:[],production:[],stockMoves:[],finance:[]};save();notify('Dados apagados.')}}
+renderAll();if(db.recipes.length===0)$('recipeIngredients').innerHTML='<div class="notice">Primeiro cadastre os ingredientes. Depois clique em “+ Ingrediente” para montar a receita.</div>';
+</script>
+</body>
+</html>
